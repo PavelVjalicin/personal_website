@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import css from "./App.module.scss"
+import {TopNav} from "./TopNav";
 class App extends Component {
     constructor(props) {
         super(props)
@@ -7,7 +7,12 @@ class App extends Component {
 
     render() {
         return <>
-            <div className={css.red}>Hello world</div>
+            <TopNav links={[
+                ["/about","About me"],
+                ["/work","Work Experience"],
+                ["/github","GitHub"],
+                ["/contact","Contact Me"]
+            ]}/>
         </>
     }
 }
