@@ -1,7 +1,8 @@
 import React, {Component} from "react"
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import {Link} from "react-router-dom";
 
 class TopNav extends Component {
     constructor(props) {
@@ -10,8 +11,11 @@ class TopNav extends Component {
 
     render() {
         return <AppBar color={'default'} position={"fixed"}>
+
             <Toolbar>
-                <Typography variant={"h6"}>Personal website of Pavel Vjalicin</Typography>
+                {this.props.links.map(link =>
+                    <Button key={link[0]} component={Link} to={link[0]}>{link[1]}</Button>
+                )}
             </Toolbar>
 
         </AppBar>
