@@ -29,9 +29,12 @@ class Server {
         this.app.get("/",(req,res) => {
             res.sendFile("src/index.html",appOptions)
         })
+
+
+
         if(isDev) {
             this.app.ws("/", (ws,req) => {
-                
+
             })
         }
     }
@@ -45,11 +48,12 @@ class Server {
 
     sendMessageToWS(msg) {
         if(this.isDev) {
+            console.log(this.expressWS.getWss().clients)
             this.expressWS.getWss().clients.forEach((socket)=>{
-                socket.send("refresh")
+                socket.send(msg)
             })
         }
     }
 }
 
-exports.default = (port) => new Server(port)
+exports.default = (port,isDev) => new Server(port,isDev)
