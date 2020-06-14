@@ -12,18 +12,17 @@ class Server {
             root: path.join(__dirname)
         }
 
-        this.app.get('*.js', function(req, res, next) {
-            req.url = req.url + '.gz';
-            res.set('Content-Encoding', 'gzip');
-            res.set('Content-Type', 'text/javascript');
-            next();
-        });
-        this.app.get('*.css', function(req, res, next) {
-            req.url = req.url + '.gz';
-            res.set('Content-Encoding', 'gzip');
-            res.set('Content-Type', 'text/css');
-            next();
-        });
+        function gz(type) {
+            return function(req, res, next) {
+                req.url = req.url + '.gz';
+                res.set('Content-Encoding', 'gzip');
+                res.set('Content-Type', type);
+                next();
+            }
+        }
+
+        this.app.get('*.js', gz("text/javascript"));
+        this.app.get('*.css', gz("text/css") );
 
         this.app.use("/dist", Express.static('dist'))
 
