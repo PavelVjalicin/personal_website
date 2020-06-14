@@ -8,9 +8,23 @@ import React from "react"
 import {BrowserRouter} from "react-router-dom";
 import {App} from "./components/App";
 import "../css/main.scss"
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import CssBaseline from "@material-ui/core/CssBaseline";
+
 const react = document.getElementById("react")
+
+const theme = createMuiTheme({
+    palette: {
+        type: 'dark'
+    }
+})
+
 ReactDOM.render(<BrowserRouter>
-                <App/>
+    <ThemeProvider theme={theme}>
+        <App/>
+        <CssBaseline/>
+    </ThemeProvider>
 </BrowserRouter>,react)
 
 //Used for dev auto-refresh
