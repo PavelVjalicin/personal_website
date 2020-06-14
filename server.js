@@ -26,17 +26,15 @@ class Server {
 
         this.app.use("/dist", Express.static('dist'))
 
-        this.app.get("/",(req,res) => {
-            res.sendFile("src/index.html",appOptions)
-        })
-
-
-
         if(isDev) {
             this.app.ws("/", (ws,req) => {
 
             })
         }
+
+        this.app.get("*",(req,res) => {
+            res.sendFile("src/index.html",appOptions)
+        })
     }
 
     start() {
@@ -48,7 +46,6 @@ class Server {
 
     sendMessageToWS(msg) {
         if(this.isDev) {
-            console.log(this.expressWS.getWss().clients)
             this.expressWS.getWss().clients.forEach((socket)=>{
                 socket.send(msg)
             })
