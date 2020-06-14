@@ -6,9 +6,8 @@ import "regenerator-runtime/runtime" // For core-js
 import ReactDOM from "react-dom"
 import React from "react"
 import {BrowserRouter} from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import {App} from "./components/App";
-
+import "../css/main.scss"
 const react = document.getElementById("react")
 ReactDOM.render(<BrowserRouter>
                 <App/>
