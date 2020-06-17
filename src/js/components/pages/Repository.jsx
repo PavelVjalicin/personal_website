@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import Box from "@material-ui/core/Box";
-import {Anchor} from "./Anchor";
 import Typography from "@material-ui/core/Typography";
+import {Anchor} from "../Anchor";
 
 class Repository extends Component {
     constructor(props) {
@@ -34,7 +34,7 @@ class Repository extends Component {
                         <Typography component={"span"}>{repo.license.name}</Typography>
                     </S>
                     <S>
-                        <Typography component={"span"}>Last Updated: {new Date(repo.updated_at).toLocaleDateString()}</Typography>
+                        <Typography component={"span"}>Last Updated: {new Date(repo.updated_at).toLocaleString()}</Typography>
                     </S>
                 </div>
             </Box>

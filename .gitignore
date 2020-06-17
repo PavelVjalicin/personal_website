@@ -105,3 +105,4 @@ dist
 
 #phpStorm, inrelliJ config
 .idea/
+/data/

@@ -1,5 +1,7 @@
 const Express = require("express")
 const path = require("path")
+const fs = require('fs');
+const fetch = require('node-fetch');
 
 class Server {
     constructor(_port,isDev) {
@@ -8,9 +10,19 @@ class Server {
         this.sockets = []
         this.isDev = isDev
         this.expressWS = require("express-ws")(this.app);
+        this.repos = {
+            lastUpdatedEpoch:0,
+            data:[]
+        };
+
         const appOptions = {
             root: path.join(__dirname)
         }
+        this.dataDir = "./data"
+        this.reposDir = this.dataDir+"/repos.json"
+
+        if(!fs.existsSync(this.dataDir))
+            fs.mkdirSync(this.dataDir)
 
         function gz(type) {
             return function(req, res, next) {
@@ -32,9 +44,53 @@ class Server {
             })
         }
 
+        this.app.get("/api/repo", (req,res) => {
+            this.getRepos().then(repos => {
+                this.repos = repos
+                res.json(this.repos.data)
+            })
+
+        })
+
         this.app.get("*",(req,res) => {
             res.sendFile("src/index.html",appOptions)
         })
+    }
+
+    updateRepo() {
+        console.log("GitHub repos updated")
+        return fetch("https://api.github.com/users/PavelVjalicin/repos")
+            .then(resp => {
+                if(resp.ok) return resp
+                else throw "GitHub server error"
+            })
+            .then(resp => resp.json())
+            .then(json => {
+                if(fs.existsSync(this.reposDir)) fs.unlinkSync(this.reposDir)
+                json.sort((a,b) => new Date(b.updated_at) - new Date(a.updated_at) )
+                const resp = { lastUpdatedEpoch:Date.now(), data:json }
+                fs.writeFile(this.reposDir,JSON.stringify(resp),(err) => {})
+                return resp
+            })
+    }
+
+    async getRepos() {
+        if(this.repos.data.length === 0) {
+            if(fs.existsSync(this.reposDir))  {
+                //Retrieve from cache
+                return JSON.parse(fs.readFileSync(this.reposDir));
+            } else {
+                return await this.updateRepo()
+            }
+
+
+        } else if(this.repos.lastUpdatedEpoch + (2*60*60*1000) < Date.now() ) {
+            //Update
+            return await this.updateRepo()
+        } else {
+            //Return in memory
+            return this.repos
+        }
     }
 
     start() {

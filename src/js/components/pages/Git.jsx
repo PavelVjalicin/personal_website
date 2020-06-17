@@ -1,9 +1,7 @@
 import React, {Component} from "react"
 import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
-import {OpenInNew} from "@material-ui/icons";
 import {GitRepositories} from "./GitRepositories";
-import {Anchor} from "./Anchor";
+import {Anchor} from "../Anchor";
 
 class Git extends Component {
     constructor(props) {

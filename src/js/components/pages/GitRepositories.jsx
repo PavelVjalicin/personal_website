@@ -9,7 +9,7 @@ class GitRepositories extends Component {
             repoInfo:[]
         }
 
-        fetch("https://api.github.com/users/PavelVjalicin/repos")
+        fetch("/api/repo")
             .then((resp) => resp.json())
             .then(json => this.setState({repoInfo:json}))
     }
