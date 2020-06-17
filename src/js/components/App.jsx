@@ -23,30 +23,36 @@ class App extends Component {
                 ["/github","GitHub"],
                 ["/contact","Contact Me"]
             ]}/>
-            <Container>
-                <Switch>
-                    <Route path={"/about"} exact>
-                        <About/>
-                    </Route>
-                    <Route path={"/work"} exact>
-                        <Work/>
-                    </Route>
-                    <Route path={"/skills"} exact>
-                        <Skills/>
-                    </Route>
-                    <Route path={"/github"} exact>
-                        <Git/>
-                    </Route>
-                    <Route path={"/contact"} exact>
-                        <Contact/>
-                    </Route>
-                    <Route path={"/"} exact>
-                        <About/>
-                    </Route>
-                    <Route>
-                        <NotFound/>
-                    </Route>
-                </Switch>
+            <Container style={{
+                borderLeft:5,
+                borderLeftStyle:"solid",
+                borderColor:"#f50057"
+            }}>
+                <div style={{paddingTop:20}}>
+                    <Switch>
+                        <Route path={"/about"} exact>
+                            <About/>
+                        </Route>
+                        <Route path={"/work"} exact>
+                            <Work/>
+                        </Route>
+                        <Route path={"/skills"} exact>
+                            <Skills/>
+                        </Route>
+                        <Route path={"/github"} exact>
+                            <Git/>
+                        </Route>
+                        <Route path={"/contact"} exact>
+                            <Contact/>
+                        </Route>
+                        <Route path={"/"} exact>
+                            <About/>
+                        </Route>
+                        <Route>
+                            <NotFound/>
+                        </Route>
+                    </Switch>
+                </div>
             </Container>
         </>
     }

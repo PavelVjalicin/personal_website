@@ -15,6 +15,8 @@ class Server {
             data:[]
         };
 
+        const favicon = fs.readFileSync("./favicon.ico")
+
         const appOptions = {
             root: path.join(__dirname)
         }
@@ -51,6 +53,16 @@ class Server {
             })
 
         })
+
+        this.app.get("/favicon.ico", (req, res) => {
+
+            res.statusCode = 200;
+            res.setHeader('Content-Length', favicon.length);
+            res.setHeader('Content-Type', 'image/x-icon');
+            res.setHeader("Cache-Control", "public, max-age=2592000");                // expiers after a month
+            res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
+            res.end(favicon);
+        });
 
         this.app.get("*",(req,res) => {
             res.sendFile("src/index.html",appOptions)
