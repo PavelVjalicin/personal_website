@@ -4,7 +4,7 @@ import {Route, Switch} from "react-router-dom";
 import {About} from "./pages/About";
 import {Work} from "./pages/Work";
 import {Skills} from "./pages/Skills";
-import {Git} from "./pages/Git";
+import {Git} from "./pages/github/Git";
 import {Contact} from "./pages/Contact";
 import {NotFound} from "./pages/NotFound";
 import Container from "@material-ui/core/Container";

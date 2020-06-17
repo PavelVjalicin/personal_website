@@ -31,9 +31,6 @@ class TopNav extends Component {
 
     render() {
         return <AppBar color={'default'} position={"sticky"}>
-            <Toolbar>
-                <Typography variant={"h4"}>Pavel&nbsp;Vjalicin resume</Typography>
-            </Toolbar>
             <Tabs value={this.state.activeTab}
                   onChange={this.handleChange}
                   variant="scrollable"

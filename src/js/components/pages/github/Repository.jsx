@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import {Anchor} from "../Anchor";
+import {Anchor} from "../../Anchor";
 
 class Repository extends Component {
     constructor(props) {
@@ -10,18 +10,16 @@ class Repository extends Component {
 
     render() {
         const repo = this.props.repo
-        console.log(repo)
 
         const S = (props) => <span style={{paddingRight:20,...props.style}}>{props.children}</span>
 
         return <>
             <Box style={{
-                marginTop:10,
-                paddingTop:5,
-                paddingLeft:5,
+                marginTop:20,
+                paddingTop:10,
                 paddingBottom:5,
-                borderRadius:5,
-                border:1,
+                border:0,
+                borderTop:1,
                 borderColor:"#e6d38f",
                 borderStyle:"solid"}}>
                 <Anchor href={repo.url}>{repo.name}</Anchor>
