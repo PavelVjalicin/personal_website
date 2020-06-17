@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
 
 class TopNav extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class TopNav extends Component {
     }
 
     setActiveTab(activeTab) {
+        if(activeTab === "/" || activeTab === "") activeTab = "/about"
         return this.hrefs.includes(activeTab) ? activeTab : false
     }
 
@@ -29,18 +31,24 @@ class TopNav extends Component {
     }
 
     render() {
-        return <AppBar color={'default'} position={"fixed"}>
+        return <AppBar color={'default'} position={"sticky"}>
             <Toolbar>
-                <Tabs value={this.state.activeTab} onChange={this.handleChange}>
-                    {this.props.links.map(link =>
-                        <Tab key={link[0]}
-                             label={link[1]}
-                             component={Link}
-                             value={link[0]}
-                             to={link[0]}/>
-                    )}
-                </Tabs>
+                <Typography variant={"h4"}>Pavel&nbsp;Vjalicin resume</Typography>
             </Toolbar>
+            <Tabs value={this.state.activeTab}
+                  onChange={this.handleChange}
+                  variant="scrollable"
+                  scrollButtons="auto"
+            >
+                {this.props.links.map(link =>
+                    <Tab key={link[0]}
+                         label={link[1]}
+                         component={Link}
+                         value={link[0]}
+                         to={link[0]}/>
+                )}
+            </Tabs>
+
         </AppBar>
     }
 }
