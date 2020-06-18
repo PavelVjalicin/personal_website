@@ -26,7 +26,8 @@ class App extends Component {
             <Container style={{
                 borderLeft:5,
                 borderLeftStyle:"solid",
-                borderColor:"#f50057"
+                borderColor:"#f50057",
+                position:"relative"
             }}>
                 <div style={{paddingTop:20}}>
                     <Switch>

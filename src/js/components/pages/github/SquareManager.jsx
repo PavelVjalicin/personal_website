@@ -13,9 +13,9 @@ class SquareManager extends Component {
         }
 
         return <div style={{
-            width: 300,
-            height: "100px",
-            top: "50px",
+            width: "100%",
+            height: 500,
+            top: 0,
             overflow: "hidden",
             right: 0,
             position: "absolute"}}>
