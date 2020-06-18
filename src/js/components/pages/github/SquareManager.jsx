@@ -18,6 +18,7 @@ class SquareManager extends Component {
             top: 0,
             overflow: "hidden",
             right: 0,
+            zIndex:-1,
             position: "absolute"}}>
             {ar}
         </div>

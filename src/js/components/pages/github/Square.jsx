@@ -80,13 +80,8 @@ class Square extends Component {
         return <div className={css.square} style={{
             height: this.size,
             width:this.size,
-            position:"absolute",
             right:pos[0],
             top:pos[1],
-            backgroundColor:"#4aad1861",
-            borderColor:"#83de55b0",
-            borderWidth:1,
-            borderStyle:"solid",
             transform: `rotate( ${rotation}deg )`,
             transition: this.transitionSpeed+"s",
             opacity:opacity
