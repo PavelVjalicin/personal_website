@@ -43,6 +43,7 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-search-params-polyfill": "^8.0.0",
     "webpack": "^4.42.1",
+    "webpack-bundle-analyzer": "^3.8.0",
     "whatwg-fetch": "^3.0.0"
   }
 }

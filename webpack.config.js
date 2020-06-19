@@ -1,7 +1,7 @@
 const path = require("path")
 
 const isDevelopment = process.env.NODE_ENV === 'development'
-//var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;// ...
+//var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -19,7 +19,7 @@ if(isDevelopment) {
             test: /\.js$|\.css$/,
             threshold:0,
             minRatio:1
-        })]
+        })/*,new BundleAnalyzerPlugin()*/]
 }
 
 module.exports = {

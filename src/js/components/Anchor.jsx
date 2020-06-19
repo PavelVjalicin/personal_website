@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import {OpenInNew} from "@material-ui/icons";
+import OpenInNew from "@material-ui/icons/OpenInNew";
 import Link from "@material-ui/core/Link";
 
 class Anchor extends Component {
