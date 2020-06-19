@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import {fetch} from "whatwg-fetch"
 import Box from "@material-ui/core/Box";
 import ReactMarkdown from "react-markdown";
-
+import scrollIntoView from "scroll-into-view-if-needed";
 class ViewReadme extends Component {
     constructor(props) {
         super(props)
@@ -12,6 +12,8 @@ class ViewReadme extends Component {
             data:null,
             noReadMe:false
         }
+
+        this.myRef = React.createRef()
 
         this.openClick = this.openClick.bind(this)
         this.closeClick = this.closeClick.bind(this)
@@ -33,13 +35,21 @@ class ViewReadme extends Component {
     }
 
     closeClick() {
-        this.setState({open:false})
+        this.setState({open:false},
+            () => {
+                const ref = this.props.topRef.current
+                scrollIntoView(ref,
+                    {
+                        scrollMode: 'if-needed',
+                        block:'nearest'})
+            }
+        )
     }
 
 
 
     render() {
-        return <div style={{paddingTop:10}}>
+        return <div style={{paddingTop:10}} ref={this.myRef} >
             {!this.state.open ? <Button variant={"contained"} color={"primary"} onClick={this.openClick}>View README.md</Button> :
                 <Box>
                     <ReactMarkdown source={this.state.data}/>

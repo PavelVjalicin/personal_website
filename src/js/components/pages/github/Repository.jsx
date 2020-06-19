@@ -7,6 +7,7 @@ import {ViewReadme} from "./ViewReadme";
 class Repository extends Component {
     constructor(props) {
         super(props)
+        this.topRef = React.createRef()
     }
 
     render() {
@@ -23,9 +24,9 @@ class Repository extends Component {
                 borderTop:1,
                 borderColor:"#e6d38f",
                 borderStyle:"solid"}}>
-                <Anchor href={repo.html_url}>{repo.full_name}</Anchor>
+                <div ref={this.topRef}><Anchor href={repo.html_url}>{repo.full_name}</Anchor></div>
                 <div><Typography color={"textSecondary"}>{repo.description}</Typography></div>
-                <ViewReadme repo={repo.name}/>
+                <ViewReadme repo={repo.name} topRef={this.topRef}/>
                 <div style={{paddingTop:10}}>
                     <S>
                         <span style={{color:"#8f9ce6"}} >{repo.language}</span>
