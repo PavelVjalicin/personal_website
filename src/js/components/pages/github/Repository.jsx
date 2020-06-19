@@ -2,6 +2,7 @@ import React, {Component} from "react"
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import {Anchor} from "../../Anchor";
+import {ViewReadme} from "./ViewReadme";
 
 class Repository extends Component {
     constructor(props) {
@@ -13,6 +14,8 @@ class Repository extends Component {
 
         const S = (props) => <span style={{paddingRight:20,...props.style}}>{props.children}</span>
 
+        console.log(repo)
+
         return <>
             <Box style={{
                 marginTop:20,
@@ -22,8 +25,9 @@ class Repository extends Component {
                 borderTop:1,
                 borderColor:"#e6d38f",
                 borderStyle:"solid"}}>
-                <Anchor href={repo.url}>{repo.name}</Anchor>
+                <Anchor href={repo.html_url}>{repo.full_name}</Anchor>
                 <div><Typography color={"textSecondary"}>{repo.description}</Typography></div>
+                <ViewReadme repo={repo.name}/>
                 <div style={{paddingTop:10}}>
                     <S>
                         <span style={{color:"#8f9ce6"}} >{repo.language}</span>

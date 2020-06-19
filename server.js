@@ -15,6 +15,8 @@ class Server {
             data:[]
         };
 
+        this.readMe = {}
+
         const favicon = fs.readFileSync("./favicon.ico")
 
         const appOptions = {
@@ -54,6 +56,11 @@ class Server {
 
         })
 
+        this.app.get("/api/readme/:repo", (req,res) => {
+            const repo = req.params.repo
+            this.getReadme(res,repo)
+        })
+
         this.app.get("/favicon.ico", (req, res) => {
 
             res.statusCode = 200;
@@ -69,19 +76,76 @@ class Server {
         })
     }
 
+    async updateReadme(repo,fileDir) {
+        console.log(`Github ${repo} Readme updated`)
+        return fetch(`https://raw.githubusercontent.com/pavelVjalicin/${repo}/master/README.md`)
+            .then(resp => {
+                if(resp.ok) return resp.text()
+                else if(resp.status === 404 ) {
+                    return repo + " does not have a README.md file."
+                } else {
+                    console.log(resp)
+                    throw "Github server error"
+                }
+            })
+            .then(body => {
+                if (fs.existsSync(fileDir)) fs.unlinkSync(fileDir)
+                const resp = {lastUpdatedEpoch: Date.now(), data: body}
+                fs.writeFile(fileDir, JSON.stringify(resp), (err) => {
+                })
+                return resp
+            })
+
+    }
+
+    async getReadme(res,repo) {
+        const inMemoryReadme = this.readMe[repo]
+        const fileName = this.dataDir+`/${repo}_README.json`
+        if(inMemoryReadme) {
+            if(inMemoryReadme.lastUpdatedEpoch + (2*60*60*1000) < Date.now()) {
+                //Update
+                this.readMe[repo] = await this.updateReadme(repo,fileName)
+                res.send(this.readMe[repo].data)
+            } else {
+                //Return in memory
+                res.send(inMemoryReadme.data)
+            }
+        } else {
+
+            if(fs.existsSync(fileName)) {
+                //Retrieve from cache
+                const json = JSON.parse(fs.readFileSync(fileName))
+                if(json.lastUpdatedEpoch + (2*60*60*1000) < Date.now()) {
+                    //update
+                    this.readMe[repo] = await this.updateReadme(repo,fileName)
+                    res.send(this.readMe[repo].data)
+                } else {
+                    this.readMe[repo] = { lastUpdatedEpoch:json, data:json.data}
+                    res.send(json.data)
+                }
+            } else {
+                //Update
+                this.readMe[repo] = await this.updateReadme(repo,fileName)
+                res.send(this.readMe[repo].data)
+            }
+
+        }
+    }
+
     updateRepo() {
         console.log("GitHub repos updated")
         return fetch("https://api.github.com/users/PavelVjalicin/repos")
             .then(resp => {
-                if(resp.ok) return resp
+                if (resp.ok) return resp
                 else throw "GitHub server error"
             })
             .then(resp => resp.json())
             .then(json => {
-                if(fs.existsSync(this.reposDir)) fs.unlinkSync(this.reposDir)
-                json.sort((a,b) => new Date(b.updated_at) - new Date(a.updated_at) )
-                const resp = { lastUpdatedEpoch:Date.now(), data:json }
-                fs.writeFile(this.reposDir,JSON.stringify(resp),(err) => {})
+                if (fs.existsSync(this.reposDir)) fs.unlinkSync(this.reposDir)
+                json.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+                const resp = {lastUpdatedEpoch: Date.now(), data: json}
+                fs.writeFile(this.reposDir, JSON.stringify(resp), (err) => {
+                })
                 return resp
             })
     }
@@ -90,11 +154,13 @@ class Server {
         if(this.repos.data.length === 0) {
             if(fs.existsSync(this.reposDir))  {
                 //Retrieve from cache
-                return JSON.parse(fs.readFileSync(this.reposDir));
+                const json = JSON.parse(fs.readFileSync(this.reposDir));
+                if(json.lastUpdatedEpoch + (2*60*60*1000) < Date.now() ) {
+                    return await this.updateRepo()
+                } else return json
             } else {
                 return await this.updateRepo()
             }
-
 
         } else if(this.repos.lastUpdatedEpoch + (2*60*60*1000) < Date.now() ) {
             //Update
