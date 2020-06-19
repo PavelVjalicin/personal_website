@@ -18,8 +18,8 @@ class App extends Component {
         return <>
             <TopNav links={[
                 ["/about","About me"],
-                ["/work","Work Experience"],
-                ["/skills","Technical Skills"],
+                ["/work","Experience"],
+                ["/skills","Skills"],
                 ["/github","GitHub"],
                 ["/contact","Contact Me"]
             ]}/>
