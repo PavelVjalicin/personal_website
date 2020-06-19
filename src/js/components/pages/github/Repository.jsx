@@ -14,8 +14,6 @@ class Repository extends Component {
 
         const S = (props) => <span style={{paddingRight:20,...props.style}}>{props.children}</span>
 
-        console.log(repo)
-
         return <>
             <Box style={{
                 marginTop:20,
@@ -33,7 +31,7 @@ class Repository extends Component {
                         <span style={{color:"#8f9ce6"}} >{repo.language}</span>
                     </S>
                     <S>
-                        <span>{repo.license.name}</span>
+                        <span>{repo.license.name === "Other" ? "Other License" :repo.license.name}</span>
                     </S>
                     <S>
                         <span>Last Updated: {new Date(repo.updated_at).toLocaleString()}</span>
