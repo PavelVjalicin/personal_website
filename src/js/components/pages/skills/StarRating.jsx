@@ -4,6 +4,7 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarHalfIcon from '@material-ui/icons/StarHalf';
 import css from "./StarRating.module.scss"
 import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 class StarRating extends Component {
     constructor(props) {
         super(props)
@@ -42,9 +43,9 @@ class StarRating extends Component {
                     <span className={css.text}>{this.props.children}</span>
                 </Grid>
                 <Grid item xs={6} sm={6} className={css.starsContainer}>
-                <div className={css.stars}>
-                    {stars.map((x,i) => x({key:i}))}
-                </div>
+                    <div className={css.stars}>
+                        {stars.map((x,i) => x({key:i,color:"secondary"}))}
+                    </div>
                 </Grid>
             </Grid>
         </div>

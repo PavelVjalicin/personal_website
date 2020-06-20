@@ -30,7 +30,7 @@ class Skills extends Component {
                 <StarRating rating={5}>ASP.NET</StarRating>
                 <StarRating rating={3}>Akka HTTP</StarRating>
             </SkillsSection>
-            <SkillsSection title={"Web UI"}>
+            <SkillsSection title={"Web Client-Side Technologies"}>
                 <StarRating rating={10}>React</StarRating>
                 <StarRating rating={10}>Material-UI</StarRating>
                 <StarRating rating={10}>HTML</StarRating>
