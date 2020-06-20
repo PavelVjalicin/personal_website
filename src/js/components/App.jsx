@@ -3,7 +3,7 @@ import {TopNav} from "./TopNav";
 import {Route, Switch} from "react-router-dom";
 import {About} from "./pages/About";
 import {Work} from "./pages/Work";
-import {Skills} from "./pages/Skills";
+import {Skills} from "./pages/skills/Skills";
 import {Git} from "./pages/github/Git";
 import {Contact} from "./pages/Contact";
 import {NotFound} from "./pages/NotFound";
