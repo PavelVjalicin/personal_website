@@ -2,6 +2,7 @@ import React, {Component} from "react"
 import {StarRating} from "./StarRating";
 import {PageTitle} from "../../PageTitle";
 import {SkillsSection} from "./SkillsSection";
+import {SkillsAnimation} from "./SkillsAnimation";
 
 class Skills extends Component {
     constructor(props) {
@@ -10,6 +11,7 @@ class Skills extends Component {
 
     render() {
         return <>
+            <SkillsAnimation/>
             <PageTitle>Technical Skills</PageTitle>
             <SkillsSection title={"Programming Languages"}>
                 <StarRating rating={10}>Scala</StarRating>

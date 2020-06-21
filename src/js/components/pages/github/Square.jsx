@@ -1,13 +1,12 @@
 import React, {Component} from "react"
 import css from "./Square.module.scss"
+import {minusV2, plusV2} from "../../../V2";
 //V2 = Vector2
 const spawnBoxV2 = [300,150]
 const spawnBoxOffsetV2 = [0,-10]
 
 const isUpper = (positionV2) => positionV2[1] < (spawnBoxV2[1] / spawnBoxV2[0]) * positionV2[0]
 
-const minusV2 = (v1,v2) => [v1[0] - v2[0], v1[1] - v2[1] ]
-const plusV2 = (v1,v2) => [v1[0] + v2[0], v1[1] + v2[1] ]
 
 //Mirrors position vector if under rectangle diagonal cross-section.
 const invert = (positionV2) => {
