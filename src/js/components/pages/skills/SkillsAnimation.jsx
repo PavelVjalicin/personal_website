@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import {positionBetweenPoints, trianglePointsDown, trianglePointsUp, triangleSize} from "./Triangle";
+import {positionBetweenMatrix, positionBetweenPoints, trianglePointsDown, trianglePointsUp, triangleSize} from "./Triangle";
 import {multV2, plusV2} from "../../../V2";
 
 class SkillsAnimation extends Component {
@@ -23,13 +23,20 @@ class SkillsAnimation extends Component {
         ctx.fillStyle = fillStyle;
         ctx.fill();
 
+        ctx.strokeStyle = "#000"
+        ctx.lineWidth = 1.5
+        ctx.stroke()
     }
 
     drawTriangle(ctx,color,positionV2,point,fraction) {
 
+        this.i = 0
+
+        this.i += 1
+
         const height = triangleSize * Math.cos(Math.PI / 6);
 
-        const spacing = 2
+        const spacing = 3
 
         const isEvenRow = positionV2[1] % 2 === 0
 
@@ -37,33 +44,39 @@ class SkillsAnimation extends Component {
 
         const renderY = isUp ? positionV2[1] : positionV2[1] - 1
 
-        let xOffset = 100 + (triangleSize / 2 + spacing ) * positionV2[0];
-        let yOffset = 300 + (height)  * renderY + spacing * positionV2[1];
+        let xOffset =  (triangleSize / 2 + spacing ) * positionV2[0];
+        let yOffset =  height + height  * renderY + spacing * positionV2[1];
 
         const isUpScalar = isUp ? 1 : -1
 
-        const trianglePosition = isUp ? trianglePointsUp() :  trianglePointsDown()
+        let trianglePosition = isUp ? trianglePointsUp() :  trianglePointsDown()
+        const reverseTrianglePosition = !isUp ? trianglePointsUp() :  trianglePointsDown()
+        let isRightScalar = -1
 
-        if(point === 2)
-            trianglePosition["outer"][point] = positionBetweenPoints(
-                trianglePointsUp()["outer"][point],
-                trianglePointsDown()["outer"][point],
-                fraction)
-        else if(point === 1)
-            trianglePosition["outer"][point] = positionBetweenPoints(
-                trianglePointsUp()["outer"][point],
-                plusV2(trianglePointsUp()["outer"][1],[-triangleSize * 1.5,-height]),
-                fraction
-            )
-        else if(point === 0)
-            trianglePosition["outer"][point] = positionBetweenPoints(
-                trianglePointsUp()["outer"][point],
-                plusV2(trianglePointsUp()["outer"][1],[triangleSize * 0.5 ,-height*isUpScalar]),
-                fraction
-            )
+        switch (point) {
+            case 0:
+                isRightScalar = 1
+            case 1:
+                let revMatrix = reverseTrianglePosition
+                const [p0, p1, p2] = [...reverseTrianglePosition]
+                if (isRightScalar === -1) revMatrix = [p2, p0, p1]
+                else revMatrix = [p1, p2, p0]
+                trianglePosition = positionBetweenMatrix(
+                    trianglePosition,
+                    revMatrix.map(x => plusV2(x, [isRightScalar * (triangleSize * 0.5 + spacing), -height * isUpScalar])),
+                    fraction
+                )
+                break
+            case 2:
+                trianglePosition = positionBetweenMatrix(
+                    trianglePosition,
+                    reverseTrianglePosition.map(x => plusV2(x, [0, spacing * isUpScalar])),
+                    fraction
+                )
+                break
+        }
 
-        this.fillTriangle(ctx,"#000",xOffset,yOffset,trianglePosition["outer"])
-        this.fillTriangle(ctx,color,xOffset,yOffset,trianglePosition["inner"])
+        this.fillTriangle(ctx,color,xOffset,yOffset,trianglePosition)
     }
 
     getTime() {
@@ -89,10 +102,12 @@ class SkillsAnimation extends Component {
         if(fraction > 1) fraction = 1
 
         const c = "rgb(30,30,30)"
-
-        for(let x = 0; x< 50; x ++) {
+        for(let x = 0; x< 5; x ++) {
             for(let y = 0; y <5; y++) {
-                this.drawTriangle(ctx,c,[x,y],1,0)
+                this.drawTriangle(ctx,c,[x*7,y*3],0,0)
+                this.drawTriangle(ctx,c,[x*7,y*3],0,fraction)
+                this.drawTriangle(ctx,c,[x*7,y*3],1,fraction)
+                this.drawTriangle(ctx,c,[x*7,y*3],2,fraction)
             }
         }
         /*this.drawTriangle(ctx,[1,0])

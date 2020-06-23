@@ -10,18 +10,17 @@ function trianglePoints(isUp) {
 
     const directionLineSize = isUp ? -lineSize : lineSize
 
-    return {
-        "outer": [
+    return [
             [0,0],
             [triangleSize,0],
             [triangleSize/2,directionalHeight]
-        ],
-        "inner": [
-            [lineSize,directionLineSize],
-            [triangleSize-lineSize,directionLineSize],
-            [triangleSize/2,directionalHeight - directionLineSize]
-        ]
-    }
+    ]
+}
+
+function positionBetweenMatrix(matrix1,matrix2,fraction) {
+    return matrix1.map( (m1Point,m1Index) =>
+        positionBetweenPoints(m1Point,matrix2[m1Index],fraction)
+    )
 }
 
 function positionBetweenPoints(pos1V2,pos2V2,fraction) {
@@ -36,4 +35,4 @@ function positionBetweenPoints(pos1V2,pos2V2,fraction) {
 const trianglePointsUp = () => trianglePoints(true)
 const trianglePointsDown = () => trianglePoints(false)
 
-export {trianglePointsUp,trianglePointsDown,positionBetweenPoints,triangleSize}
+export {trianglePointsUp,trianglePointsDown,positionBetweenPoints,triangleSize,positionBetweenMatrix}
