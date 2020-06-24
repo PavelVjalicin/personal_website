@@ -3,7 +3,7 @@ import {multV2, plusV2} from "../../../V2";
 const triangleSize = 30
 const lineSize = 1.5
 const height = triangleSize * Math.cos(Math.PI / 6);
-const animationDuration = 1000
+const animationDuration = 300
 
 function trianglePoints(isUp) {
     const directionalHeight = isUp ? -height : height
@@ -35,4 +35,4 @@ function positionBetweenPoints(pos1V2,pos2V2,fraction) {
 const trianglePointsUp = () => trianglePoints(true)
 const trianglePointsDown = () => trianglePoints(false)
 
-export {trianglePointsUp,trianglePointsDown,positionBetweenPoints,triangleSize,positionBetweenMatrix}
+export {trianglePointsUp,trianglePointsDown,positionBetweenPoints,triangleSize,positionBetweenMatrix,animationDuration}

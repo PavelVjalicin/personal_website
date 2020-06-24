@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import {positionBetweenMatrix, positionBetweenPoints, trianglePointsDown, trianglePointsUp, triangleSize} from "./Triangle";
+import {animationDuration, positionBetweenMatrix, positionBetweenPoints, trianglePointsDown, trianglePointsUp, triangleSize} from "./Triangle";
 import {multV2, plusV2} from "../../../V2";
 
 class SkillsAnimation extends Component {
@@ -9,8 +9,29 @@ class SkillsAnimation extends Component {
 
         this.animationDuration = 0
 
+        this.triangles = [{
+            x:0,
+            y:0
+        }]
+        this.triangleAnimations = {
+            0:{
+                x:0,
+                y:0,
+                currentDuration:0,
+                point:0
+            },
+            1:{
+                x:0,
+                y:0,
+                currentDuration:0,
+                point:2
+            }
+        }
+
+        this.animationIdCounter = 100
+
         this.draw = this.draw.bind(this)
-        this.getTime = this.getTime.bind(this)
+        this.getFrameTime = this.getFrameTime.bind(this)
     }
 
     fillTriangle(ctx,fillStyle,xOffset,yOffset,points) {
@@ -79,7 +100,7 @@ class SkillsAnimation extends Component {
         this.fillTriangle(ctx,color,xOffset,yOffset,trianglePosition)
     }
 
-    getTime() {
+    getFrameTime() {
         const currentMil = new Date().getTime()
         if(this.lastFrameTime === undefined) this.lastFrameTime = currentMil
         const time = currentMil - this.lastFrameTime
@@ -88,7 +109,8 @@ class SkillsAnimation extends Component {
     }
 
     draw() {
-        this.animationDuration += this.getTime()
+        const frameTime = this.getFrameTime()
+        this.animationDuration += frameTime
         const canvas = this.canvasRef.current
         const ctx = this.canvasRef.current.getContext("2d")
 
@@ -101,15 +123,52 @@ class SkillsAnimation extends Component {
 
         if(fraction > 1) fraction = 1
 
+        const animationsToDelete = []
+
         const c = "rgb(30,30,30)"
-        for(let x = 0; x< 5; x ++) {
-            for(let y = 0; y <5; y++) {
-                this.drawTriangle(ctx,c,[x*7,y*3],0,0)
-                this.drawTriangle(ctx,c,[x*7,y*3],0,fraction)
-                this.drawTriangle(ctx,c,[x*7,y*3],1,fraction)
-                this.drawTriangle(ctx,c,[x*7,y*3],2,fraction)
+
+        this.triangles.forEach(triangle => {
+            this.drawTriangle(ctx,c,[triangle.x,triangle.y],0,0)
+        })
+
+        for(const [id,triangleAnimation] of Object.entries(this.triangleAnimations) )  {
+            const newDuration = triangleAnimation.currentDuration + frameTime
+            this.drawTriangle(
+                ctx,
+                c,
+                [triangleAnimation.x, triangleAnimation.y],
+                triangleAnimation.point,
+                newDuration / animationDuration
+            )
+            triangleAnimation.currentDuration = newDuration
+
+            if(newDuration >= animationDuration) {
+                animationsToDelete.push(id)
+                let newX = triangleAnimation.x
+                let newY = triangleAnimation.y
+                if(triangleAnimation.point === 1) newX -= 1
+                if(triangleAnimation.point === 0) newX += 1
+                if(triangleAnimation.point === 2 ) newY += 1
+                this.triangles.push({x:newX,y:newY})
+                if(triangleAnimation.x < 20) {
+                    this.animationIdCounter += 1
+                    const newObj = {...triangleAnimation}
+                    newObj.x = newX
+                    newObj.y = newY
+                    newObj.currentDuration = 0
+                    newObj.point = 0
+                    this.triangleAnimations[this.animationIdCounter] = newObj
+                }
             }
         }
+
+
+        animationsToDelete.forEach(id => delete this.triangleAnimations[id])
+
+        //console.log(animationsToDelete)
+
+
+
         /*this.drawTriangle(ctx,[1,0])
         this.drawTriangle(ctx,[2,0])
         this.drawTriangle(ctx,[0,1])
