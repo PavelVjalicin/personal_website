@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {animationDuration, positionBetweenMatrix, positionBetweenPoints, trianglePointsDown, trianglePointsUp, triangleSize} from "./Triangle";
-import {multV2, plusV2} from "../../../V2";
-
+import { plusV2} from "../../../V2";
+import css from "./SkillsAnimation.module.scss"
 class SkillsAnimation extends Component {
     constructor(props) {
         super(props)
@@ -9,41 +9,50 @@ class SkillsAnimation extends Component {
 
         this.animationDuration = 0
 
-        this.gridXSize = 10
-        this.gridYSize = 5
+        this.gridXSize = 12
+        this.gridYSize = 6
 
-        //false = No triangle, true = Triangle
+        //-1 = No triangle, 1 = Triangle, 0 = Animation in progress
         this.triangleGrid = []
 
         for(let x=0;x<=this.gridXSize; x++) {
-            this.triangleGrid.push(Array(this.gridYSize).fill(false))
+            this.triangleGrid.push(Array(this.gridYSize).fill(-1))
         }
 
-        this.triangleGrid[0][0] = true
 
         // Double signifies the probability of triangle fold to that grid location.
         this.triangleGridProbs = []
 
-        for(let x=0;x<this.gridXSize; x++) {
+        for(let x=0;x<=this.gridXSize; x++) {
             this.triangleGridProbs[x] = []
-            for(let y=0; y<this.gridYSize;y++) {
-                let probability = 1 - ( ( (x + 1) / this.gridXSize + (y + 1) / this.gridYSize) / 2 )
+            for(let y=0; y<=this.gridYSize;y++) {
+                let probability = 1 - y * 0.13
                 this.triangleGridProbs[x][y] = probability
             }
         }
+
+
+
+        this.triangleGridProbs.forEach( (o,x) => console.log(o.map(y => y.toFixed(2))))
 
         this.triangleAnimations = {
             0:{
                 x:0,
                 y:0,
                 currentDuration:0,
-                point:0
+                point:2
             },
             1:{
-                x:0,
+                x:4,
                 y:0,
                 currentDuration:0,
                 point:2
+            },
+            2:{
+                x:10,
+                y:0,
+                currentDuration:0,
+                point:0
             }
         }
 
@@ -51,6 +60,8 @@ class SkillsAnimation extends Component {
 
         this.draw = this.draw.bind(this)
         this.getFrameTime = this.getFrameTime.bind(this)
+        this.addAnimation = this.addAnimation.bind(this)
+        this.addAnimations = this.addAnimations.bind(this)
     }
 
     fillTriangle(ctx,fillStyle,xOffset,yOffset,points) {
@@ -68,19 +79,18 @@ class SkillsAnimation extends Component {
         ctx.stroke()
     }
 
+    isUpFunc(x,y) {
+        const isEvenRow = y % 2 === 0
+        return x % 2 != isEvenRow
+    }
+
     drawTriangle(ctx,color,positionV2,point,fraction) {
-
-        this.i = 0
-
-        this.i += 1
 
         const height = triangleSize * Math.cos(Math.PI / 6);
 
         const spacing = 3
 
-        const isEvenRow = positionV2[1] % 2 === 0
-
-        const isUp = positionV2[0] % 2 != isEvenRow
+        const isUp = this.isUpFunc(positionV2[0],positionV2[1])
 
         const renderY = isUp ? positionV2[1] : positionV2[1] - 1
 
@@ -127,6 +137,47 @@ class SkillsAnimation extends Component {
         return time;
     }
 
+    addAnimations(x,y) {
+        const isUp = this.isUpFunc(x,y)
+
+        const addAnim =(x1,y1,x2,y2,p) => {
+
+            const xGrid = this.triangleGrid[x1+x2]
+
+            if(xGrid === undefined) return
+
+            if(xGrid[y1+y2] === -1) {
+                const prob = this.triangleGridProbs[x1+x2][y1+y2]
+                if(Math.random() < prob) {
+                    this.addAnimation(x1, y1, p)
+                    xGrid[y1+y2] = 0
+                }
+            }
+        }
+
+        addAnim(x,y,-1,0,1)
+
+        addAnim(x,y,1,0,0)
+
+        if(isUp) {
+            addAnim(x,y,0,1,2)
+        } else {
+            addAnim(x,y,0,-1,2)
+        }
+    }
+
+    addAnimation(x,y,point) {
+        this.animationIdCounter += 1
+        this.triangleAnimations[this.animationIdCounter] = {
+            x:x,
+            y:y,
+            point:point,
+            currentDuration:0
+        }
+    }
+
+
+
     draw() {
         const frameTime = this.getFrameTime()
         this.animationDuration += frameTime
@@ -148,7 +199,7 @@ class SkillsAnimation extends Component {
 
         this.triangleGrid.forEach((objX,x) => {
             objX.forEach((objY,y) => {
-                if(this.triangleGrid[x][y] === true) {
+                if(this.triangleGrid[x][y] === 1) {
                     this.drawTriangle(ctx, c, [x, y], 0, 0)
                 }
             })
@@ -168,39 +219,24 @@ class SkillsAnimation extends Component {
 
             if(newDuration >= animationDuration) {
                 animationsToDelete.push(id)
+
                 let newX = triangleAnimation.x
                 let newY = triangleAnimation.y
+
                 if(triangleAnimation.point === 1) newX -= 1
                 if(triangleAnimation.point === 0) newX += 1
-                if(triangleAnimation.point === 2 ) newY += 1
-                this.triangleGrid[newX][newY] = true
-                if(triangleAnimation.x < this.gridXSize - 1) {
-                    this.animationIdCounter += 1
-                    const newObj = {...triangleAnimation}
-                    newObj.x = newX
-                    newObj.y = newY
-                    newObj.currentDuration = 0
-                    newObj.point = 0
-                    this.triangleAnimations[this.animationIdCounter] = newObj
+                if(triangleAnimation.point === 2 ) {
+                    if(this.isUpFunc(newX,newY))
+                        newY += 1
+                    else newY -= 1
                 }
+
+                this.triangleGrid[newX][newY] = 1
+
+                this.addAnimations(newX,newY)
             }
         }
-
-
         animationsToDelete.forEach(id => delete this.triangleAnimations[id])
-
-        //console.log(animationsToDelete)
-
-
-
-        /*this.drawTriangle(ctx,[1,0])
-        this.drawTriangle(ctx,[2,0])
-        this.drawTriangle(ctx,[0,1])
-        this.drawTriangle(ctx,[1,1])
-        this.drawTriangle(ctx,[2,1])
-        this.drawTriangle(ctx,[0,2])
-        this.drawTriangle(ctx,[1,2])
-        this.drawTriangle(ctx,[2,2])*/
         window.requestAnimationFrame(this.draw)
     }
 
@@ -209,7 +245,7 @@ class SkillsAnimation extends Component {
     }
 
     render() {
-        return <canvas ref={this.canvasRef} width={500} height={500}/>
+        return <canvas ref={this.canvasRef} width={250} height={200} className={css.canvas}/>
     }
 }
 

@@ -12,7 +12,7 @@ class Skills extends Component {
     render() {
         return <>
             <SkillsAnimation/>
-            <PageTitle>Technical Skills</PageTitle>
+            <PageTitle>Skills</PageTitle>
             <SkillsSection title={"Programming Languages"}>
                 <StarRating rating={10}>Scala</StarRating>
                 <StarRating rating={10}>JavaScript</StarRating>
