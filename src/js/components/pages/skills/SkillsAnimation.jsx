@@ -9,10 +9,29 @@ class SkillsAnimation extends Component {
 
         this.animationDuration = 0
 
-        this.triangles = [{
-            x:0,
-            y:0
-        }]
+        this.gridXSize = 10
+        this.gridYSize = 5
+
+        //false = No triangle, true = Triangle
+        this.triangleGrid = []
+
+        for(let x=0;x<=this.gridXSize; x++) {
+            this.triangleGrid.push(Array(this.gridYSize).fill(false))
+        }
+
+        this.triangleGrid[0][0] = true
+
+        // Double signifies the probability of triangle fold to that grid location.
+        this.triangleGridProbs = []
+
+        for(let x=0;x<this.gridXSize; x++) {
+            this.triangleGridProbs[x] = []
+            for(let y=0; y<this.gridYSize;y++) {
+                let probability = 1 - ( ( (x + 1) / this.gridXSize + (y + 1) / this.gridYSize) / 2 )
+                this.triangleGridProbs[x][y] = probability
+            }
+        }
+
         this.triangleAnimations = {
             0:{
                 x:0,
@@ -127,8 +146,13 @@ class SkillsAnimation extends Component {
 
         const c = "rgb(30,30,30)"
 
-        this.triangles.forEach(triangle => {
-            this.drawTriangle(ctx,c,[triangle.x,triangle.y],0,0)
+        this.triangleGrid.forEach((objX,x) => {
+            objX.forEach((objY,y) => {
+                if(this.triangleGrid[x][y] === true) {
+                    this.drawTriangle(ctx, c, [x, y], 0, 0)
+                }
+            })
+
         })
 
         for(const [id,triangleAnimation] of Object.entries(this.triangleAnimations) )  {
@@ -149,8 +173,8 @@ class SkillsAnimation extends Component {
                 if(triangleAnimation.point === 1) newX -= 1
                 if(triangleAnimation.point === 0) newX += 1
                 if(triangleAnimation.point === 2 ) newY += 1
-                this.triangles.push({x:newX,y:newY})
-                if(triangleAnimation.x < 20) {
+                this.triangleGrid[newX][newY] = true
+                if(triangleAnimation.x < this.gridXSize - 1) {
                     this.animationIdCounter += 1
                     const newObj = {...triangleAnimation}
                     newObj.x = newX
