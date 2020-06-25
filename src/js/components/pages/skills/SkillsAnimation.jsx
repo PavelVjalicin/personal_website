@@ -31,9 +31,7 @@ class SkillsAnimation extends Component {
             }
         }
 
-
-
-        this.triangleGridProbs.forEach( (o,x) => console.log(o.map(y => y.toFixed(2))))
+        //this.triangleGridProbs.forEach( (o,x) => console.log(o.map(y => y.toFixed(2))))
 
         this.triangleAnimations = {
             0:{
@@ -182,6 +180,7 @@ class SkillsAnimation extends Component {
         const frameTime = this.getFrameTime()
         this.animationDuration += frameTime
         const canvas = this.canvasRef.current
+        if(canvas === null) return
         const ctx = this.canvasRef.current.getContext("2d")
 
         ctx.save();
@@ -237,7 +236,8 @@ class SkillsAnimation extends Component {
             }
         }
         animationsToDelete.forEach(id => delete this.triangleAnimations[id])
-        window.requestAnimationFrame(this.draw)
+        if(Object.entries(this.triangleAnimations).length !== 0)
+            window.requestAnimationFrame(this.draw)
     }
 
     componentDidMount() {
