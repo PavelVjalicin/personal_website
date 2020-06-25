@@ -18,9 +18,9 @@ class Skills extends Component {
                 <StarRating rating={10}>JavaScript</StarRating>
                 <StarRating rating={10}>TypeScript</StarRating>
                 <StarRating rating={9}>Java</StarRating>
+                <StarRating rating={8}>C#</StarRating>
                 <StarRating rating={8}>PHP</StarRating>
                 <StarRating rating={8}>ActionScript</StarRating>
-                <StarRating rating={7}>C#</StarRating>
                 <StarRating rating={5}>Python</StarRating>
                 <StarRating rating={3}>C++</StarRating>
             </SkillsSection>
