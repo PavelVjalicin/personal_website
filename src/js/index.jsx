@@ -11,6 +11,7 @@ import "../css/main.scss"
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import CssBaseline from "@material-ui/core/CssBaseline";
+import ScrollToTop from "./components/ScrollToTop";
 
 const react = document.getElementById("react")
 
@@ -21,6 +22,7 @@ const theme = createMuiTheme({
 })
 
 ReactDOM.render(<BrowserRouter>
+    <ScrollToTop/>
     <ThemeProvider theme={theme}>
         <App/>
         <CssBaseline/>
