@@ -1,13 +1,13 @@
 import React, {Component} from "react"
 import {TopNav} from "./TopNav";
 import {Route, Switch} from "react-router-dom";
-import {About} from "./pages/About";
-import {Work} from "./pages/Work";
 import {Skills} from "./pages/skills/Skills";
 import {Git} from "./pages/github/Git";
-import {Contact} from "./pages/Contact";
 import {NotFound} from "./pages/NotFound";
 import Container from "@material-ui/core/Container";
+import {About} from "./pages/about/About";
+import {Experience} from "./pages/experience/Experience";
+import {Contact} from "./pages/contact/Contact";
 
 class App extends Component {
     constructor(props) {
@@ -35,7 +35,7 @@ class App extends Component {
                             <About/>
                         </Route>
                         <Route path={"/work"} exact>
-                            <Work/>
+                            <Experience/>
                         </Route>
                         <Route path={"/skills"} exact>
                             <Skills/>

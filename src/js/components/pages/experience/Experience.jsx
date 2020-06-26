@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 
-class Work extends Component {
+class Experience extends Component {
     constructor(props) {
         super(props)
     }
@@ -10,4 +10,4 @@ class Work extends Component {
     }
 }
 
-export {Work}
+export {Experience}
