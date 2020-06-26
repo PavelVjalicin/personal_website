@@ -2,7 +2,6 @@ import React, {Component} from "react"
 import {Section} from "../../Section";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import {StarRating} from "./StarRating";
 
 class SkillsSection extends Component {
     constructor(props) {
@@ -16,7 +15,7 @@ class SkillsSection extends Component {
             //i % 2 === 0 ? left.push(x) : right.push(x)
             i < this.props.children.length / 2 ? left.push(x) : right.push(x)
         )
-        return <>
+        return <div style={{paddingTop:20}}>
             <Section>{this.props.title}</Section>
             <Grid container>
                 <Grid item xs={12} sm={6}>
@@ -30,7 +29,7 @@ class SkillsSection extends Component {
                     </Box>
                 </Grid>
             </Grid>
-        </>
+        </div>
     }
 }
 

@@ -45,7 +45,8 @@ class Skills extends Component {
                 <StarRating rating={10}>SCSS</StarRating>
                 <StarRating rating={10}>LESS</StarRating>
                 <StarRating rating={10}>JQuery</StarRating>
-                <StarRating rating={9}>Bootstrap</StarRating>
+                <StarRating rating={10}>Bootstrap</StarRating>
+                <StarRating rating={9}>WebPack</StarRating>
                 <StarRating rating={9}>Graph.js</StarRating>
                 <StarRating rating={8}>D3.js</StarRating>
                 <StarRating rating={7}>WebGL</StarRating>

@@ -38,7 +38,7 @@ class StarRating extends Component {
         this.addStar(stars,emptyStarNumber,Empty)
 
         return <div className={css.box}>
-            <Grid container spacing={4} alignItems="center">
+            <Grid container spacing={0} alignItems="center">
                 <Grid item xs={6} sm={6} className={css.grid}>
                     <span className={css.text}>{this.props.children}</span>
                 </Grid>
