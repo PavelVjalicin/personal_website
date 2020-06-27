@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import {LineAnimation} from "./LineAnimation";
 
 class Experience extends Component {
     constructor(props) {
@@ -6,7 +7,9 @@ class Experience extends Component {
     }
 
     render() {
-        return <></>
+        return <>
+            <LineAnimation/>
+        </>
     }
 }
 

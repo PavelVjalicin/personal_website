@@ -1,14 +1,12 @@
 import {rotateV2} from "../../../V2";
 
-const animationDuration = 500
+const animationDuration = 1000
 const maxLineNumber = 3
-const lineColor = "#FFF"
-const lineWidth = 1
-const lineSpacing = 5
-const maxLineLength = 100
-const minLineLength = 20
+const lineSpacing = 10
+const maxLineLength = 200
+const minLineLength = 10
 
-const getLineNum = () => between(1,maxLineNumber)
+const getLineNum = () => 3//between(1,maxLineNumber)
 //10, 100
 const between = (a,b) => Math.round(Math.random() * (b - a) + 1)
 
@@ -23,11 +21,15 @@ const getInitialLineVectors = () => {
     for(let i = 0; i < num; i++) {
         const linesLeft = num - i + 1
         const maxLength = maxLineLength - totalSpacing - linesLeft * minLineLength
-        const endPosition = between(minLineLength,maxLength)
+        let endPosition
+        if(i === num-1) endPosition = maxLength
+        else endPosition = between(minLineLength,maxLength)
+
         arr.push([
             [startPosition,0],
             [endPosition,0]
         ])
+
         startPosition += endPosition + lineSpacing
     }
     return arr
