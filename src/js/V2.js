@@ -9,4 +9,4 @@ const rotateV2 = (vector,degrees) => {
     return [vector[0] * cos - vector[1] * sin, vector[0] * sin + vector[1] * cos]
 }
 
-export {minusV2,plusV2,multV2}
+export {minusV2,plusV2,multV2,rotateV2}

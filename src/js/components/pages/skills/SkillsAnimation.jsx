@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import {animationDuration, positionBetweenMatrix, positionBetweenPoints, trianglePointsDown, trianglePointsUp, triangleSize} from "./Triangle";
-import { plusV2} from "../../../V2";
+import {plusV2} from "../../../V2";
 import css from "./SkillsAnimation.module.scss"
 class SkillsAnimation extends Component {
     constructor(props) {
