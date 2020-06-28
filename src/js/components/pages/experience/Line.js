@@ -1,6 +1,6 @@
 import {rotateV2} from "../../../V2";
 
-const animationDuration = 1000
+const animationDuration = 2000
 const maxLineNumber = 4
 const lineSpacing = 10
 const maxLineLength = 200
@@ -18,16 +18,15 @@ const getInitialLineVectors = () => {
 
     let maxLength = maxLineLength - totalSpacing
 
-    let startPosition = 0
+    let startPosition = 40
     for(let i = 0; i < num; i++) {
 
-        const maxLengthWIthReservedMinLength = maxLength + (minLineLength * i) - num * minLineLength
+        const maxLengthWithReservedMinLength = maxLength + (minLineLength * i) - num * minLineLength
 
         let length = between(
             minLineLength,
-            maxLengthWIthReservedMinLength )
+            maxLengthWithReservedMinLength )
 
-        if(i === num - 1 ) length = maxLength
 
         let endPosition = startPosition + length
 
@@ -58,7 +57,8 @@ class Line {
     }
 
     getAnimationFraction() {
-        return this.animationTime / animationDuration
+        const t = this.animationTime / animationDuration
+        return t*(2-t)
     }
 
     getMatrixAfter(duration) {
