@@ -11,7 +11,7 @@ class LineAnimation extends Component {
         this.lines = []
         this.currentLineNum = 0
         this.curAnim = 0
-        this.animDelay = 600
+        this.animDelay = 500
         this.maxLineNum = 15
         this.maxAngle = 105
         this.canvasRef = React.createRef()

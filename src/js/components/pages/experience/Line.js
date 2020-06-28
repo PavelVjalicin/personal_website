@@ -4,7 +4,7 @@ const animationDuration = 2000
 const maxLineNumber = 4
 const lineSpacing = 10
 const maxLineLength = 200
-const minLineLength = 20
+const minLineLength = 15
 
 const getLineNum = () => between(1,maxLineNumber)
 //10, 100
