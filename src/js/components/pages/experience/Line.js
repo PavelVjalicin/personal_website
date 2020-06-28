@@ -1,14 +1,14 @@
 import {rotateV2} from "../../../V2";
 
 const animationDuration = 1000
-const maxLineNumber = 3
+const maxLineNumber = 4
 const lineSpacing = 10
 const maxLineLength = 200
-const minLineLength = 10
+const minLineLength = 20
 
-const getLineNum = () => 3//between(1,maxLineNumber)
+const getLineNum = () => between(1,maxLineNumber)
 //10, 100
-const between = (a,b) => Math.round(Math.random() * (b - a) + 1)
+const between = (a,b) => Math.round((Math.random() * (b - a)) + a)
 
 const getInitialLineVectors = () => {
     const num = getLineNum()
@@ -16,21 +16,28 @@ const getInitialLineVectors = () => {
 
     const totalSpacing = (num - 1) * lineSpacing
 
-    let startPosition = 0
+    let maxLength = maxLineLength - totalSpacing
 
+    let startPosition = 0
     for(let i = 0; i < num; i++) {
-        const linesLeft = num - i + 1
-        const maxLength = maxLineLength - totalSpacing - linesLeft * minLineLength
-        let endPosition
-        if(i === num-1) endPosition = maxLength
-        else endPosition = between(minLineLength,maxLength)
+
+        const maxLengthWIthReservedMinLength = maxLength + (minLineLength * i) - num * minLineLength
+
+        let length = between(
+            minLineLength,
+            maxLengthWIthReservedMinLength )
+
+        if(i === num - 1 ) length = maxLength
+
+        let endPosition = startPosition + length
 
         arr.push([
             [startPosition,0],
             [endPosition,0]
         ])
 
-        startPosition += endPosition + lineSpacing
+        maxLength -= length
+        startPosition += length + lineSpacing
     }
     return arr
 }
