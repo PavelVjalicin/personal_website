@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import Typography from "@material-ui/core/Typography";
 
 class NotFound extends Component {
     constructor(props) {
@@ -6,7 +7,9 @@ class NotFound extends Component {
     }
 
     render() {
-        return <></>
+        return <>
+            <Typography variant={"h6"}>Page Not Found</Typography>
+        </>
     }
 }
 
