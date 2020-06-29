@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import {ContactAnimation} from "./ContactAnimation";
 
 class Contact extends Component {
     constructor(props) {
@@ -6,7 +7,9 @@ class Contact extends Component {
     }
 
     render() {
-        return <></>
+        return <>
+            <ContactAnimation/>
+        </>
     }
 }
 

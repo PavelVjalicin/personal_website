@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import {AboutAnimation} from "./AboutAnimation";
 
 class About extends Component {
     constructor(props) {
@@ -6,7 +7,10 @@ class About extends Component {
     }
 
     render() {
-        return <>Hi my name is Pavel.</>
+        return <>
+            <AboutAnimation/>
+            <span>Hi my name is Pavel.</span>
+        </>
     }
 }
 
