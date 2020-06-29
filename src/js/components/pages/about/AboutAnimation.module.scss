@@ -5,8 +5,22 @@
 
 }
 
+@keyframes spawn {
+  from {
+    height: 0;
+    width: 0;
+  }
+  to {
+    height: var(--height);
+    width: var(--width);
+  }
+}
+
 .dot {
   position: absolute;
   background-color:black;
   border-radius: 100%;
+  animation-name: spawn;
+  animation-duration:4s;
+  animation-iteration-count:1;
 }
