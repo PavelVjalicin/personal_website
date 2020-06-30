@@ -106,3 +106,4 @@ dist
 #phpStorm, inrelliJ config
 .idea/
 /data/
+/app.config.js
