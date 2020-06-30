@@ -2,7 +2,8 @@ const Express = require("express")
 const path = require("path")
 const fs = require('fs');
 const fetch = require('node-fetch');
-
+const sendEmail = require('./email')
+const bodyParser = require('body-parser')
 class Server {
     constructor(_port,isDev) {
         this.port = _port
@@ -37,6 +38,8 @@ class Server {
             }
         }
 
+        const jsonParser = bodyParser.json()
+
         this.app.get('*.js', gz("text/javascript"));
         this.app.get('*.css', gz("text/css") );
 
@@ -59,6 +62,11 @@ class Server {
         this.app.get("/api/readme/:repo", (req,res) => {
             const repo = req.params.repo
             this.getReadme(res,repo)
+        })
+
+        this.app.post("/api/contact",jsonParser,(req,res) => {
+            const body = req.body
+            
         })
 
         this.app.get("/favicon.ico", (req, res) => {
