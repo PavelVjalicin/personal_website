@@ -77,6 +77,8 @@ class Contact extends Component {
             }).then( resp => {
                 this.setState({isSubmitting:false,submitted:true})
             })
+        } else {
+            this.setState({isSubmitting:false})
         }
     }
 
