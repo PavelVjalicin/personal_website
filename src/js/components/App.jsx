@@ -16,7 +16,7 @@ class App extends Component {
     }
 
     render() {
-        return <div style={{position:"relative",minHeight:"100vh",paddingBottom:80}}>
+        return <div style={{position:"relative",minHeight:"100vh",paddingBottom:60}}>
             <TopNav links={[
                 ["/about","About me"],
                 ["/work","Experience"],
