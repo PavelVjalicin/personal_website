@@ -9,10 +9,25 @@ class GitRepositories extends Component {
             repoInfo:[]
         }
 
+        this.mounted = false
+    }
+
+    componentDidMount() {
+        this.mounted = true
         fetch("/api/repo")
             .then((resp) => resp.json())
-            .then(json => this.setState({repoInfo:json}))
+            .then(json => {
+                    if (this.mounted === true) {
+                        this.setState({repoInfo: json})
+                    }
+                }
+            )
     }
+
+    componentWillUnmount() {
+        this.mounted = false
+    }
+
 
     render() {
         return this.state.repoInfo.length === 0 ? <div>Fetching data from GitHub...</div> :

@@ -105,7 +105,8 @@ class Contact extends Component {
                 value:this.state[name],
                 error:this.state.error[name],
                 helperText:this.state.error[name] ? this.state.error[name] : null,
-                onChange:this.handleChange(name)
+                onChange:this.handleChange(name),
+                onSubmit:(e) => this.sendForm()
             }
         }
 
@@ -113,21 +114,27 @@ class Contact extends Component {
             <PageTitle>Contact Me</PageTitle>
             {!this.state.submitted ? <>
                 <br/>
-
                 <ContactAnimation/>
-                <TextField
-                    label={"Your Name"}
-                    {...defaultProps("name")}/>
-                <TextField
-                    type={"email"}
-                    label={"Your Email"}
-                    {...defaultProps("email")}/>
-                <TextField
-                    label={"Message"}
-                    multiline
-                    rows={8}
-                    {...defaultProps("message")}/>
-                <Button disabled={this.state.isSubmitting} style={{marginTop:10}} variant={"contained"} color={"primary"} onClick={this.sendForm}>Send</Button>
+                <form onSubmit={(e)=>this.sendForm()}>
+                    <TextField
+                        label={"Your Name"}
+                        {...defaultProps("name")}/>
+                    <TextField
+                        type={"email"}
+                        label={"Your Email"}
+                        {...defaultProps("email")}/>
+                    <TextField
+                        label={"Message"}
+                        multiline
+                        rows={8}
+                        {...defaultProps("message")}/>
+                    <Button disabled={this.state.isSubmitting}
+                            style={{marginTop:10}}
+                            variant={"contained"}
+                            color={"primary"}
+                            type={"submit"}
+                            onClick={this.sendForm}>Send</Button>
+                </form>
                 <br/>
                 <br/>
                 {this.state.errorMessage &&

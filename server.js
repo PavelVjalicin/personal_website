@@ -68,7 +68,6 @@ class Server {
         this.app.post("/api/contact",jsonParser,(req,res) => {
             const {name,email,message} = req.body
             if(name && validateEmail(email) && message) {
-                res.sendStatus(200)
                 sendEmail(email,name,message)
                     .then(
                         res.sendStatus(200)
