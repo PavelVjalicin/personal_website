@@ -30,7 +30,7 @@ class App extends Component {
                 borderColor:"#f50057",
                 position:"relative"
             }}>
-                <div style={{paddingTop:20,paddingBottom:20}}>
+                <div style={{paddingTop:20,paddingBottom:40}}>
                     <Switch>
                         <Route path={"/about"} exact>
                             <About/>
