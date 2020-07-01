@@ -1,8 +1,8 @@
 const mailer = require("nodemailer")
-const config = require("./app.config").mailer
+const config = require("./app.config.js").default.mailer
 
 async function sendEmail(from,name,msg) {
-    let transporter = nodemailer.createTransport(config.transport);
+    let transporter = mailer.createTransport(config.transport);
   
     return await transporter.sendMail({
       from: '"'+name+'" <'+from+'>', 

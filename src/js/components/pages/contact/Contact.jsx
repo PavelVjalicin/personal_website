@@ -16,7 +16,9 @@ class Contact extends Component {
                 name:false,
                 email:false,
                 message:false
-            }
+            },
+            isSubmitting:false,
+            errorMessage:null
         }
         this.handleChange = this.handleChange.bind(this)
         this.sendForm = this.sendForm.bind(this)
@@ -51,8 +53,17 @@ class Contact extends Component {
     }
 
     sendForm() {
+        this.setState({isSubmitting:true})
         if(this.validate()) {
-            console.log(123)
+            fetch("/api/contact",{
+                method:"POST",
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({name:this.state.name,email:this.state.email,message:this.state.message})
+            }).then( resp => {
+                this.setState({isSubmitting:false})
+            })
         }
     }
 
@@ -87,9 +98,12 @@ class Contact extends Component {
                 multiline
                 rows={8}
                 {...defaultProps("message")}/>
-            <Button style={{marginTop:10}} variant={"contained"} color={"primary"} onClick={this.sendForm}>Send</Button>
+            <Button disabled={this.state.isSubmitting} style={{marginTop:10}} variant={"contained"} color={"primary"} onClick={this.sendForm}>Send</Button>
             <br/>
             <br/>
+            {this.state.errorMessage &&
+                <div style={{color:red}}>{this.state.errorMessage}</div>
+            }
             <Typography color={"textSecondary"}>* Your email will NEVER be used for marketing purposes.</Typography>
         </>
 

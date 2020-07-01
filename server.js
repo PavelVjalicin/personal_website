@@ -2,7 +2,7 @@ const Express = require("express")
 const path = require("path")
 const fs = require('fs');
 const fetch = require('node-fetch');
-const sendEmail = require('./email')
+const sendEmail = require('./email').default
 const bodyParser = require('body-parser')
 class Server {
     constructor(_port,isDev) {
@@ -65,8 +65,18 @@ class Server {
         })
 
         this.app.post("/api/contact",jsonParser,(req,res) => {
-            const body = req.body
-            
+            const {name,email,message} = req.body
+            if(name && email && message) {
+                sendEmail(email,name,message)
+                    .then(
+                        res.sendStatus(200)
+                    ).catch( e => {
+                        console.log(e)
+                        res.status(500).json({error:"Something went wrong"})
+                    })
+            } else {
+                res.status(500).json({error:"Required field is missing"})
+            }
         })
 
         this.app.get("/favicon.ico", (req, res) => {
