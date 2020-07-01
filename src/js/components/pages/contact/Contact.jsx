@@ -69,7 +69,7 @@ class Contact extends Component {
 
     sendForm() {
         this.setState({isSubmitting:true,errorMessage:null})
-        //if(this.validate()) {
+        if(this.validate()) {
             fetch("/api/contact",{
                 method:"POST",
                 headers: {
@@ -89,9 +89,9 @@ class Contact extends Component {
                     })
                     .catch(e => this.setState({isSubmitting:false,errorMessage:"Something went wrong. Try again later."}))
             })
-        /*} else {
+        } else {
             this.setState({isSubmitting:false})
-        }*/
+        }
     }
 
     render() {
@@ -119,6 +119,7 @@ class Contact extends Component {
                     label={"Your Name"}
                     {...defaultProps("name")}/>
                 <TextField
+                    type={"email"}
                     label={"Your Email"}
                     {...defaultProps("email")}/>
                 <TextField

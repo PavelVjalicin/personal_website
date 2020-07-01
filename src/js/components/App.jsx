@@ -8,6 +8,7 @@ import Container from "@material-ui/core/Container";
 import {About} from "./pages/about/About";
 import {Experience} from "./pages/experience/Experience";
 import {Contact} from "./pages/contact/Contact";
+import {Footer} from "./Footer";
 
 class App extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class App extends Component {
     }
 
     render() {
-        return <>
+        return <div style={{position:"relative",minHeight:"100vh",paddingBottom:80}}>
             <TopNav links={[
                 ["/about","About me"],
                 ["/work","Experience"],
@@ -29,7 +30,7 @@ class App extends Component {
                 borderColor:"#f50057",
                 position:"relative"
             }}>
-                <div style={{paddingTop:20}}>
+                <div style={{paddingTop:20,paddingBottom:20}}>
                     <Switch>
                         <Route path={"/about"} exact>
                             <About/>
@@ -55,7 +56,8 @@ class App extends Component {
                     </Switch>
                 </div>
             </Container>
-        </>
+            <Footer/>
+        </div>
     }
 }
 
