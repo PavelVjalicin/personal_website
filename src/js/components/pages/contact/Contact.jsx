@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import {PageTitle} from "../../PageTitle";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import {validateEmail} from "../../../validateEmail";
 
 class Contact extends Component {
     constructor(props) {
@@ -18,6 +19,7 @@ class Contact extends Component {
                 message:false
             },
             isSubmitting:false,
+            submitted:false,
             errorMessage:null
         }
         this.handleChange = this.handleChange.bind(this)
@@ -39,17 +41,28 @@ class Contact extends Component {
 
         const f = (obj) => {
             if(this.state[obj] === "") {
-                error[obj] = true
+                error[obj] = "This field is required"
                 return false
             } else {
-                error[obj] = false
+                error[obj] = null
                 return true
+            }
+        }
+
+        const emailValid = () => {
+            if(validateEmail(this.state.email))
+            {
+                error.email = null
+                return true
+            } else {
+                error.email = "Email is not valid"
+                return false
             }
         }
 
         this.setState({error:error})
 
-        return [f("name"), f("email") ,f("message")].every(x=>x===true)
+        return [f("name"), emailValid() ,f("message")].every(x=>x===true)
     }
 
     sendForm() {
@@ -62,7 +75,7 @@ class Contact extends Component {
                 },
                 body:JSON.stringify({name:this.state.name,email:this.state.email,message:this.state.message})
             }).then( resp => {
-                this.setState({isSubmitting:false})
+                this.setState({isSubmitting:false,submitted:true})
             })
         }
     }
@@ -77,34 +90,38 @@ class Contact extends Component {
                 fullWidth:true,
                 value:this.state[name],
                 error:this.state.error[name],
-                helperText:this.state.error[name] ? "This field is required" : null,
+                helperText:this.state.error[name] ? this.state.error[name] : null,
                 onChange:this.handleChange(name)
             }
         }
 
         return <>
             <PageTitle>Contact Me</PageTitle>
-            <br/>
+            {!this.state.submitted ? <>
+                <br/>
 
-            <ContactAnimation/>
-            <TextField
-                label={"Your Name"}
-                {...defaultProps("name")}/>
-            <TextField
-                label={"Your Email"}
-                {...defaultProps("email")}/>
-            <TextField
-                label={"Message"}
-                multiline
-                rows={8}
-                {...defaultProps("message")}/>
-            <Button disabled={this.state.isSubmitting} style={{marginTop:10}} variant={"contained"} color={"primary"} onClick={this.sendForm}>Send</Button>
-            <br/>
-            <br/>
-            {this.state.errorMessage &&
-                <div style={{color:red}}>{this.state.errorMessage}</div>
-            }
-            <Typography color={"textSecondary"}>* Your email will NEVER be used for marketing purposes.</Typography>
+                <ContactAnimation/>
+                <TextField
+                    label={"Your Name"}
+                    {...defaultProps("name")}/>
+                <TextField
+                    label={"Your Email"}
+                    {...defaultProps("email")}/>
+                <TextField
+                    label={"Message"}
+                    multiline
+                    rows={8}
+                    {...defaultProps("message")}/>
+                <Button disabled={this.state.isSubmitting} style={{marginTop:10}} variant={"contained"} color={"primary"} onClick={this.sendForm}>Send</Button>
+                <br/>
+                <br/>
+                {this.state.errorMessage &&
+                <div style={{color:"red"}}>{this.state.errorMessage}</div>
+                }
+                <Typography color={"textSecondary"}>* Your email will NEVER be used for marketing purposes.</Typography>
+            </> : <>
+                <Typography>Your message has been sent successfully. You will be contacted at {this.state.email} soon.</Typography>
+            </>}
         </>
 
     }
