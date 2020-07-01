@@ -1,3 +1,4 @@
+const validateEmail = require("./src/js/validateEmail").default
 const Express = require("express")
 const path = require("path")
 const fs = require('fs');
@@ -66,7 +67,8 @@ class Server {
 
         this.app.post("/api/contact",jsonParser,(req,res) => {
             const {name,email,message} = req.body
-            if(name && email && message) {
+            if(name && validateEmail(email) && message) {
+                res.sendStatus(200)
                 sendEmail(email,name,message)
                     .then(
                         res.sendStatus(200)
@@ -75,7 +77,7 @@ class Server {
                         res.status(500).json({error:"Something went wrong"})
                     })
             } else {
-                res.status(500).json({error:"Required field is missing"})
+                res.status(500).json({error:"Form was not filled in correctly."})
             }
         })
 

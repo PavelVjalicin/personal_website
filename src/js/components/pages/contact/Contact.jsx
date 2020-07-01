@@ -4,7 +4,9 @@ import TextField from "@material-ui/core/TextField";
 import {PageTitle} from "../../PageTitle";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import {validateEmail} from "../../../validateEmail";
+import validateDefault from "../../../validateEmail";
+
+const validateEmail = validateDefault.default
 
 class Contact extends Component {
     constructor(props) {
@@ -66,8 +68,8 @@ class Contact extends Component {
     }
 
     sendForm() {
-        this.setState({isSubmitting:true})
-        if(this.validate()) {
+        this.setState({isSubmitting:true,errorMessage:null})
+        //if(this.validate()) {
             fetch("/api/contact",{
                 method:"POST",
                 headers: {
@@ -75,11 +77,21 @@ class Contact extends Component {
                 },
                 body:JSON.stringify({name:this.state.name,email:this.state.email,message:this.state.message})
             }).then( resp => {
-                this.setState({isSubmitting:false,submitted:true})
+                if(resp.ok) {
+                    this.setState({isSubmitting: false, submitted: true})
+                } else {
+                    throw(resp)
+                }
+            }).catch(err => {
+                err.json()
+                    .then(jsError => {
+                        this.setState({isSubmitting:false,errorMessage:jsError.error})
+                    })
+                    .catch(e => this.setState({isSubmitting:false,errorMessage:"Something went wrong. Try again later."}))
             })
-        } else {
+        /*} else {
             this.setState({isSubmitting:false})
-        }
+        }*/
     }
 
     render() {

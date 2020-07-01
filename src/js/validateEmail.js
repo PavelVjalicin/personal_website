@@ -4,4 +4,4 @@ function validateEmail(email)
     return re.test(email);
 }
 
-export {validateEmail}
+exports.default = validateEmail
