@@ -23,6 +23,8 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.5.5",
+    "@hapi/hapi": "^19.1.1",
+    "@hapi/inert": "^6.0.1",
     "@material-ui/core": "^4.10.2",
     "@material-ui/icons": "^4.9.1",
     "babel-loader": "^8.1.0",

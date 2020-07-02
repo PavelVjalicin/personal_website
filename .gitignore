@@ -107,3 +107,5 @@ dist
 .idea/
 /data/
 /app.config.js
+/private.pem
+/cert.pem
