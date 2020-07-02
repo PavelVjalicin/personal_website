@@ -76,6 +76,21 @@ const initHapi = async () => {
 
     server.route([{
         method:'GET',
+        path:'/robots.txt',
+        handler: (req,h) =>
+            h.file("robots.txt")
+
+    },{
+        method:'GET',
+        path:'/favicon.ico',
+        handler: (req,h) =>
+            h.response(favicon).header('Content-Length', favicon.length)
+                .header('Content-Type', 'image/x-icon')
+                .header("Cache-Control", "public, max-age=2592000") //Expires in a month
+                .header("Expires", new Date(Date.now() + 2592000000).toUTCString())
+
+    },{
+        method:'GET',
         path:"/api/repo",
         handler:(req,h) => {
             return getRepos().then(r => {
@@ -96,15 +111,6 @@ const initHapi = async () => {
 
             return resp
         }
-    },{
-        method:'GET',
-        path:'/favicon.ico',
-        handler: (req,h) =>
-            h.response(favicon).header('Content-Length', favicon.length)
-                .header('Content-Type', 'image/x-icon')
-                .header("Cache-Control", "public, max-age=2592000") //Expires in a month
-                .header("Expires", new Date(Date.now() + 2592000000).toUTCString())
-
     },{
         method:'GET',
         path:'/{any*}',

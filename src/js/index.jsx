@@ -31,7 +31,7 @@ ReactDOM.render(<BrowserRouter>
 
 //Used for dev auto-refresh
 
-const socket = new WebSocket("ws://"+window.location.host)
+/*const socket = new WebSocket("ws://"+window.location.host)
 
 socket.addEventListener("open", (e) => {
     socket.send("open")
@@ -41,4 +41,4 @@ socket.addEventListener("message",(e) => {
     if(e.data === "refresh") {
         window.location.reload()
     }
-})
+})*/
