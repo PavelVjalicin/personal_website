@@ -97,6 +97,7 @@ class Contact extends Component {
     render() {
         const defaultProps = (name) => {
             return {
+                id:name,
                 variant:"outlined",
                 color:"secondary",
                 style:{marginTop:10},
