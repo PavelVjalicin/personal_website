@@ -1,5 +1,5 @@
 const Server = require("./server.js").default
 
-var server =  Server(80,false)
+var server =  Server(8080,false)
 
 server.start()
