@@ -18,8 +18,9 @@ class App extends Component {
         const Contact = React.lazy( () => import(/*webpackChunkName: "Contact"*/ "./pages/contact/Contact"))
         const TopNav = React.lazy(() => import(/*webpackChunkName: "TopNav"*/ "./TopNav"))
         const Footer = React.lazy(() => import(/*webpackChunkName: "Footer"*/ "./Footer"))
+        const Theme = React.lazy(() => import(/*webpackChunkName: "Theme"*/ "./Theme"))
 
-        return <div style={{position:"relative",minHeight:"100vh",paddingBottom:60}}>
+        const page = <div style={{position:"relative",minHeight:"100vh",paddingBottom:60}}>
             <Suspense fallback={<></>}>
                 <TopNav links={[
                     ["/about","About me"],
@@ -57,6 +58,10 @@ class App extends Component {
                 <Footer/>
             </Suspense>
         </div>
+
+
+
+        return <Suspense fallback={page}><Theme>{page}</Theme></Suspense>
     }
 }
 
