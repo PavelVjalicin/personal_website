@@ -4,7 +4,7 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarHalfIcon from '@material-ui/icons/StarHalf';
 import css from "./StarRating.module.scss"
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
+
 class StarRating extends Component {
     constructor(props) {
         super(props)

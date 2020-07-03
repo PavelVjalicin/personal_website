@@ -59,6 +59,7 @@ class Skills extends Component {
                 <StarRating rating={10}>TCP/IP</StarRating>
                 <StarRating rating={10}>Ajax</StarRating>
                 <StarRating rating={10}>HTTP</StarRating>
+                <StarRating rating={10}>HTTP/2</StarRating>
                 <StarRating rating={10}>Server-Sent Events</StarRating>
                 <StarRating rating={7}>WebRTC</StarRating>
             </SkillsSection>

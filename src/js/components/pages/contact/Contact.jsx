@@ -67,7 +67,8 @@ class Contact extends Component {
         return [f("name"), emailValid() ,f("message")].every(x=>x===true)
     }
 
-    sendForm() {
+    sendForm(e) {
+        e.preventDefault()
         this.setState({isSubmitting:true,errorMessage:null})
         if(this.validate()) {
             fetch("/api/contact",{
@@ -104,10 +105,11 @@ class Contact extends Component {
                 required:true,
                 fullWidth:true,
                 value:this.state[name],
-                error:this.state.error[name],
+                error:this.state.error[name] ? true : false,
                 helperText:this.state.error[name] ? this.state.error[name] : null,
                 onChange:this.handleChange(name),
-                onSubmit:(e) => this.sendForm()
+                onSubmit:(this.sendForm)
+
             }
         }
 
@@ -137,10 +139,10 @@ class Contact extends Component {
                             onClick={this.sendForm}>Send</Button>
                 </form>
                 <br/>
-                <br/>
                 {this.state.errorMessage &&
                 <div style={{color:"red"}}>{this.state.errorMessage}</div>
                 }
+                <br/>
                 <Typography color={"textSecondary"}>* Your email will NEVER be used for marketing purposes.</Typography>
             </> : <>
                 <Typography>Your message has been sent successfully. You will be contacted at {this.state.email} soon.</Typography>

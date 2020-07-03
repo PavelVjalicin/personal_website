@@ -3,13 +3,16 @@ const config = require("./app.config.js").default.mailer
 
 async function sendEmail(from,name,msg) {
     let transporter = mailer.createTransport(config.transport);
-  
-    return await transporter.sendMail({
-      from: '"'+name+'" <'+from+'>', 
+
+    const fullMsg = msg + " Email: " + from+ " Name: " + name
+
+    const email = await transporter.sendMail({
+      from: '"Info" <info@vjalicin.com>',
       to: config.to, 
       subject: "vjalicin.com Contact", 
-      text: msg
+      text: fullMsg
     });
+    return email
   }
 
   exports.default = sendEmail
