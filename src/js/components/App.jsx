@@ -1,11 +1,7 @@
 import React, {Component, Suspense} from "react"
-import {TopNav} from "./TopNav";
 import {Route, Switch} from "react-router-dom";
-
 import {NotFound} from "./pages/NotFound";
 import Container from "@material-ui/core/Container";
-
-import {Footer} from "./Footer";
 
 class App extends Component {
     constructor(props) {
@@ -20,15 +16,19 @@ class App extends Component {
         const Git = React.lazy( () => import(/*webpackChunkName: "Git"*/ "./pages/github/Git"))
         const About = React.lazy( () => import(/*webpackChunkName: "About"*/ "./pages/about/About"))
         const Contact = React.lazy( () => import(/*webpackChunkName: "Contact"*/ "./pages/contact/Contact"))
+        const TopNav = React.lazy(() => import(/*webpackChunkName: "TopNav"*/ "./TopNav"))
+        const Footer = React.lazy(() => import(/*webpackChunkName: "Footer"*/ "./Footer"))
 
         return <div style={{position:"relative",minHeight:"100vh",paddingBottom:60}}>
-            <TopNav links={[
-                ["/about","About me"],
-                ["/work","Experience"],
-                ["/skills","Skills"],
-                ["/github","GitHub"],
-                ["/contact","Contact Me"]
-            ]}/>
+            <Suspense fallback={<></>}>
+                <TopNav links={[
+                    ["/about","About me"],
+                    ["/work","Experience"],
+                    ["/skills","Skills"],
+                    ["/github","GitHub"],
+                    ["/contact","Contact Me"]
+                ]}/>
+            </Suspense>
             <Container style={{
                 borderLeft:5,
                 borderLeftStyle:"solid",
@@ -53,7 +53,9 @@ class App extends Component {
                     </div>
                 </Suspense>
             </Container>
-            <Footer/>
+            <Suspense fallback={<></>}>
+                <Footer/>
+            </Suspense>
         </div>
     }
 }

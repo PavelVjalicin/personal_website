@@ -14,7 +14,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Typography from "@material-ui/core/Typography";
-class TopNav extends Component {
+export default class TopNav extends Component {
     constructor(props) {
         super(props)
 
@@ -115,5 +115,3 @@ class TopNav extends Component {
         </AppBar>
     }
 }
-
-export {TopNav}

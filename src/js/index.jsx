@@ -4,14 +4,15 @@ import "core-js/stable/object/values" // safari 9 polyfill Object.values
 import 'url-search-params-polyfill'; //safari 9 polyfill new URLSearchParams
 import "regenerator-runtime/runtime" // For core-js
 import ReactDOM from "react-dom"
-import React from "react"
+import React, {Suspense} from "react"
 import {BrowserRouter} from "react-router-dom";
 import {App} from "./components/App";
 import "../css/main.scss"
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
-import CssBaseline from "@material-ui/core/CssBaseline";
+
 import ScrollToTop from "./components/ScrollToTop";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 const react = document.getElementById("react")
 

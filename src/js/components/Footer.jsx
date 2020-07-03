@@ -3,7 +3,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-class Footer extends Component {
+export default class Footer extends Component {
     constructor(props) {
         super(props)
     }
@@ -21,5 +21,3 @@ class Footer extends Component {
         </AppBar>
     }
 }
-
-export {Footer}
