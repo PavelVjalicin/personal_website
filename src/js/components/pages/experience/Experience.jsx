@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {LineAnimation} from "./LineAnimation";
 
-class Experience extends Component {
+export default class Experience extends Component {
     constructor(props) {
         super(props)
     }
@@ -12,5 +12,3 @@ class Experience extends Component {
         </>
     }
 }
-
-export {Experience}

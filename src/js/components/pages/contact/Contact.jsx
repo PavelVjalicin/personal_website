@@ -8,21 +8,21 @@ import validateDefault from "../../../validateEmail";
 
 const validateEmail = validateDefault.default
 
-class Contact extends Component {
+export default class Contact extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            name:"",
-            email:"",
-            message:"",
-            error:{
-                name:false,
-                email:false,
-                message:false
+            name: "",
+            email: "",
+            message: "",
+            error: {
+                name: false,
+                email: false,
+                message: false
             },
-            isSubmitting:false,
-            submitted:false,
-            errorMessage:null
+            isSubmitting: false,
+            submitted: false,
+            errorMessage: null
         }
         this.handleChange = this.handleChange.bind(this)
         this.sendForm = this.sendForm.bind(this)
@@ -33,7 +33,7 @@ class Contact extends Component {
         return (e) => {
             const error = {...this.state.error}
             error[field] = false
-            this.setState({[field]:e.target.value,error:error})
+            this.setState({[field]: e.target.value, error: error})
         }
     }
 
@@ -42,7 +42,7 @@ class Contact extends Component {
         const error = {...this.state.error}
 
         const f = (obj) => {
-            if(this.state[obj] === "") {
+            if (this.state[obj] === "") {
                 error[obj] = "This field is required"
                 return false
             } else {
@@ -52,8 +52,7 @@ class Contact extends Component {
         }
 
         const emailValid = () => {
-            if(validateEmail(this.state.email))
-            {
+            if (validateEmail(this.state.email)) {
                 error.email = null
                 return true
             } else {
@@ -62,23 +61,23 @@ class Contact extends Component {
             }
         }
 
-        this.setState({error:error})
+        this.setState({error: error})
 
-        return [f("name"), emailValid() ,f("message")].every(x=>x===true)
+        return [f("name"), emailValid(), f("message")].every(x => x === true)
     }
 
     sendForm(e) {
         e.preventDefault()
-        this.setState({isSubmitting:true,errorMessage:null})
-        if(this.validate()) {
-            fetch("/api/contact",{
-                method:"POST",
+        this.setState({isSubmitting: true, errorMessage: null})
+        if (this.validate()) {
+            fetch("/api/contact", {
+                method: "POST",
                 headers: {
-                    "Content-Type":"application/json"
+                    "Content-Type": "application/json"
                 },
-                body:JSON.stringify({name:this.state.name,email:this.state.email,message:this.state.message})
-            }).then( resp => {
-                if(resp.ok) {
+                body: JSON.stringify({name: this.state.name, email: this.state.email, message: this.state.message})
+            }).then(resp => {
+                if (resp.ok) {
                     this.setState({isSubmitting: false, submitted: true})
                 } else {
                     throw(resp)
@@ -86,29 +85,29 @@ class Contact extends Component {
             }).catch(err => {
                 err.json()
                     .then(jsError => {
-                        this.setState({isSubmitting:false,errorMessage:jsError.error})
+                        this.setState({isSubmitting: false, errorMessage: jsError.error})
                     })
-                    .catch(e => this.setState({isSubmitting:false,errorMessage:"Something went wrong. Try again later."}))
+                    .catch(e => this.setState({isSubmitting: false, errorMessage: "Something went wrong. Try again later."}))
             })
         } else {
-            this.setState({isSubmitting:false})
+            this.setState({isSubmitting: false})
         }
     }
 
     render() {
         const defaultProps = (name) => {
             return {
-                id:name,
-                variant:"outlined",
-                color:"secondary",
-                style:{marginTop:10},
-                required:true,
-                fullWidth:true,
-                value:this.state[name],
-                error:this.state.error[name] ? true : false,
-                helperText:this.state.error[name] ? this.state.error[name] : null,
-                onChange:this.handleChange(name),
-                onSubmit:(this.sendForm)
+                id: name,
+                variant: "outlined",
+                color: "secondary",
+                style: {marginTop: 10},
+                required: true,
+                fullWidth: true,
+                value: this.state[name],
+                error: this.state.error[name] ? true : false,
+                helperText: this.state.error[name] ? this.state.error[name] : null,
+                onChange: this.handleChange(name),
+                onSubmit: (this.sendForm)
 
             }
         }
@@ -118,7 +117,7 @@ class Contact extends Component {
             {!this.state.submitted ? <>
                 <br/>
                 <ContactAnimation/>
-                <form onSubmit={(e)=>this.sendForm()}>
+                <form onSubmit={(e) => this.sendForm()}>
                     <TextField
                         label={"Your Name"}
                         {...defaultProps("name")}/>
@@ -132,7 +131,7 @@ class Contact extends Component {
                         rows={8}
                         {...defaultProps("message")}/>
                     <Button disabled={this.state.isSubmitting}
-                            style={{marginTop:10}}
+                            style={{marginTop: 10}}
                             variant={"contained"}
                             color={"primary"}
                             type={"submit"}
@@ -140,7 +139,7 @@ class Contact extends Component {
                 </form>
                 <br/>
                 {this.state.errorMessage &&
-                <div style={{color:"red"}}>{this.state.errorMessage}</div>
+                <div style={{color: "red"}}>{this.state.errorMessage}</div>
                 }
                 <br/>
                 <Typography color={"textSecondary"}>* Your email will NEVER be used for marketing purposes.</Typography>
@@ -151,5 +150,3 @@ class Contact extends Component {
 
     }
 }
-
-export {Contact}

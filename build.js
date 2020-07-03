@@ -1,5 +1,3 @@
-const Server = require("./server.js").default
+const Hapi = require("./server.js").default
 
-var server =  Server(8080,false)
-
-server.start()
+var server =  Hapi(8080)

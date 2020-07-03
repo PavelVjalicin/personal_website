@@ -5,7 +5,7 @@ import {Anchor} from "../../Anchor";
 import {SquareManager} from "./SquareManager";
 import {PageTitle} from "../../PageTitle";
 
-class Git extends Component {
+export default class Git extends Component {
     constructor(props) {
         super(props)
     }

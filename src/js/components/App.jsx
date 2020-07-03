@@ -1,13 +1,10 @@
-import React, {Component} from "react"
+import React, {Component, Suspense} from "react"
 import {TopNav} from "./TopNav";
 import {Route, Switch} from "react-router-dom";
-import {Skills} from "./pages/skills/Skills";
-import {Git} from "./pages/github/Git";
+
 import {NotFound} from "./pages/NotFound";
 import Container from "@material-ui/core/Container";
-import {About} from "./pages/about/About";
-import {Experience} from "./pages/experience/Experience";
-import {Contact} from "./pages/contact/Contact";
+
 import {Footer} from "./Footer";
 
 class App extends Component {
@@ -16,6 +13,14 @@ class App extends Component {
     }
 
     render() {
+
+        const Experience = React.lazy(() => import(/* webpackChunkName: "Experience" */ './pages/experience/Experience'))
+
+        const Skills = React.lazy( () => import(/*webpackChunkName: "Skills"*/ "./pages/skills/Skills"))
+        const Git = React.lazy( () => import(/*webpackChunkName: "Git"*/ "./pages/github/Git"))
+        const About = React.lazy( () => import(/*webpackChunkName: "About"*/ "./pages/about/About"))
+        const Contact = React.lazy( () => import(/*webpackChunkName: "Contact"*/ "./pages/contact/Contact"))
+
         return <div style={{position:"relative",minHeight:"100vh",paddingBottom:60}}>
             <TopNav links={[
                 ["/about","About me"],
@@ -30,31 +35,23 @@ class App extends Component {
                 borderColor:"#f50057",
                 position:"relative"
             }}>
-                <div style={{paddingTop:20,paddingBottom:40}}>
-                    <Switch>
-                        <Route path={"/about"} exact>
-                            <About/>
-                        </Route>
-                        <Route path={"/work"} exact>
-                            <Experience/>
-                        </Route>
-                        <Route path={"/skills"} exact>
-                            <Skills/>
-                        </Route>
-                        <Route path={"/github"} exact>
-                            <Git/>
-                        </Route>
-                        <Route path={"/contact"} exact>
-                            <Contact/>
-                        </Route>
-                        <Route path={"/"} exact>
-                            <About/>
-                        </Route>
-                        <Route>
-                            <NotFound/>
-                        </Route>
-                    </Switch>
-                </div>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <div style={{paddingTop:20,paddingBottom:40}}>
+                        <Switch>
+                            <Route path={"/about"} exact>
+                                <About/>
+                            </Route>
+                            <Route path={"/work"} component={Experience} exact/>
+                            <Route path={"/skills"} exact component={Skills} />
+                            <Route path={"/github"} exact component={Git}/>
+                            <Route path={"/contact"} exact component={Contact}/>
+                            <Route path={"/"} exact component={About}/>
+                            <Route>
+                                <NotFound/>
+                            </Route>
+                        </Switch>
+                    </div>
+                </Suspense>
             </Container>
             <Footer/>
         </div>

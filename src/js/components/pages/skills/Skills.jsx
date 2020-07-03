@@ -4,7 +4,7 @@ import {PageTitle} from "../../PageTitle";
 import {SkillsSection} from "./SkillsSection";
 import {SkillsAnimation} from "./SkillsAnimation";
 
-class Skills extends Component {
+export default class Skills extends Component {
     constructor(props) {
         super(props)
     }
@@ -134,5 +134,3 @@ class Skills extends Component {
         </>
     }
 }
-
-export {Skills}

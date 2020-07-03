@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {AboutAnimation} from "./AboutAnimation";
 
-class About extends Component {
+export default class About extends Component {
     constructor(props) {
         super(props)
     }
@@ -13,5 +13,3 @@ class About extends Component {
         </>
     }
 }
-
-export {About}

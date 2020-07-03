@@ -12,7 +12,7 @@ class Footer extends Component {
         return <AppBar color={'default'} position={"absolute"} style={{top:"auto",bottom:0,padding:20}}>
             <Grid container justify={"flex-end"}>
                 <Typography color={"textSecondary"}>
-                    Copyright (c) 2020 Pavel Vjalicin.
+                    Copyright &copy; 2020 Pavel Vjalicin.
                 </Typography>
                 <Typography color={"textSecondary"}  style={{paddingLeft:10}}>
                     All rights reserved.
