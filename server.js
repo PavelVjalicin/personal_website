@@ -188,6 +188,11 @@ const initHapi = async (port) => {
             else if(type === "css") resp.header("Content-Type","text/css")
 
             return resp
+        },
+        options: {
+            cache: {
+                expiresIn: 3600 * 1000
+            }
         }
     },{
         method:'GET',

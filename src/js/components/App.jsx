@@ -10,15 +10,15 @@ class App extends Component {
 
     render() {
 
-        const Experience = React.lazy(() => import(/* webpackChunkName: "Experience" */ './pages/experience/Experience'))
+        const Experience = React.lazy(() => import(/* webpackChunkName: "Experience", webpackPrefetch: true */ './pages/experience/Experience'))
 
-        const Skills = React.lazy( () => import(/*webpackChunkName: "Skills"*/ "./pages/skills/Skills"))
-        const Git = React.lazy( () => import(/*webpackChunkName: "Git"*/ "./pages/github/Git"))
-        const About = React.lazy( () => import(/*webpackChunkName: "About"*/ "./pages/about/About"))
-        const Contact = React.lazy( () => import(/*webpackChunkName: "Contact"*/ "./pages/contact/Contact"))
-        const TopNav = React.lazy(() => import(/*webpackChunkName: "TopNav"*/ "./TopNav"))
-        const Footer = React.lazy(() => import(/*webpackChunkName: "Footer"*/ "./Footer"))
-        const Theme = React.lazy(() => import(/*webpackChunkName: "Theme"*/ "./Theme"))
+        const Skills = React.lazy( () => import(/*webpackChunkName: "Skills", webpackPrefetch: true */ "./pages/skills/Skills"))
+        const Git = React.lazy( () => import(/*webpackChunkName: "Git", webpackPrefetch: true  */ "./pages/github/Git"))
+        const About = React.lazy( () => import(/*webpackChunkName: "About", webpackPrefetch: true */ "./pages/about/About"))
+        const Contact = React.lazy( () => import(/*webpackChunkName: "Contact", webpackPrefetch: true */ "./pages/contact/Contact"))
+        const TopNav = React.lazy(() => import(/*webpackChunkName: "TopNav", webpackPrefetch: true */ "./TopNav"))
+        const Footer = React.lazy(() => import(/*webpackChunkName: "Footer", webpackPrefetch: true */ "./Footer"))
+        const Theme = React.lazy(() => import(/*webpackChunkName: "Theme", webpackPrefetch: true */ "./Theme"))
 
         const page = <div style={{position:"relative",minHeight:"100vh",paddingBottom:60}}>
             <Suspense fallback={<></>}>
