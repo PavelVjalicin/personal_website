@@ -26,7 +26,7 @@ module.exports = {
     watch: true,
     mode: "development",
     entry: "./src/js/index.jsx",
-    devtool: "inline-source-map",
+    devtool: isDevelopment ? "inline-source-map" : "",
     module: {
         rules: [
             {

@@ -6,13 +6,12 @@ async function sendEmail(from,name,msg) {
 
     const fullMsg = msg + " Email: " + from+ " Name: " + name
 
-    const email = await transporter.sendMail({
-      from: '"Info" <info@vjalicin.com>',
-      to: config.to, 
-      subject: "vjalicin.com Contact", 
-      text: fullMsg
-    });
-    return email
+    return await transporter.sendMail({
+        from: '"Info" <info@vjalicin.com>',
+        to: config.to,
+        subject: "vjalicin.com Contact",
+        text: fullMsg
+    })
   }
 
   exports.default = sendEmail

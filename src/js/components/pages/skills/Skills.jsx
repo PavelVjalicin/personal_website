@@ -101,6 +101,7 @@ export default class Skills extends Component {
                 <StarRating rating={2}>Blockchain</StarRating>
             </SkillsSection>
             <SkillsSection title={"Mathematics"}>
+                <StarRating rating={9}>Trigonometry</StarRating>
                 <StarRating rating={8}>Statistics</StarRating>
                 <StarRating rating={7}>Linear Algebra</StarRating>
                 <StarRating rating={7}>Calculus</StarRating>
