@@ -8,7 +8,7 @@ class Anchor extends Component {
     }
 
     render() {
-        return <Link rel={"noreferrer"} color={"secondary"} target={"_blank"} href={this.props.href}>{this.props.children} <OpenInNew style={{fontSize:15}}/></Link>
+        return <Link rel={"noreferrer"} color={"secondary"} target={"_blank"} href={this.props.href} style={this.props.style}>{this.props.children} <OpenInNew style={{fontSize:15}}/></Link>
     }
 }
 

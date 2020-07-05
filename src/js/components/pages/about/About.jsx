@@ -3,6 +3,7 @@ import {AboutAnimation} from "./AboutAnimation";
 import {PageTitle} from "../../PageTitle";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import {Anchor} from "../../Anchor";
 
 export default class About extends Component {
     constructor(props) {
@@ -61,6 +62,16 @@ export default class About extends Component {
             <Paragraph>
                 <Typography variant={"h5"}>Education</Typography>
                 <Typography>Institute for Apprenticeships & Technical Education Software Developer Level 4 (2019)</Typography>
+                <div style={{paddingLeft:20}}>
+                    <Typography>
+                        <Anchor href={"public/pv_qa_portfolio_clean.pdf"}>Apprenticeship Portfolio</Anchor>
+                    </Typography>
+                    <Typography>
+                        Synoptic Project (C# ASP.NET Core REST API)
+                        <Anchor href={"public/pv_qa_synoptic_project_design.pdf"} style={{paddingLeft:20}}>Design&nbsp;Document</Anchor>
+                        <Anchor href={"https://github.com/PavelVjalicin/qa_synoptic_project"} style={{paddingLeft:20}}>Github&nbsp;Repository</Anchor>
+                    </Typography>
+                </div>
                 <Typography>Graduated from Vilnius "Juventos" gymnasium (2014)</Typography>
             </Paragraph>
             <Paragraph>

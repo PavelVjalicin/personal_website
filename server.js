@@ -196,6 +196,12 @@ const initHapi = async (port) => {
         }
     },{
         method:'GET',
+        path:"/public/{any*}",
+        handler: (req,h) => {
+            return h.file("public/"+req.params.any)
+        }
+    },{
+        method:'GET',
         path:'/{any*}',
         handler: (req,h) => {
             return h.file("src/index.html")
