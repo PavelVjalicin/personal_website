@@ -71,6 +71,7 @@ export default class Skills extends Component {
                 <StarRating rating={10}>CORS</StarRating>
                 <StarRating rating={10}>oAuth</StarRating>
                 <StarRating rating={10}>Logging</StarRating>
+                <StarRating rating={8}>TLS/SSL</StarRating>
             </SkillsSection>
             <SkillsSection title={"Software Design"}>
                 <StarRating rating={10}>OOP</StarRating>
