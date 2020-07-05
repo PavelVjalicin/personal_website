@@ -68,8 +68,14 @@ export default class About extends Component {
                     </Typography>
                     <Typography>
                         Synoptic Project (C# ASP.NET Core REST API)
-                        <Anchor href={"public/pv_qa_synoptic_project_design.pdf"} style={{paddingLeft:20}}>Design&nbsp;Document</Anchor>
-                        <Anchor href={"https://github.com/PavelVjalicin/qa_synoptic_project"} style={{paddingLeft:20}}>Github&nbsp;Repository</Anchor>
+                        <div style={{paddingLeft:20}}>
+                            <div>
+                                <Anchor href={"public/pv_qa_synoptic_project_design.pdf"}>Design&nbsp;Document</Anchor>
+                            </div>
+                            <div>
+                                <Anchor href={"https://github.com/PavelVjalicin/qa_synoptic_project"}>Github&nbsp;Repository</Anchor>
+                            </div>
+                        </div>
                     </Typography>
                 </div>
                 <Typography>Graduated from Vilnius "Juventos" gymnasium (2014)</Typography>
