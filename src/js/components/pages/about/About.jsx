@@ -13,7 +13,7 @@ export default class About extends Component {
 
         const Paragraph = (props) => <div style={{paddingTop:20}}>{props.children}</div>
 
-        return <Grid xs={12} md={9}>
+        return <Grid item xs={12} md={9}>
             <AboutAnimation/>
             <PageTitle>About Me</PageTitle>
             <Paragraph>
@@ -35,7 +35,7 @@ export default class About extends Component {
             <Paragraph>
                 <Typography>
                     As time passed, I realised that my software skills began to stagnate.
-                    I felt like the technical challenges presented to me were not enough anymore.
+                    I felt like the technical challenges presented to me were not challenging enough anymore.
                     After all, you can only do so much in a country with such a small market like Lithuania.
                     So I did the most sensible thing I could think of.
                     I bought a one-way ticket to London with no real plan behind it and never looked back.
@@ -45,7 +45,7 @@ export default class About extends Component {
                 <Typography>
                     From then on, I have been employed as a Lead Software Engineer, developing a web development environment for my company,
                     working with our clients to design and implement software based business solutions.
-                    Learning about software architecture, primarily studying various Web Technologies, Machine Learning, Neural Networks and distributed systems.
+                    Learning about software architecture, primarily studying: various Web Technologies, Machine Learning, Neural Networks and distributed systems.
                 </Typography>
             </Paragraph>
             <Paragraph>
