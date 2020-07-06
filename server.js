@@ -181,8 +181,18 @@ const initHapi = async (port) => {
         path:"/dist/{any*}",
         handler: (req,h) => {
             const type = req.params.any.split(".").pop()
+            const dir = "dist/"+req.params.any
+            const fileDir = "./"+dir+".gz"
 
-            let resp = h.file("dist/"+req.params.any+".gz").header('Content-Encoding', 'gzip')
+            let resp
+
+            if(!fs.existsSync(fileDir)) {
+                resp = h.file(dir)
+            } else {
+                resp = h.file(dir+".gz")
+                resp.header('Content-Encoding', 'gzip')
+            }
+            
 
             if(type === "js") resp.header("Content-Type","text/javascript")
             else if(type === "css") resp.header("Content-Type","text/css")
