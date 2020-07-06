@@ -76,15 +76,15 @@ export default class Experience extends Component {
                         <Anchor href={"public/pv_qa_portfolio_clean.pdf"}>Apprenticeship Portfolio</Anchor>
                     </Typography>
                     <Typography>
-                        Synoptic Project (C# ASP.NET Core REST API)
+                        Synoptic Project (C#&nbsp;ASP.NET&nbsp;Core&nbsp;REST&nbsp;API)
                     </Typography>
                     <div style={{paddingLeft:20}}>
-                        <div>
+                        <Typography>
                             <Anchor href={"public/pv_qa_synoptic_project_design.pdf"}>Design&nbsp;Document</Anchor>
-                        </div>
-                        <div>
+                        </Typography>
+                        <Typography>
                             <Anchor href={"https://github.com/PavelVjalicin/qa_synoptic_project"}>Github&nbsp;Repository</Anchor>
-                        </div>
+                        </Typography>
                     </div>
                 </div>
                 <Typography>Graduated from Vilnius "Juventos" gymnasium (2014)</Typography>
