@@ -17,7 +17,7 @@ if(isDevelopment) {
     }),
         new CompressionPlugin({
             test: /\.js$|\.css$/,
-            threshold:0,
+            threshold:1,
             minRatio:1
         })/*,new BundleAnalyzerPlugin()*/]
 }

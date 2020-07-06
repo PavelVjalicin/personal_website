@@ -4,10 +4,9 @@ import "core-js/stable/object/values" // safari 9 polyfill Object.values
 import 'url-search-params-polyfill'; //safari 9 polyfill new URLSearchParams
 import "regenerator-runtime/runtime" // For core-js
 import ReactDOM from "react-dom"
-import React, {Suspense} from "react"
+import React from "react"
 import {BrowserRouter} from "react-router-dom";
 import {App} from "./components/App";
-import "../css/main.scss"
 
 import ScrollToTop from "./components/ScrollToTop";
 

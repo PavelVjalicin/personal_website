@@ -59,36 +59,6 @@ export default class About extends Component {
                 <Typography style={{float:"right"}}>- Pavel Vjalicin</Typography>
             </Paragraph>
             <br/>
-            <Paragraph>
-                <Typography variant={"h5"}>Education</Typography>
-                <Typography>Institute for Apprenticeships & Technical Education Software Developer Level 4 (2019)</Typography>
-                <div style={{paddingLeft:20}}>
-                    <Typography>
-                        <Anchor href={"public/pv_qa_portfolio_clean.pdf"}>Apprenticeship Portfolio</Anchor>
-                    </Typography>
-                    <Typography>
-                        Synoptic Project (C# ASP.NET Core REST API)
-                        <div style={{paddingLeft:20}}>
-                            <div>
-                                <Anchor href={"public/pv_qa_synoptic_project_design.pdf"}>Design&nbsp;Document</Anchor>
-                            </div>
-                            <div>
-                                <Anchor href={"https://github.com/PavelVjalicin/qa_synoptic_project"}>Github&nbsp;Repository</Anchor>
-                            </div>
-                        </div>
-                    </Typography>
-                </div>
-                <Typography>Graduated from Vilnius "Juventos" gymnasium (2014)</Typography>
-            </Paragraph>
-            <Paragraph>
-                <Typography variant={"h5"}>Certifications</Typography>
-                <Typography>BCS Level 4 Diploma in Software Languages (2019)</Typography>
-                <Typography>BCS Certificate in Systems Development Essentials (2018)</Typography>
-
-            </Paragraph>
-            <Paragraph>
-                <Typography color={"textSecondary"}>* Certification documents are available upon request.</Typography>
-            </Paragraph>
             </Grid>
     }
 }
