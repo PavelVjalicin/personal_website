@@ -5,7 +5,7 @@
   "main": "index.jsx",
   "scripts": {
     "dev": "node dev-build.js",
-    "prod": "node build.js",
+    "prod": "node prod.js",
     "build": "webpack --mode production"
   },
   "repository": {

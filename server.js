@@ -112,23 +112,36 @@ async function getReadme(repo) {
     }
 }
 
-const initHapi = async (port) => {
-    const listener = http2.createSecureServer(
-        {
-            key:fs.readFileSync("private.pem"),
-            cert:fs.readFileSync("cert.pem")
-        }
-    )
+const initHapi = async (isProd) => {
 
-    const server = Hapi.Server({
-        listener,
-        port: port,
-        routes: {
-            files: {
-                relativeTo: __dirname
+
+    let server
+    if(isProd) {
+        server = Hapi.Server({
+            port: "./passenger",
+            routes: {
+                files: {
+                    relativeTo: __dirname
+                }
             }
-        }
-    })
+        })
+    } else {
+        const listener = http2.createSecureServer(
+            {
+                key:fs.readFileSync("private.pem"),
+                cert:fs.readFileSync("cert.pem")
+            }
+        )
+        server = Hapi.Server({
+            listener,
+            port: port,
+            routes: {
+                files: {
+                    relativeTo: __dirname
+                }
+            }
+        })
+    }
 
     await server.register(require("@hapi/inert"))
 
