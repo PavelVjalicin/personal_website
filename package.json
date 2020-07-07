@@ -1,7 +1,7 @@
 {
   "name": "personal_website",
   "version": "1.0.0",
-  "description": "Personal vebsite of Pavel Vjalicin",
+  "description": "Personal website of Pavel Vjalicin",
   "main": "index.jsx",
   "scripts": {
     "dev": "node dev-build.js",
