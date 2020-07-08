@@ -1,9 +1,9 @@
-#Personal website for Pavel Vjalicin
+# Personal website for Pavel Vjalicin
 
 Currently hosted at: https://vjalicin.com   
 Node 12 required
 
-##Development stack
+## Development stack
 
 Hapi v19 Server  
 React  
@@ -12,7 +12,7 @@ Webpack 4
 SCSS module support  
 ECMAScript 6 on client support  
 
-##Dev environment setup
+## Dev environment setup
 
 Create private/public keys for https server during dev  
 Execute from project dir:
