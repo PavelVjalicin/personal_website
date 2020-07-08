@@ -17,8 +17,7 @@ export default class Git extends Component {
             <Anchor href={"https://github.com/PavelVjalicin?tab=repositories"}>View on GitHub</Anchor>
             <GitRepositories pinnedRepos={[
                 "PavelVjalicin/personal_website",
-                "PavelVjalicin/js_rendering_engine",
-                "PavelVjalicin/scalajs_template_engine"
+                "PavelVjalicin/js_rendering_engine"
             ]}/>
         </>
     }
