@@ -134,7 +134,7 @@ const initHapi = async (isProd) => {
         )
         server = Hapi.Server({
             listener,
-            port: port,
+            port: 8080,
             routes: {
                 files: {
                     relativeTo: __dirname
