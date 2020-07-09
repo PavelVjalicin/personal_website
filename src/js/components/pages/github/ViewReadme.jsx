@@ -53,7 +53,8 @@ class ViewReadme extends Component {
             {!this.state.open ? <Button variant={"contained"} color={"primary"} onClick={this.openClick}>View README.md</Button> :
                 <Box>
                     <div className={"markdown"}>
-                        <ReactMarkdown source={this.state.data}/>
+                        <ReactMarkdown source={this.state.data}
+                                       renderers={{link:(props) =>  <a href={props.href} target="_blank">{props.children}</a>}}/>
                         {!this.state.noReadMe ?<Button variant={"outlined"} onClick={this.closeClick}>Close ReadMe</Button> : null}
                     </div>
                 </Box>
