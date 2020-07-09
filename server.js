@@ -227,7 +227,7 @@ const initHapi = async (isProd) => {
         method:'GET',
         path:'/{any*}',
         handler: (req,h) => {
-            return h.file("src/index.html")
+            return h.file("dist/index.html")
         }
     }])
 

@@ -2,6 +2,7 @@ const path = require("path")
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 //var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -11,14 +12,16 @@ if(isDevelopment) {
     plugins = []
 } else {
     plugins = [new MiniCssExtractPlugin({
-        filename: 'css/[name].css',
-        chunkFilename: 'css/[name].css',
+        filename: 'css/[name].[contenthash].css',
+        chunkFilename: 'css/[name].[contenthash].css',
 
     }),
         new CompressionPlugin({
             test: /\.js$|\.css$/,
             threshold:1,
             minRatio:1
+        }),new HtmlWebpackPlugin({
+            template: 'src/index.html'
         })/*,new BundleAnalyzerPlugin()*/]
 }
 
@@ -81,8 +84,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, "dist/"),
-        filename: "js/[name].bundle.js",
-        chunkFilename: 'js/[name].bundle.js',
+        filename: "js/[name].[contenthash].bundle.js",
+        chunkFilename: 'js/[name].[contenthash].bundle.js',
         publicPath: 'dist/'
     },
     plugins: plugins,
