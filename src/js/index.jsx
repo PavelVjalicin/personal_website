@@ -7,7 +7,7 @@ import ReactDOM from "react-dom"
 import React from "react"
 import {BrowserRouter} from "react-router-dom";
 import {App} from "./components/App";
-
+import "../css/main.scss"
 import ScrollToTop from "./components/ScrollToTop";
 
 const react = document.getElementById("react")
