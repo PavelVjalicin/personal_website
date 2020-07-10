@@ -1,5 +1,5 @@
 const mailer = require("nodemailer")
-const config = require("./app.config.js").default.mailer
+const config = require("../app.config.js").default.mailer
 
 async function sendEmail(from,name,msg) {
     let transporter = mailer.createTransport(config.transport);

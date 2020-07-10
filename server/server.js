@@ -1,10 +1,11 @@
-const validateEmail = require("./src/js/validateEmail").default
+import Path from "path"
+
+const validateEmail = require("../src/js/validateEmail").default
 const http2 = require("http2")
 const fs = require('fs')
 const fetch = require('node-fetch');
 const sendEmail = require('./email').default
 const Hapi = require("@hapi/hapi")
-
 const dataDir = "./data"
 const readMe = {}
 const reposDir = dataDir+"/repos.json"
@@ -114,14 +115,14 @@ async function getReadme(repo) {
 
 const initHapi = async (isProd) => {
 
-
+    const dir = Path.resolve(__dirname, '..')
     let server
     if(isProd) {
         server = Hapi.Server({
             port: "./passenger",
             routes: {
                 files: {
-                    relativeTo: __dirname
+                    relativeTo: dir
                 }
             }
         })
@@ -137,7 +138,7 @@ const initHapi = async (isProd) => {
             port: 8080,
             routes: {
                 files: {
-                    relativeTo: __dirname
+                    relativeTo: dir
                 }
             }
         })
@@ -205,7 +206,7 @@ const initHapi = async (isProd) => {
                 resp = h.file(dir+".gz")
                 resp.header('Content-Encoding', 'gzip')
             }
-            
+
 
             if(type === "js") resp.header("Content-Type","text/javascript")
             else if(type === "css") resp.header("Content-Type","text/css")
