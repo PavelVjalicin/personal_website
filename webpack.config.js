@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const LoadablePlugin = require('@loadable/webpack-plugin')
 let plugins;
 
 if(isDevelopment) {
@@ -22,7 +23,8 @@ if(isDevelopment) {
             minRatio:1
         }),new HtmlWebpackPlugin({
             template: 'src/index.html'
-        })/*,new BundleAnalyzerPlugin()*/]
+        }),
+        new LoadablePlugin()/*,new BundleAnalyzerPlugin()*/]
 }
 
 module.exports = {

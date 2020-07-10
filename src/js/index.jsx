@@ -5,19 +5,17 @@ import 'url-search-params-polyfill'; //safari 9 polyfill new URLSearchParams
 import "regenerator-runtime/runtime" // For core-js
 import ReactDOM from "react-dom"
 import React from "react"
-import {BrowserRouter} from "react-router-dom";
 import {App} from "./components/App";
 import "../css/main.scss"
-import ScrollToTop from "./components/ScrollToTop";
-
-const react = document.getElementById("react")
-
+import {loadableReady} from "@loadable/component";
+import {BrowserRouter} from "react-router-dom";
 
 
-ReactDOM.render(<BrowserRouter>
-    <ScrollToTop/>
-    <App/>
-</BrowserRouter>,react)
+loadableReady(() =>{
+    const react = document.getElementById("react")
+    ReactDOM.hydrate(<BrowserRouter><App/></BrowserRouter>,react)
+})
+
 
 //Used for dev auto-refresh
 

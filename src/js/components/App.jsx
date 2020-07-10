@@ -2,8 +2,8 @@ import React, {Component} from "react"
 import {Route, Switch} from "react-router-dom";
 import {NotFound} from "./pages/NotFound";
 import Container from "@material-ui/core/Container";
-import Theme from "./Theme";
 import loadable from '@loadable/component'
+import ScrollToTop from "./ScrollToTop";
 
 
 const Experience = loadable( () => import(/* webpackChunkName: "Experience", webpackPrefetch: true */ './pages/experience/Experience'))
@@ -56,8 +56,17 @@ class App extends Component {
             <Footer/>
         </div>
 
+        const Theme = loadable( () => import("./Theme"), {
+            render: ({Component, loading, ownProps}) => {
+                if(loading) return ownProps.children
+                return <Component {...ownProps}/>
+            }
+        })
 
-        return <Theme>{page}</Theme>
+        return <>
+            <ScrollToTop/>
+            <Theme>{page}</Theme>
+        </>
     }
 }
 
