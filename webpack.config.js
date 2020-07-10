@@ -26,7 +26,7 @@ if(isDevelopment) {
 }
 
 module.exports = {
-    watch: isDevelopment,
+    watch: true,
     mode: "development",
     entry: "./src/js/index.jsx",
     devtool: isDevelopment ? "inline-source-map" : "",

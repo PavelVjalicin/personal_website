@@ -2,6 +2,47 @@ import React, {Component, Suspense} from "react"
 import {Route, Switch} from "react-router-dom";
 import {NotFound} from "./pages/NotFound";
 import Container from "@material-ui/core/Container";
+import Loadable from 'react-loadable';
+import Theme from "./Theme";
+
+function Loading(props) {
+    return <div>Loading...</div>;
+}
+
+function EmptyLoading(props) {
+    return <></>
+}
+
+const Experience = Loadable({
+    loader: () => import(/* webpackChunkName: "Experience", webpackPrefetch: true */ './pages/experience/Experience'),
+    loading: Loading
+})
+const Skills = Loadable({
+    loader: () => import(/*webpackChunkName: "Skills", webpackPrefetch: true */ "./pages/skills/Skills"),
+    loading: Loading
+})
+const Git = Loadable({
+    loader: () => import(/*webpackChunkName: "Git", webpackPrefetch: true  */ "./pages/github/Git"),
+    loading: Loading
+})
+const About = Loadable({
+    loader: () => import(/*webpackChunkName: "About", webpackPrefetch: true */ "./pages/about/About"),
+    loading: Loading
+})
+const Contact = Loadable({
+    loader: () => import(/*webpackChunkName: "Contact", webpackPrefetch: true */ "./pages/contact/Contact"),
+    loading: Loading
+})
+const TopNav = Loadable({
+    loader: () => import(/*webpackChunkName: "TopNav", webpackPrefetch: true */ "./TopNav"),
+    loading: Loading
+})
+const Footer = Loadable({
+    loader: () => import(/*webpackChunkName: "Footer", webpackPrefetch: true */ "./Footer"),
+    loading: Loading
+})
+
+
 
 class App extends Component {
     constructor(props) {
@@ -10,58 +51,56 @@ class App extends Component {
 
     render() {
 
-        const Experience = React.lazy(() => import(/* webpackChunkName: "Experience", webpackPrefetch: true */ './pages/experience/Experience'))
 
-        const Skills = React.lazy( () => import(/*webpackChunkName: "Skills", webpackPrefetch: true */ "./pages/skills/Skills"))
-        const Git = React.lazy( () => import(/*webpackChunkName: "Git", webpackPrefetch: true  */ "./pages/github/Git"))
-        const About = React.lazy( () => import(/*webpackChunkName: "About", webpackPrefetch: true */ "./pages/about/About"))
-        const Contact = React.lazy( () => import(/*webpackChunkName: "Contact", webpackPrefetch: true */ "./pages/contact/Contact"))
-        const TopNav = React.lazy(() => import(/*webpackChunkName: "TopNav", webpackPrefetch: true */ "./TopNav"))
-        const Footer = React.lazy(() => import(/*webpackChunkName: "Footer", webpackPrefetch: true */ "./Footer"))
-        const Theme = React.lazy(() => import(/*webpackChunkName: "Theme", webpackPrefetch: true */ "./Theme"))
 
-        const page = <div style={{position:"relative",minHeight:"100vh",paddingBottom:60}}>
-            <Suspense fallback={<></>}>
-                <TopNav links={[
-                    ["/about","About me"],
-                    ["/work","Experience"],
-                    ["/skills","Skills"],
-                    ["/github","GitHub"],
-                    ["/contact","Contact Me"]
-                ]}/>
-            </Suspense>
+        const page =  <div style={{position:"relative",minHeight:"100vh",paddingBottom:60}}>
+            <TopNav links={[
+                ["/about","About me"],
+                ["/work","Experience"],
+                ["/skills","Skills"],
+                ["/github","GitHub"],
+                ["/contact","Contact Me"]
+            ]}/>
             <Container style={{
                 borderLeft:5,
                 borderLeftStyle:"solid",
                 borderColor:"#f50057",
                 position:"relative"
             }}>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <div style={{paddingTop:20,paddingBottom:40}}>
-                        <Switch>
-                            <Route path={"/about"} exact>
-                                <About/>
-                            </Route>
-                            <Route path={"/work"} component={Experience} exact/>
-                            <Route path={"/skills"} exact component={Skills} />
-                            <Route path={"/github"} exact component={Git}/>
-                            <Route path={"/contact"} exact component={Contact}/>
-                            <Route path={"/"} exact component={About}/>
-                            <Route>
-                                <NotFound/>
-                            </Route>
-                        </Switch>
-                    </div>
-                </Suspense>
+                <div style={{paddingTop:20,paddingBottom:40}}>
+                    <Switch>
+                        <Route path={"/about"} exact>
+                            <About/>
+                        </Route>
+                        <Route path={"/work"} component={Experience} exact/>
+                        <Route path={"/skills"} exact component={Skills} />
+                        <Route path={"/github"} exact component={Git}/>
+                        <Route path={"/contact"} exact component={Contact}/>
+                        <Route path={"/"} exact component={About}/>
+                        <Route>
+                            <NotFound/>
+                        </Route>
+                    </Switch>
+                </div>
             </Container>
-            <Suspense fallback={<></>}>
-                <Footer/>
-            </Suspense>
+            <Footer/>
         </div>
 
+        function ThemeLoading(props) {
+            return page
+        }
+
+        const Theme = Loadable({
+            loader: () => import(/*webpackChunkName: "Theme", webpackPrefetch: true */ "./Theme"),
+            loading: ThemeLoading,
+            render(loaded,props) {
+                let Theme = loaded.default;
+                return <Theme {...props} />
+            }
+        })
 
 
-        return <Suspense fallback={page}><Theme>{page}</Theme></Suspense>
+        return <Theme>{page}</Theme>
     }
 }
 
