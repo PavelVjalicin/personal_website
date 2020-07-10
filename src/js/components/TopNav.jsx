@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import AppBar from "@material-ui/core/AppBar";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import IconButton from "@material-ui/core/IconButton";
@@ -14,7 +14,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Typography from "@material-ui/core/Typography";
-export default class TopNav extends Component {
+
+class TopNav extends Component {
     constructor(props) {
         super(props)
 
@@ -25,7 +26,7 @@ export default class TopNav extends Component {
         this.hrefs = this.props.links.map(x => x[0])
 
         this.state = {
-            activeTab:this.setActiveTab(window.location.pathname),
+            activeTab:this.setActiveTab(props.location.pathname),
             small: window.innerWidth < 800
         }
     }
@@ -115,3 +116,5 @@ export default class TopNav extends Component {
         </AppBar>
     }
 }
+
+export default withRouter(props => <TopNav {...props}/>)

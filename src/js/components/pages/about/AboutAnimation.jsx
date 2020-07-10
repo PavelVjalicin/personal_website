@@ -1,5 +1,4 @@
 import React, {Component} from "react"
-import css from "./AboutAnimation.module.scss"
 import {animationDuration} from "../skills/Triangle";
 
 class AboutAnimation extends Component {
@@ -101,7 +100,12 @@ class AboutAnimation extends Component {
     }
 
     render() {
-        return <canvas height={this.height} width={this.width+30} ref={this.canvasRef} className={css.main} />
+        return <canvas height={this.height} width={this.width+30} ref={this.canvasRef} style={{
+            position:"absolute",
+            top:0,
+            right:0,
+            zIndex:-1
+        }} />
     }
 }
 
