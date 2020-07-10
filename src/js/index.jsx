@@ -10,7 +10,6 @@ import "../css/main.scss"
 import {loadableReady} from "@loadable/component";
 import {BrowserRouter} from "react-router-dom";
 
-
 loadableReady(() =>{
     const react = document.getElementById("react")
     ReactDOM.hydrate(<BrowserRouter><App/></BrowserRouter>,react)

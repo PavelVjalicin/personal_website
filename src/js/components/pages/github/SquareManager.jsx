@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import {Square} from "./Square";
-import css from "./SquareManager.module.scss"
+//import css from "./SquareManager.module.scss"
 class SquareManager extends Component {
     constructor(props) {
         super(props)
@@ -12,7 +12,7 @@ class SquareManager extends Component {
             ar.push(React.createElement(Square,{key:i}))
         }
 
-        return <div className={css.main}>
+        return <div /*className={css.main}*/>
             {ar}
         </div>
     }

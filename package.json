@@ -4,7 +4,7 @@
   "description": "Personal website of Pavel Vjalicin",
   "main": "index.jsx",
   "scripts": {
-    "dev": "nodemon --watch server --exec babel-node server/dev-build.js",
+    "dev": "webpack && nodemon --watch server --exec babel-node server/dev-build.js",
     "prod": "node prod.js",
     "build-server": "babel server -d server-dist",
     "build": "webpack --mode production"

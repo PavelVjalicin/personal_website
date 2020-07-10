@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {animationDuration, positionBetweenMatrix, trianglePointsDown, trianglePointsUp, triangleSize} from "./Triangle";
 import {plusV2} from "../../../V2";
-import css from "./SkillsAnimation.module.scss"
+//import css from "./SkillsAnimation.module.scss"
 class SkillsAnimation extends Component {
     constructor(props) {
         super(props)
@@ -245,7 +245,7 @@ class SkillsAnimation extends Component {
     }
 
     render() {
-        return <canvas ref={this.canvasRef} width={250} height={200} className={css.canvas}/>
+        return <canvas ref={this.canvasRef} width={250} height={200} /*className={css.canvas}*//>
     }
 }
 

@@ -3,7 +3,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import {Anchor} from "../../Anchor";
 import {ViewReadme} from "./ViewReadme";
-import css from "./Repository.module.scss"
+//import css from "./Repository.module.scss"
 class Repository extends Component {
     constructor(props) {
         super(props)
@@ -41,7 +41,7 @@ class Repository extends Component {
         const lastUpdated = !this.state.small ? <S>{lastUpdatedComp}</S> : <div style={{paddingTop:5}}>{lastUpdatedComp}</div>
 
         return <>
-            <Box className={css.box}>
+            <Box /*className={css.box}*/>
                 <div ref={this.topRef}><Anchor href={repo.html_url}>{repo.full_name}</Anchor></div>
                 <div><Typography color={"textSecondary"}>{repo.description}</Typography></div>
                 <ViewReadme repo={repo.name} topRef={this.topRef}/>
