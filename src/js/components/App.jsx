@@ -1,46 +1,18 @@
-import React, {Component, Suspense} from "react"
+import React, {Component} from "react"
 import {Route, Switch} from "react-router-dom";
 import {NotFound} from "./pages/NotFound";
 import Container from "@material-ui/core/Container";
-import Loadable from 'react-loadable';
 import Theme from "./Theme";
+import loadable from '@loadable/component'
 
-function Loading(props) {
-    return <div>Loading...</div>;
-}
 
-function EmptyLoading(props) {
-    return <></>
-}
-
-const Experience = Loadable({
-    loader: () => import(/* webpackChunkName: "Experience", webpackPrefetch: true */ './pages/experience/Experience'),
-    loading: Loading
-})
-const Skills = Loadable({
-    loader: () => import(/*webpackChunkName: "Skills", webpackPrefetch: true */ "./pages/skills/Skills"),
-    loading: Loading
-})
-const Git = Loadable({
-    loader: () => import(/*webpackChunkName: "Git", webpackPrefetch: true  */ "./pages/github/Git"),
-    loading: Loading
-})
-const About = Loadable({
-    loader: () => import(/*webpackChunkName: "About", webpackPrefetch: true */ "./pages/about/About"),
-    loading: Loading
-})
-const Contact = Loadable({
-    loader: () => import(/*webpackChunkName: "Contact", webpackPrefetch: true */ "./pages/contact/Contact"),
-    loading: Loading
-})
-const TopNav = Loadable({
-    loader: () => import(/*webpackChunkName: "TopNav", webpackPrefetch: true */ "./TopNav"),
-    loading: Loading
-})
-const Footer = Loadable({
-    loader: () => import(/*webpackChunkName: "Footer", webpackPrefetch: true */ "./Footer"),
-    loading: Loading
-})
+const Experience = loadable( () => import(/* webpackChunkName: "Experience", webpackPrefetch: true */ './pages/experience/Experience'))
+const Skills = loadable( () => import(/*webpackChunkName: "Skills", webpackPrefetch: true */ "./pages/skills/Skills"))
+const Git = loadable( () => import(/*webpackChunkName: "Git", webpackPrefetch: true  */ "./pages/github/Git"))
+const About = loadable( () => import(/*webpackChunkName: "About", webpackPrefetch: true */ "./pages/about/About"))
+const Contact = loadable( () => import(/*webpackChunkName: "Contact", webpackPrefetch: true */ "./pages/contact/Contact"))
+const TopNav = loadable( () => import(/*webpackChunkName: "TopNav", webpackPrefetch: true */ "./TopNav"))
+const Footer = loadable( () => import(/*webpackChunkName: "Footer", webpackPrefetch: true */ "./Footer"))
 
 
 
@@ -50,8 +22,6 @@ class App extends Component {
     }
 
     render() {
-
-
 
         const page =  <div style={{position:"relative",minHeight:"100vh",paddingBottom:60}}>
             <TopNav links={[
@@ -85,19 +55,6 @@ class App extends Component {
             </Container>
             <Footer/>
         </div>
-
-        function ThemeLoading(props) {
-            return page
-        }
-
-        const Theme = Loadable({
-            loader: () => import(/*webpackChunkName: "Theme", webpackPrefetch: true */ "./Theme"),
-            loading: ThemeLoading,
-            render(loaded,props) {
-                let Theme = loaded.default;
-                return <Theme {...props} />
-            }
-        })
 
 
         return <Theme>{page}</Theme>
