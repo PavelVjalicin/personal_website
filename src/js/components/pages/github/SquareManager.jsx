@@ -1,6 +1,5 @@
 import React, {Component} from "react"
 import {Square} from "./Square";
-//import css from "./SquareManager.module.scss"
 class SquareManager extends Component {
     constructor(props) {
         super(props)
@@ -12,7 +11,15 @@ class SquareManager extends Component {
             ar.push(React.createElement(Square,{key:i}))
         }
 
-        return <div /*className={css.main}*/>
+        return <div style={{
+            width: "100%",
+            height: 500,
+            top: 0,
+            overflow: "hidden",
+            right: 0,
+            zIndex:-1,
+            position: "absolute"
+        }}>
             {ar}
         </div>
     }

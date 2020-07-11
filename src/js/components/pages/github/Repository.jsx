@@ -41,7 +41,15 @@ class Repository extends Component {
         const lastUpdated = !this.state.small ? <S>{lastUpdatedComp}</S> : <div style={{paddingTop:5}}>{lastUpdatedComp}</div>
 
         return <>
-            <Box /*className={css.box}*/>
+            <Box style={{
+                marginTop:20,
+                paddingTop:10,
+                paddingBottom:5,
+                borderWidth:0,
+                borderStyle:"solid",
+                borderColor: "#e6d38f",
+                borderTopWidth: 1
+            }}>
                 <div ref={this.topRef}><Anchor href={repo.html_url}>{repo.full_name}</Anchor></div>
                 <div><Typography color={"textSecondary"}>{repo.description}</Typography></div>
                 <ViewReadme repo={repo.name} topRef={this.topRef}/>

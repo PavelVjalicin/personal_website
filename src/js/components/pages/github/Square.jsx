@@ -1,5 +1,4 @@
 import React, {Component} from "react"
-//import css from "./Square.module.scss"
 import {minusV2, plusV2} from "../../../V2";
 //V2 = Vector2
 const spawnBoxV2 = [300,150]
@@ -76,7 +75,12 @@ class Square extends Component {
         const pos = this.state.animationStarted ? this.positionV2 : [0,this.positionV2[1]]
         const rotation = this.state.animationStarted ? this.rotationEnd : this.rotationStart
         const opacity = this.state.animationStarted ? this.opacityEnd : this.opacityStart
-        return <div /*className={css.square} */ style={{
+        return <div style={{
+            position: "absolute",
+            backgroundColor: "#4aad1861",
+            borderColor: "#83de55b0",
+            borderWidth: 1,
+            borderStyle: "solid",
             height: this.size,
             width:this.size,
             right:pos[0],
