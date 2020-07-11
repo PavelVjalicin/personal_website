@@ -10,13 +10,12 @@ Page based bundle splitting.
 Easy deployment to Phusion Passenger.
 
 ## Development stack
-
+Babel  
 Hapi v19 Server  
 React  
 Material-UI  
 Webpack 4  
 SCSS module support  
-ECMAScript 6 on client support  
 
 ## Dev environment setup
 
