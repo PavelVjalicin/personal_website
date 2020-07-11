@@ -2,13 +2,17 @@ import React from "react"
 import Path from "path"
 import {ChunkExtractor} from "@loadable/server"
 import ReactDomServer from "react-dom/server"
-import {App} from "../src/js/components/App";
+import {App} from "../js/components/App";
 import {StaticRouter} from "react-router-dom";
 import window from "global/window"
 import {ServerStyleSheets, ThemeProvider} from "@material-ui/styles";
 import {theme} from "./theme";
-
-
+import validateEmail from "../js/validateEmail";
+import http2 from "http2";
+import fs from "fs";
+import fetch from "node-fetch";
+import sendEmail from "./email";
+import Hapi from "@hapi/hapi";
 
 global.window = window
 global.self = window
@@ -24,13 +28,6 @@ const linkTags = extractor.getLinkTags() // or extractor.getLinkElements();
 // And you can even collect your style tags (if you use "mini-css-extract-plugin")
 const styleTags = extractor.getStyleTags() // or extractor.getStyleElements();
 
-
-const validateEmail = require("../src/js/validateEmail").default
-const http2 = require("http2")
-const fs = require('fs')
-const fetch = require('node-fetch');
-const sendEmail = require('./email').default
-const Hapi = require("@hapi/hapi")
 const dataDir = "./data"
 const readMe = {}
 const reposDir = dataDir+"/repos.json"
@@ -140,7 +137,7 @@ async function getReadme(repo) {
 
 const initHapi = async (isProd) => {
 
-    const dir = Path.resolve(__dirname, '..')
+    const dir = Path.resolve(__dirname, '../..')
     let server
     if(isProd) {
         server = Hapi.Server({

@@ -10,7 +10,7 @@ import "../css/main.scss"
 import {loadableReady} from "@loadable/component";
 import {BrowserRouter} from "react-router-dom";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
-import {theme} from "../../server/theme";
+import {theme} from "../server/theme";
 
 function Main() {
     React.useEffect(() => {
