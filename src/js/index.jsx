@@ -35,10 +35,10 @@ function Main() {
         ReactDOM.render(
             <Main/>, react)
     } else {
-        loadableReady(() => {
+        /*loadableReady(() => {
             ReactDOM.hydrate(
                 <Main/>, react)
-        })
+        })*/
     }
 
 

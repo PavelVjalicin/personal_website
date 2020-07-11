@@ -2,7 +2,6 @@ import React, {Component} from "react"
 import StarIcon from '@material-ui/icons/Star';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarHalfIcon from '@material-ui/icons/StarHalf';
-//import css from "./StarRating.module.scss"
 import Grid from "@material-ui/core/Grid";
 
 class StarRating extends Component {
@@ -37,13 +36,24 @@ class StarRating extends Component {
 
         this.addStar(stars,emptyStarNumber,Empty)
 
-        return <div /*className={css.box}*/>
+        return <div style={{
+            paddingTop:10,
+            paddingBottom:10
+        }}>
             <Grid container spacing={0} alignItems="center">
-                <Grid item xs={6} sm={6} /*className={css.grid}*/>
-                    <span /*className={css.text}*/>{this.props.children}</span>
+                <Grid item xs={6} sm={6}>
+                    <span style={{
+                        paddingLeft:10,
+                        fontWeight:"bold"
+                    }}>{this.props.children}</span>
                 </Grid>
-                <Grid item xs={6} sm={6} /*className={css.starsContainer}*/>
-                    <div /*className={css.stars}*/>
+                <Grid item xs={6} sm={6} style={{textAlign:"center"}}>
+                    <div style={{
+                        borderRadius: 20,
+                        backgroundColor: "#212121",
+                        display: "inline-block",
+                        padding: "5px 6px 2px 6px"
+                    }}>
                         {stars.map((x,i) => x({key:i,color:"secondary"}))}
                     </div>
                 </Grid>

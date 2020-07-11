@@ -1,6 +1,5 @@
 import React, {Component} from "react"
 import {Line} from "./Line";
-/*import css from "./LineAnimation.module.scss"*/
 
 const lineColor = "#000"
 const lineWidth = 2
@@ -79,7 +78,12 @@ class LineAnimation extends Component {
         return <canvas ref={this.canvasRef}
                        width={270}
                        height={250}
-                       /*className={css.canvas}*/
+                       style={{
+                           position:"absolute",
+                           top:20,
+                           right:0,
+                           zIndex:-1
+                       }}
         />
     }
 }
