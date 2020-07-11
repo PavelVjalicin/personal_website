@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "webpack && nodemon --watch server --exec babel-node src/server/dev-build.js",
     "prod": "node prod.js",
+    "webpack-watch": "webpack --watch",
     "build-server": "babel src -d server-dist",
     "build": "webpack --mode production"
   },
