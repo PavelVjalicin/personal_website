@@ -9,11 +9,37 @@ import {App} from "./components/App";
 import "../css/main.scss"
 import {loadableReady} from "@loadable/component";
 import {BrowserRouter} from "react-router-dom";
+import ThemeProvider from "@material-ui/styles/ThemeProvider";
+import {theme} from "../../server/theme";
 
-loadableReady(() =>{
+function Main() {
+    React.useEffect(() => {
+        const jssStyles = document.querySelector('#jss-server-side');
+        if (jssStyles) {
+            jssStyles.parentElement.removeChild(jssStyles);
+        }
+    }, []);
+
+    return (
+        <ThemeProvider theme={theme}>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
+        </ThemeProvider>
+    );
+}
+
+
     const react = document.getElementById("react")
-    ReactDOM.hydrate(<BrowserRouter><App/></BrowserRouter>,react)
-})
+    if(react.childNodes.length === 0) {
+        ReactDOM.render(
+            <Main/>, react)
+    } else {
+        loadableReady(() => {
+            ReactDOM.hydrate(
+                <Main/>, react)
+        })
+    }
 
 
 //Used for dev auto-refresh

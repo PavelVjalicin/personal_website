@@ -4,7 +4,7 @@ import {PageTitle} from "../../PageTitle";
 import {ExperienceSection} from "./ExperienceSection";
 import Typography from "@material-ui/core/Typography";
 import {Anchor} from "../../Anchor";
-import Grid from "@material-ui/core/Grid";
+import NoSsr from "@material-ui/core/NoSsr";
 
 export default class Experience extends Component {
     constructor(props) {
@@ -15,7 +15,9 @@ export default class Experience extends Component {
         const Line = () => <hr style={{borderColor:"#f50057"}}/>
         const Paragraph = (props) => <div style={{paddingBottom:40}}>{props.children}</div>
         return <>
-            <LineAnimation/>
+            <NoSsr>
+                <LineAnimation/>
+            </NoSsr>
             <PageTitle>Experience</PageTitle>
             <ExperienceSection from={"June 2017"}
                                to={"Present"}

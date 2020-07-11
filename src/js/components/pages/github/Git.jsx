@@ -4,6 +4,7 @@ import {GitRepositories} from "./GitRepositories";
 import {Anchor} from "../../Anchor";
 import {SquareManager} from "./SquareManager";
 import {PageTitle} from "../../PageTitle";
+import NoSsr from "@material-ui/core/NoSsr";
 
 export default class Git extends Component {
     constructor(props) {
@@ -12,7 +13,9 @@ export default class Git extends Component {
 
     render() {
         return <>
-            <SquareManager/>
+            <NoSsr>
+                <SquareManager/>
+            </NoSsr>
             <PageTitle>GitHub</PageTitle>
             <Anchor href={"https://github.com/PavelVjalicin?tab=repositories"}>View on GitHub</Anchor>
             <GitRepositories pinnedRepos={[

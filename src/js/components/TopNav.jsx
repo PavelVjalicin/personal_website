@@ -14,6 +14,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Typography from "@material-ui/core/Typography";
+import NoSsr from "@material-ui/core/NoSsr";
 
 class TopNav extends Component {
     constructor(props) {

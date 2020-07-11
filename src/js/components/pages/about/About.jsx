@@ -4,6 +4,7 @@ import {PageTitle} from "../../PageTitle";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import {Anchor} from "../../Anchor";
+import NoSsr from "@material-ui/core/NoSsr";
 
 export default class About extends Component {
     constructor(props) {
@@ -15,7 +16,9 @@ export default class About extends Component {
         const Paragraph = (props) => <div style={{paddingTop:20}}>{props.children}</div>
 
         return <Grid item xs={12} md={9}>
-            <AboutAnimation/>
+            <NoSsr>
+                <AboutAnimation/>
+            </NoSsr>
             <PageTitle>About Me</PageTitle>
             <Paragraph>
                 <Typography>

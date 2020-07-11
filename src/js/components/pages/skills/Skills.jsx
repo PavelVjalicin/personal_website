@@ -3,6 +3,7 @@ import {StarRating} from "./StarRating";
 import {PageTitle} from "../../PageTitle";
 import {SkillsSection} from "./SkillsSection";
 import {SkillsAnimation} from "./SkillsAnimation";
+import NoSsr from "@material-ui/core/NoSsr";
 
 export default class Skills extends Component {
     constructor(props) {
@@ -11,7 +12,9 @@ export default class Skills extends Component {
 
     render() {
         return <>
-            <SkillsAnimation/>
+            <NoSsr>
+                <SkillsAnimation/>
+            </NoSsr>
             <PageTitle>Skills</PageTitle>
             <SkillsSection title={"Programming Languages"}>
                 <StarRating rating={10}>Scala</StarRating>

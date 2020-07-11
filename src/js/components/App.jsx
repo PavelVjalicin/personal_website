@@ -4,6 +4,7 @@ import {NotFound} from "./pages/NotFound";
 import Container from "@material-ui/core/Container";
 import loadable from '@loadable/component'
 import ScrollToTop from "./ScrollToTop";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 
 const Experience = loadable( () => import(/* webpackChunkName: "Experience", webpackPrefetch: true */ './pages/experience/Experience'))
@@ -23,49 +24,41 @@ class App extends Component {
 
     render() {
 
-        const page =  <div style={{position:"relative",minHeight:"100vh",paddingBottom:60}}>
-            <TopNav links={[
-                ["/about","About me"],
-                ["/work","Experience"],
-                ["/skills","Skills"],
-                ["/github","GitHub"],
-                ["/contact","Contact Me"]
-            ]}/>
-            <Container style={{
-                borderLeft:5,
-                borderLeftStyle:"solid",
-                borderColor:"#f50057",
-                position:"relative"
-            }}>
-                <div style={{paddingTop:20,paddingBottom:40}}>
-                    <Switch>
-                        <Route path={"/about"} exact>
-                            <About/>
-                        </Route>
-                        <Route path={"/work"} component={Experience} exact/>
-                        <Route path={"/skills"} exact component={Skills} />
-                        <Route path={"/github"} exact component={Git}/>
-                        <Route path={"/contact"} exact component={Contact}/>
-                        <Route path={"/"} exact component={About}/>
-                        <Route>
-                            <NotFound/>
-                        </Route>
-                    </Switch>
-                </div>
-            </Container>
-            <Footer/>
-        </div>
-
-        const Theme = loadable( () => import("./Theme"), {
-            render: ({Component, loading, ownProps}) => {
-                if(loading) return ownProps.children
-                return <Component {...ownProps}/>
-            }
-        })
-
         return <>
             <ScrollToTop/>
-            <Theme>{page}</Theme>
+            <div style={{position:"relative",minHeight:"100vh",paddingBottom:60}}>
+                <TopNav links={[
+                    ["/about","About me"],
+                    ["/work","Experience"],
+                    ["/skills","Skills"],
+                    ["/github","GitHub"],
+                    ["/contact","Contact Me"]
+                ]}/>
+                <Container style={{
+                    borderLeft:5,
+                    borderLeftStyle:"solid",
+                    borderColor:"#f50057",
+                    position:"relative"
+                }}>
+                    <div style={{paddingTop:20,paddingBottom:40}}>
+                        <Switch>
+                            <Route path={"/about"} exact>
+                                <About/>
+                            </Route>
+                            <Route path={"/work"} component={Experience} exact/>
+                            <Route path={"/skills"} exact component={Skills} />
+                            <Route path={"/github"} exact component={Git}/>
+                            <Route path={"/contact"} exact component={Contact}/>
+                            <Route path={"/"} exact component={About}/>
+                            <Route>
+                                <NotFound/>
+                            </Route>
+                        </Switch>
+                    </div>
+                </Container>
+                <Footer/>
+            </div>
+            <CssBaseline/>
         </>
     }
 }

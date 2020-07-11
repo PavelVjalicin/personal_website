@@ -5,6 +5,8 @@ import ReactDomServer from "react-dom/server"
 import {App} from "../src/js/components/App";
 import {StaticRouter} from "react-router-dom";
 import window from "global/window"
+import {ServerStyleSheets, ThemeProvider} from "@material-ui/styles";
+import {theme} from "./theme";
 
 
 
@@ -251,20 +253,42 @@ const initHapi = async (isProd) => {
         method:'GET',
         path:'/{any*}',
         handler: (req,h) => {
-            return new Promise( (resolve,reject ) => {
-                fs.readFile("dist/index.html",'utf8',(err,data) => {
-                    // Wrap your application using "collectChunks"
-                    console.log(req.url)
-                    const jsx = extractor.collectChunks(<StaticRouter location={req.url.pathname}><App /></StaticRouter>)
-                    // Render your application
-                    const html = ReactDomServer.renderToString(jsx)
-                    if(err) reject(h.response().status(500))
-                    resolve(
-                        data.replace(/<div id="react"><\/div>/g,
-                        `<div id="react">${html}</div>`)
-                    )
+
+            const isBot = false
+            if(isBot) {
+                return new Promise((resolve, reject) => {
+                    fs.readFile("dist/index.html", 'utf8', (err, data) => {
+                        // Wrap your application using "collectChunks"
+                        const sheets = new ServerStyleSheets();
+                        const jsx = extractor.collectChunks(
+                            <ThemeProvider theme={theme}>
+                                <StaticRouter location={req.url.pathname}>
+                                    <App/>
+                                </StaticRouter>
+                            </ThemeProvider>
+                        )
+
+
+                        // Render your application
+                        const html = ReactDomServer.renderToString(sheets.collect(jsx))
+                        if (err) reject(h.response().status(500))
+
+                        const css = sheets.toString();
+
+                        let result = data.replace(/<style id="jss-server-side"><\/style>/g,
+                            `<style id="jss-server-side">${css}</style>`)
+
+                        result = result.replace(/<div id="react"><\/div>/g,
+                            `<div id="react">${html}</div>`)
+
+                        resolve(
+                            result
+                        )
+                    })
                 })
-            })
+            } else {
+                return h.file("dist/index.html")
+            }
         }
     }])
 
