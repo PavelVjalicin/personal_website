@@ -29,17 +29,16 @@ function Main() {
     );
 }
 
-
-    const react = document.getElementById("react")
-    if(react.childNodes.length === 0) {
-        ReactDOM.render(
+const react = document.getElementById("react")
+if(react.childNodes.length === 0) {
+    ReactDOM.render(
+        <Main/>, react)
+} else {
+    /*loadableReady(() => {
+        ReactDOM.hydrate(
             <Main/>, react)
-    } else {
-        /*loadableReady(() => {
-            ReactDOM.hydrate(
-                <Main/>, react)
-        })*/
-    }
+    })*/
+}
 
 
 //Used for dev auto-refresh
