@@ -20,6 +20,11 @@ const Footer = loadable( () => import(/*webpackChunkName: "Footer", webpackPrefe
 class App extends Component {
     constructor(props) {
         super(props)
+        if(props.data) {
+            window.app = {
+                data:props.data
+            }
+        }
     }
 
     render() {

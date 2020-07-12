@@ -260,32 +260,37 @@ const initHapi = async (isProd) => {
             if(isBot) {
                 return new Promise((resolve, reject) => {
                     fs.readFile("dist/index.html", 'utf8', (err, data) => {
-                        // Wrap your application using "collectChunks"
-                        const sheets = new ServerStyleSheets();
-                        const jsx = extractor.collectChunks(
-                            <ThemeProvider theme={theme}>
-                                <StaticRouter location={req.url.pathname}>
-                                    <App/>
-                                </StaticRouter>
-                            </ThemeProvider>
-                        )
+                        getRepos()
+                            .then(json => json.data)
+                            .then(gitData =>{
+                                // Wrap your application using "collectChunks"
+                                const sheets = new ServerStyleSheets();
+                                const jsx = extractor.collectChunks(
+                                    <ThemeProvider theme={theme}>
+                                        <StaticRouter location={req.url.pathname}>
+                                            <App data={{git:gitData}}/>
+                                        </StaticRouter>
+                                    </ThemeProvider>
+                                )
 
 
-                        // Render your application
-                        const html = ReactDomServer.renderToString(sheets.collect(jsx))
-                        if (err) reject(h.response().status(500))
+                                // Render your application
+                                const html = ReactDomServer.renderToString(sheets.collect(jsx))
+                                if (err) reject(h.response().status(500))
 
-                        const css = sheets.toString();
+                                const css = sheets.toString();
 
-                        let result = data.replace(/<style id="jss-server-side"><\/style>/g,
-                            `<style id="jss-server-side">${css}</style>`)
+                                let result = data.replace(/<style id="jss-server-side"><\/style>/g,
+                                    `<style id="jss-server-side">${css}</style>`)
 
-                        result = result.replace(/<div id="react"><\/div>/g,
-                            `<div id="react">${html}</div>`)
+                                result = result.replace(/<div id="react"><\/div>/g,
+                                    `<div id="react">${html}</div>`)
 
-                        resolve(
-                            result
-                        )
+                                resolve(
+                                    result
+                                )
+                            })
+
                     })
                 })
             } else {

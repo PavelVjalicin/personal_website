@@ -6,36 +6,56 @@ import Typography from "@material-ui/core/Typography";
 class GitRepositories extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            repoInfo:[],
-            pinnedRepos: []
+
+        let repoInfo = []
+        let pinnedRepos = []
+
+        //For SSR
+        if(window.app && window.app.data) {
+            const [_pRepos,_repos] = this.splitRepos(window.app.data.git)
+            repoInfo = _repos
+            pinnedRepos = _pRepos
         }
+
+        this.state = {
+            repoInfo:repoInfo,
+            pinnedRepos: pinnedRepos
+        }
+
+        this.splitRepos = this.splitRepos.bind(this)
 
         this.mounted = false
     }
 
+    splitRepos(json) {
+        const pinnedRepos = []
+        const repos = []
+        json.forEach(value => {
+            if(this.props.pinnedRepos.includes(value.full_name)) {
+                pinnedRepos.push(value)
+            } else {
+                repos.push(value)
+            }
+        })
+        return [pinnedRepos,repos]
+    }
+
     componentDidMount() {
-        this.mounted = true
-        fetch("/api/repo")
-            .then((resp) => resp.json())
-            .then(json => {
-                    if (this.mounted === true) {
-                        const pinnedRepos = []
-                        const repos = []
-                        json.forEach(value => {
-                            if(this.props.pinnedRepos.includes(value.full_name)) {
-                                pinnedRepos.push(value)
-                            } else {
-                                repos.push(value)
-                            }
-                        })
-                        this.setState({
-                            pinnedRepos: pinnedRepos,
-                            repoInfo: repos
-                        })
+        if(this.state.repoInfo.length === 0) {
+            this.mounted = true
+            fetch("/api/repo")
+                .then((resp) => resp.json())
+                .then(json => {
+                        if (this.mounted === true) {
+                            const [pinnedRepos, repos] = this.splitRepos(json)
+                            this.setState({
+                                pinnedRepos: pinnedRepos,
+                                repoInfo: repos
+                            })
+                        }
                     }
-                }
-            )
+                )
+        }
     }
 
     componentWillUnmount() {
