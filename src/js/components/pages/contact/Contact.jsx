@@ -5,6 +5,7 @@ import {PageTitle} from "../../PageTitle";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import validateDefault from "../../../validateEmail";
+import {Helmet} from "react-helmet";
 
 const validateEmail = validateDefault.default
 
@@ -113,6 +114,10 @@ export default class Contact extends Component {
         }
 
         return <>
+            <Helmet>
+                <title>Pavel Vjalicin - Contact Me</title>
+                <meta name={"description"} content={"Contact Pavel Vjalicin."} />
+            </Helmet>
             <PageTitle>Contact Me</PageTitle>
             {!this.state.submitted ? <>
                 <br/>

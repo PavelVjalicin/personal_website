@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import {Anchor} from "../../Anchor";
 import NoSsr from "@material-ui/core/NoSsr";
+import {Helmet} from "react-helmet";
 
 export default class About extends Component {
     constructor(props) {
@@ -14,8 +15,11 @@ export default class About extends Component {
     render() {
 
         const Paragraph = (props) => <div style={{paddingTop:20}}>{props.children}</div>
-
         return <Grid item xs={12} md={9}>
+            <Helmet>
+                <title>Pavel Vjalicin - About Me</title>
+                <meta name={"description"} content={"About Pavel Vjalicin"} />
+            </Helmet>
             <NoSsr>
                 <AboutAnimation/>
             </NoSsr>
@@ -62,6 +66,6 @@ export default class About extends Component {
                 <Typography style={{float:"right"}}>- Pavel Vjalicin</Typography>
             </Paragraph>
             <br/>
-            </Grid>
+        </Grid>
     }
 }

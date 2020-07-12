@@ -4,6 +4,7 @@ import {PageTitle} from "../../PageTitle";
 import {SkillsSection} from "./SkillsSection";
 import {SkillsAnimation} from "./SkillsAnimation";
 import NoSsr from "@material-ui/core/NoSsr";
+import {Helmet} from "react-helmet";
 
 export default class Skills extends Component {
     constructor(props) {
@@ -12,6 +13,10 @@ export default class Skills extends Component {
 
     render() {
         return <>
+            <Helmet>
+                <title>Pavel Vjalicin - Skills</title>
+                <meta name={"description"} content={"Pavel Vjalicin - Software Development skills."} />
+            </Helmet>
             <NoSsr>
                 <SkillsAnimation/>
             </NoSsr>

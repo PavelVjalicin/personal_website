@@ -5,6 +5,7 @@ import {ExperienceSection} from "./ExperienceSection";
 import Typography from "@material-ui/core/Typography";
 import {Anchor} from "../../Anchor";
 import NoSsr from "@material-ui/core/NoSsr";
+import {Helmet} from "react-helmet";
 
 export default class Experience extends Component {
     constructor(props) {
@@ -15,6 +16,10 @@ export default class Experience extends Component {
         const Line = () => <hr style={{borderColor:"#f50057"}}/>
         const Paragraph = (props) => <div style={{paddingBottom:40}}>{props.children}</div>
         return <>
+            <Helmet>
+                <title>Pavel Vjalicin - Work Experience and Education</title>
+                <meta name={"description"} content={"Pavel Vjalicin - Work experience and education"} />
+            </Helmet>
             <NoSsr>
                 <LineAnimation/>
             </NoSsr>

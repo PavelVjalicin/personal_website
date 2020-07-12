@@ -13,6 +13,7 @@ import fs from "fs";
 import fetch from "node-fetch";
 import sendEmail from "./email";
 import Hapi from "@hapi/hapi";
+import {Helmet} from "react-helmet";
 
 global.window = window
 global.self = window
@@ -260,6 +261,9 @@ const initHapi = async (isProd) => {
             if(isBot) {
                 return new Promise((resolve, reject) => {
                     fs.readFile("dist/index.html", 'utf8', (err, data) => {
+
+                        if (err) reject(h.response().status(500))
+
                         getRepos()
                             .then(json => json.data)
                             .then(gitData =>{
@@ -276,11 +280,16 @@ const initHapi = async (isProd) => {
 
                                 // Render your application
                                 const html = ReactDomServer.renderToString(sheets.collect(jsx))
-                                if (err) reject(h.response().status(500))
-
+                                const helmet = Helmet.renderStatic();
                                 const css = sheets.toString();
 
-                                let result = data.replace(/<style id="jss-server-side"><\/style>/g,
+
+
+                                let result = data.replace(/<title>Pavel Vjalicin - About Me<\/title>/g,helmet.title.toString())
+
+                                result = result.replace(/<meta name="description" content="Pavel Vjalicin - About Me"\/>/g,helmet.meta.toString())
+
+                                result = result.replace(/<style id="jss-server-side"><\/style>/g,
                                     `<style id="jss-server-side">${css}</style>`)
 
                                 result = result.replace(/<div id="react"><\/div>/g,

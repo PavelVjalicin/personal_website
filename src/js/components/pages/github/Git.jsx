@@ -5,6 +5,7 @@ import {Anchor} from "../../Anchor";
 import {SquareManager} from "./SquareManager";
 import {PageTitle} from "../../PageTitle";
 import NoSsr from "@material-ui/core/NoSsr";
+import {Helmet} from "react-helmet";
 
 export default class Git extends Component {
     constructor(props) {
@@ -13,6 +14,10 @@ export default class Git extends Component {
 
     render() {
         return <>
+            <Helmet>
+                <title>Pavel Vjalicin - GitHub</title>
+                <meta name={"description"} content={"GitHub repositories of Pavel Vjalicin"} />
+            </Helmet>
             <NoSsr>
                 <SquareManager/>
             </NoSsr>
