@@ -1,6 +1,6 @@
-import "core-js/stable/object/assign"  // safari 9 polyfill Object.assign
+/*import "core-js/stable/object/assign"  // safari 9 polyfill Object.assign
 import "core-js/stable/object/entries"  // safari 9 polyfill Object.entries
-import "core-js/stable/object/values" // safari 9 polyfill Object.values
+import "core-js/stable/object/values" // safari 9 polyfill Object.values*/
 import 'url-search-params-polyfill'; //safari 9 polyfill new URLSearchParams
 import "regenerator-runtime/runtime" // For core-js
 import ReactDOM from "react-dom"

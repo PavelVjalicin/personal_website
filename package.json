@@ -29,7 +29,6 @@
     "nodemailer": "^6.4.10",
     "@material-ui/core": "4.10.2",
     "@material-ui/icons": "^4.9.1",
-    "core-js": "^3.6.4",
     "global": "^4.4.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
