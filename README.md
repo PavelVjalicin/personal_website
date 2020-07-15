@@ -25,4 +25,7 @@ Execute from project dir:
 `openssl req -x509 -newkey rsa:4096 -nodes -sha256 -subj '/CN=localhost' -keyout private.pem -out cert.pem`
 
 ## Deployment 
-TBD 
+Run: `npm run build` `npm run build-server`  
+Pull git repo onto server.  
+Copy server-dist, dist folders to server.  
+Install non dev npm dependencies to server.
