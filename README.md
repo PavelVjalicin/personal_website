@@ -28,4 +28,5 @@ Execute from project dir:
 Run: `npm run build` `npm run build-server`  
 Pull git repo onto server.  
 Copy server-dist, dist folders to server.  
-Install non dev npm dependencies to server.
+Install non dev npm dependencies to server.  
+Run `node prod.js` to start server.
