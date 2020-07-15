@@ -14,4 +14,4 @@ async function sendEmail(from,name,msg) {
     })
   }
 
-  exports.default = sendEmail
+  export {sendEmail}

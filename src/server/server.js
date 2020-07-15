@@ -7,11 +7,11 @@ import {StaticRouter} from "react-router-dom";
 import window from "global/window"
 import {ServerStyleSheets, ThemeProvider} from "@material-ui/styles";
 import {theme} from "./theme";
-import validateEmail from "../js/validateEmail";
+import {validateEmail} from "../js/validateEmail";
 import http2 from "http2";
 import fs from "fs";
 import fetch from "node-fetch";
-import sendEmail from "./email";
+import {sendEmail} from "./email";
 import Hapi from "@hapi/hapi";
 import {Helmet} from "react-helmet";
 

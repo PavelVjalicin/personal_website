@@ -4,10 +4,8 @@ import TextField from "@material-ui/core/TextField";
 import {PageTitle} from "../../PageTitle";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import validateDefault from "../../../validateEmail";
 import {Helmet} from "react-helmet";
-
-const validateEmail = validateDefault.default
+import {validateEmail} from "../../../validateEmail";
 
 export default class Contact extends Component {
     constructor(props) {
