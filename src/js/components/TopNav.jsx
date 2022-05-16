@@ -15,6 +15,7 @@ import Divider from "@mui/material/Divider";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Typography from "@mui/material/Typography";
 import NoSsr from "@mui/material/NoSsr";
+import Container from "@mui/material/Container";
 
 class TopNav extends Component {
     constructor(props) {
@@ -61,11 +62,11 @@ class TopNav extends Component {
     }
 
     render() {
-        return <AppBar color={'default'} position={"sticky"}>
+        return <AppBar color={'secondary'} position={"sticky"}>
             {this.state.small ? <Toolbar>
                     <Grid container
                           alignItems={"center"}
-                          justify={"space-between"}>
+                          justifyContent={"space-between"}>
                         <Typography>Pavel Vjalicin - Personal Website</Typography>
                         <IconButton
                             color="inherit"
@@ -101,10 +102,18 @@ class TopNav extends Component {
                         </Drawer>
                     </Grid>
                 </Toolbar> :
+                <Container style={{
+                    borderLeft:5,
+                    borderLeftStyle:"solid",
+                    borderColor:"#f50057",
+                    position:"relative"
+                }}>
                 <Tabs value={this.state.activeTab}
                       onChange={this.handleChange}
-                      variant="scrollable"
+                      variant="fullwidth"
                       scrollButtons="auto"
+                      textColor="white"
+                      indicatorColor="secondary"
                 >
                     {this.props.links.map(link =>
                         <Tab key={link[0]}
@@ -113,7 +122,7 @@ class TopNav extends Component {
                              value={link[0]}
                              to={link[0]}/>
                     )}
-                </Tabs>}
+                </Tabs></Container>}
         </AppBar>
     }
 }
