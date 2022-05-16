@@ -37,6 +37,7 @@
     "react-helmet": "^6.1.0",
     "react-markdown": "^8.0.3",
     "react-router-dom": "^6.3.0",
+    "remark-gfm": "^3.0.1",
     "scroll-into-view-if-needed": "^2.2.25",
     "url-search-params-polyfill": "^8.0.0",
     "whatwg-fetch": "^3.0.0"

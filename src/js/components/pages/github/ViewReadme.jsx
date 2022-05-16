@@ -4,6 +4,8 @@ import {fetch} from "whatwg-fetch"
 import Box from "@mui/material/Box";
 import ReactMarkdown from "react-markdown";
 import scrollIntoView from "scroll-into-view-if-needed";
+import gfm from "remark-gfm";
+
 class ViewReadme extends Component {
     constructor(props) {
         super(props)
@@ -53,8 +55,8 @@ class ViewReadme extends Component {
             {!this.state.open ? <Button variant={"contained"} color={"primary"} onClick={this.openClick}>View README.md</Button> :
                 <Box>
                     <div>
-                        <ReactMarkdown children={this.state.data}
-                                       components={{link:(node, ...props) =>  <a href={props.href} style={{color:'#f50057'}} target="_blank">{props.children}</a>}}/>
+                        <ReactMarkdown remarkPlugins={[gfm]} children={this.state.data} linkTarget="_blank"
+                                       components={{a:(props) =>  <a href={props.href} style={{color:'#f50057'}} target="_blank">{props.children}</a>}}/>
                         {!this.state.noReadMe ?<Button variant={"outlined"} onClick={this.closeClick}>Close ReadMe</Button> : null}
                     </div>
                 </Box>
