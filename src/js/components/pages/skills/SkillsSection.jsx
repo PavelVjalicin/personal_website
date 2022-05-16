@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {Section} from "../../Section";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
 class SkillsSection extends Component {
     constructor(props) {

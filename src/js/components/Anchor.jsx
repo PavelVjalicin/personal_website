@@ -1,6 +1,6 @@
 import React, {Component} from "react"
-import OpenInNew from "@material-ui/icons/OpenInNew";
-import Link from "@material-ui/core/Link";
+import OpenInNew from "@mui/icons-material/OpenInNew";
+import Link from "@mui/material/Link";
 
 class Anchor extends Component {
     constructor(props) {

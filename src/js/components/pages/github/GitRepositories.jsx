@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {Repository} from "./Repository";
 import {fetch} from "whatwg-fetch"
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 
 class GitRepositories extends Component {
     constructor(props) {

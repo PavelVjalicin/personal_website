@@ -1,6 +1,6 @@
 import React, {Component} from "react"
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import {Anchor} from "../../Anchor";
 import {ViewReadme} from "./ViewReadme";
 //import css from "./Repository.module.scss"

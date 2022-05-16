@@ -1,20 +1,20 @@
 import React, {Component} from "react"
-import AppBar from "@material-ui/core/AppBar";
-import {Link, withRouter} from "react-router-dom";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from "@material-ui/core/Toolbar";
-import Grid from "@material-ui/core/Grid";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Divider from "@material-ui/core/Divider";
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import Typography from "@material-ui/core/Typography";
-import NoSsr from "@material-ui/core/NoSsr";
+import AppBar from "@mui/material/AppBar";
+import {Link} from "react-router-dom";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from '@mui/icons-material/Menu';
+import Toolbar from "@mui/material/Toolbar";
+import Grid from "@mui/material/Grid";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import Typography from "@mui/material/Typography";
+import NoSsr from "@mui/material/NoSsr";
 
 class TopNav extends Component {
     constructor(props) {
@@ -27,7 +27,7 @@ class TopNav extends Component {
         this.hrefs = this.props.links.map(x => x[0])
 
         this.state = {
-            activeTab:this.setActiveTab(props.location.pathname),
+            activeTab:this.setActiveTab(window.location.pathname),
             small: window.innerWidth < 800
         }
     }
@@ -118,4 +118,4 @@ class TopNav extends Component {
     }
 }
 
-export default withRouter(props => <TopNav {...props}/>)
+export default (props => <TopNav {...props}/>)

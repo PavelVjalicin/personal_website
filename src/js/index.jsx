@@ -6,10 +6,9 @@ import "regenerator-runtime/runtime" // For core-js
 import ReactDOM from "react-dom"
 import React from "react"
 import {App} from "./components/App";
-import "../css/main.scss"
 import {loadableReady} from "@loadable/component";
 import {BrowserRouter} from "react-router-dom";
-import ThemeProvider from "@material-ui/styles/ThemeProvider";
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import {theme} from "../server/theme";
 
 function Main() {

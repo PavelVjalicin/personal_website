@@ -1,7 +1,10 @@
-import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
-const theme = createMuiTheme({
+import { createTheme } from '@mui/material/styles'
+import { pink } from '@mui/material/colors';
+const theme = createTheme({
     palette: {
-        type: 'dark'
+        mode: 'dark',
+        primary: pink,
+        secondary: pink,
     }
 })
 

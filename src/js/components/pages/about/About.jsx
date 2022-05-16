@@ -1,10 +1,10 @@
 import React, {Component} from "react"
 import {AboutAnimation} from "./AboutAnimation";
 import {PageTitle} from "../../PageTitle";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 import {Anchor} from "../../Anchor";
-import NoSsr from "@material-ui/core/NoSsr";
+import NoSsr from "@mui/material/NoSsr";
 import {Helmet} from "react-helmet";
 
 export default class About extends Component {

@@ -1,8 +1,8 @@
 import React, {Component} from "react"
-import StarIcon from '@material-ui/icons/Star';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import StarHalfIcon from '@material-ui/icons/StarHalf';
-import Grid from "@material-ui/core/Grid";
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarHalfIcon from '@mui/icons-material/StarHalf';
+import Grid from "@mui/material/Grid";
 
 class StarRating extends Component {
     constructor(props) {

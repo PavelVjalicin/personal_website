@@ -1,10 +1,10 @@
 import React, {Component} from "react"
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 import {GitRepositories} from "./GitRepositories";
 import {Anchor} from "../../Anchor";
 import {SquareManager} from "./SquareManager";
 import {PageTitle} from "../../PageTitle";
-import NoSsr from "@material-ui/core/NoSsr";
+import NoSsr from "@mui/material/NoSsr";
 import {Helmet} from "react-helmet";
 
 export default class Git extends Component {

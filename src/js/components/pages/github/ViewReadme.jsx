@@ -1,7 +1,7 @@
 import React, {Component} from "react"
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import {fetch} from "whatwg-fetch"
-import Box from "@material-ui/core/Box";
+import Box from "@mui/material/Box";
 import ReactMarkdown from "react-markdown";
 import scrollIntoView from "scroll-into-view-if-needed";
 class ViewReadme extends Component {
@@ -52,9 +52,9 @@ class ViewReadme extends Component {
         return <div style={{paddingTop:10}} ref={this.myRef} >
             {!this.state.open ? <Button variant={"contained"} color={"primary"} onClick={this.openClick}>View README.md</Button> :
                 <Box>
-                    <div className={"markdown"}>
-                        <ReactMarkdown source={this.state.data}
-                                       renderers={{link:(props) =>  <a href={props.href} target="_blank">{props.children}</a>}}/>
+                    <div>
+                        <ReactMarkdown children={this.state.data}
+                                       components={{link:(node, ...props) =>  <a href={props.href} style={{color:'#f50057'}} target="_blank">{props.children}</a>}}/>
                         {!this.state.noReadMe ?<Button variant={"outlined"} onClick={this.closeClick}>Close ReadMe</Button> : null}
                     </div>
                 </Box>

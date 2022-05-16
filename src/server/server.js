@@ -5,7 +5,7 @@ import ReactDomServer from "react-dom/server"
 import {App} from "../js/components/App";
 import {StaticRouter} from "react-router-dom";
 import window from "global/window"
-import {ServerStyleSheets, ThemeProvider} from "@material-ui/styles";
+import {ServerStyleSheets, ThemeProvider} from "@mui/material/styles";
 import {theme} from "./theme";
 import {validateEmail} from "../js/validateEmail";
 import http2 from "http2";

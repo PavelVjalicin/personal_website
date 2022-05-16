@@ -1,10 +1,10 @@
 import React, {Component} from "react"
-import {Route, Switch} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {NotFound} from "./pages/NotFound";
-import Container from "@material-ui/core/Container";
+import Container from "@mui/material/Container";
 import loadable from '@loadable/component'
 import ScrollToTop from "./ScrollToTop";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import CssBaseline from "@mui/material/CssBaseline";
 
 
 const Experience = loadable( () => import(/* webpackChunkName: "Experience", webpackPrefetch: true */ './pages/experience/Experience'))
@@ -27,7 +27,11 @@ class App extends Component {
         }
     }
 
+    
     render() {
+
+        /*<Route path={"/"} exact element={About}/>
+                            <Route path="*" element={NotFound}/>*/
 
         return <>
             <ScrollToTop/>
@@ -46,19 +50,15 @@ class App extends Component {
                     position:"relative"
                 }}>
                     <div style={{paddingTop:20,paddingBottom:40}}>
-                        <Switch>
-                            <Route path={"/about"} exact>
-                                <About/>
-                            </Route>
-                            <Route path={"/work"} component={Experience} exact/>
-                            <Route path={"/skills"} exact component={Skills} />
-                            <Route path={"/github"} exact component={Git}/>
-                            <Route path={"/contact"} exact component={Contact}/>
-                            <Route path={"/"} exact component={About}/>
-                            <Route>
-                                <NotFound/>
-                            </Route>
-                        </Switch>
+                        <Routes>
+                            <Route path={"/about"} exact element={<About/>}/>
+                            <Route path={"/work"} element={<Experience/>} exact/>
+                            <Route path={"/skills"} exact element={<Skills/>} />
+                            <Route path={"/github"} exact element={<Git/>}/>
+                            <Route path={"/contact"} exact element={<Contact/>}/>
+                            <Route path={"/"} exact element={<About/>}/>
+                            <Route path="*" element={<NotFound/>}/>
+                        </Routes>
                     </div>
                 </Container>
                 <Footer/>

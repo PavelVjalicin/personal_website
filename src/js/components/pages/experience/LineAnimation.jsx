@@ -80,7 +80,7 @@ class LineAnimation extends Component {
                        height={250}
                        style={{
                            position:"absolute",
-                           top:20,
+                           top:0,
                            right:0,
                            zIndex:-1
                        }}

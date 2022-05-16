@@ -2,9 +2,9 @@ import React, {Component} from "react"
 import {LineAnimation} from "./LineAnimation";
 import {PageTitle} from "../../PageTitle";
 import {ExperienceSection} from "./ExperienceSection";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 import {Anchor} from "../../Anchor";
-import NoSsr from "@material-ui/core/NoSsr";
+import NoSsr from "@mui/material/NoSsr";
 import {Helmet} from "react-helmet";
 
 export default class Experience extends Component {

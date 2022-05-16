@@ -1,7 +1,7 @@
 import React, {Component} from "react"
-import AppBar from "@material-ui/core/AppBar";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import AppBar from "@mui/material/AppBar";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 
 export default class Footer extends Component {
     constructor(props) {

@@ -3,7 +3,7 @@ import {StarRating} from "./StarRating";
 import {PageTitle} from "../../PageTitle";
 import {SkillsSection} from "./SkillsSection";
 import {SkillsAnimation} from "./SkillsAnimation";
-import NoSsr from "@material-ui/core/NoSsr";
+import NoSsr from "@mui/material/NoSsr";
 import {Helmet} from "react-helmet";
 
 export default class Skills extends Component {
