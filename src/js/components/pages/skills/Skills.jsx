@@ -32,6 +32,22 @@ export default class Skills extends Component {
                 <StarRating rating={5}>Python</StarRating>
                 <StarRating rating={3}>C++</StarRating>
             </SkillsSection>
+            <SkillsSection title={"AWS"}>
+                <StarRating rating={10}>EC2</StarRating>
+                <StarRating rating={10}>SQS</StarRating>
+                <StarRating rating={10}>SNS</StarRating>
+                <StarRating rating={10}>RDS</StarRating>
+                <StarRating rating={10}>Lambda</StarRating>
+                <StarRating rating={10}>CloudWatch</StarRating>
+                <StarRating rating={10}>S3</StarRating>
+                <StarRating rating={10}>CodeCommit</StarRating>
+                <StarRating rating={8}>Spot</StarRating>
+                <StarRating rating={8}>DynamoDB</StarRating>
+                <StarRating rating={8}>CloudFront</StarRating>
+                <StarRating rating={8}>Amplify</StarRating>
+                <StarRating rating={7}>ECS</StarRating>
+                <StarRating rating={6}>AMI</StarRating>
+            </SkillsSection>
             <SkillsSection title={"Operating Systems"}>
                 <StarRating rating={8}>Windows</StarRating>
                 <StarRating rating={8}>Linux</StarRating>
@@ -57,6 +73,7 @@ export default class Skills extends Component {
                 <StarRating rating={9}>WebPack</StarRating>
                 <StarRating rating={9}>Graph.js</StarRating>
                 <StarRating rating={8}>D3.js</StarRating>
+                <StarRating rating={8}>Next.js</StarRating>
                 <StarRating rating={7}>WebGL</StarRating>
                 <StarRating rating={5}>Angular</StarRating>
             </SkillsSection>
