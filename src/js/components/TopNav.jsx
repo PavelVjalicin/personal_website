@@ -51,7 +51,7 @@ class TopNav extends Component {
     }
 
     setActiveTab(activeTab) {
-        if(activeTab === "/" || activeTab === "") activeTab = "/about"
+        if(activeTab === "/" || activeTab === "") activeTab = "/"
         return this.hrefs.includes(activeTab) ? activeTab : false
     }
 
@@ -110,9 +110,8 @@ class TopNav extends Component {
                 }}>
                 <Tabs value={this.state.activeTab}
                       onChange={this.handleChange}
-                      variant="fullwidth"
                       scrollButtons="auto"
-                      textColor="white"
+                      textColor="inherit"
                       indicatorColor="secondary"
                 >
                     {this.props.links.map(link =>
