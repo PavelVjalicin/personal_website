@@ -8,8 +8,6 @@ import { getBlogs } from "./BlogStore";
 const cardCharLimit = 200
 
 export default function Blog() {
-
-    throw 123
     const [blogs, setBlogs] = useState(null)
 
     useEffect(async () => {

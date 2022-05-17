@@ -5,8 +5,6 @@ import Container from "@mui/material/Container";
 import loadable from '@loadable/component'
 import ScrollToTop from "./ScrollToTop";
 import CssBaseline from "@mui/material/CssBaseline";
-import { ErrorBoundary } from 'react-error-boundary';
-import { Error } from "./Error";
 
 const Experience = loadable(() => import(/* webpackChunkName: "Experience", webpackPrefetch: true */ './pages/experience/Experience'))
 const Skills = loadable(() => import(/*webpackChunkName: "Skills", webpackPrefetch: true */ "./pages/skills/Skills"))
@@ -32,18 +30,6 @@ class App extends Component {
 
 
     render() {
-
-        /*<Route index element={<About />} />
-                                <Route path={"work/work"} />
-                                <Route path={"skills"} element={<Skills />} />
-                                <Route path={"github"} element={<Git />} />
-                                <Route path={"contact"} element={<Contact />} />
-                                <Route path={"blog"}>
-                                    <Route index element={<Blog />} />
-                                    <Route path=":id" element={<BlogPost />}></Route>
-                                </Route>
-                                <Route path="*" element={<NotFound />} />*/
-
         return <>
             <ScrollToTop />
             <div style={{ position: "relative", minHeight: "100vh", paddingBottom: 60 }}>
