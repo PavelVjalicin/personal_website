@@ -14,6 +14,14 @@ import fetch from "node-fetch";
 import {sendEmail} from "./email";
 import Hapi from "@hapi/hapi";
 import {Helmet} from "react-helmet";
+import bcrypt from 'bcryptjs'
+import conf from '../../app.config'
+import jwt from "jsonwebtoken";
+import { request } from "http";
+import { authenticated } from "./authentication";
+import { createBlogHandler, deleteBlogHandler, retrieveBlogsHandler, updateBlogHandler } from "./BlogController";
+
+const config = conf.default
 
 global.window = window
 global.self = window
@@ -169,7 +177,42 @@ const initHapi = async (isProd) => {
 
     await server.register(require("@hapi/inert"))
 
-    server.route([{
+    server.route([
+    {
+        method:'POST',
+        path:'/login',
+        handler: async (req,h) => {
+            const { password } = req.payload
+            if(bcrypt.compareSync( password, config.admin_hash)){
+                const signature = jwt.sign({}, config.secret, { expiresIn: "5h"})
+                h.state("t",signature)
+                return h.response("").code(200)
+            } else {
+                return h.response("").code(404)
+            }
+             
+        }
+    },
+    {
+        method:'GET',
+        path:'/logout',
+        handler: (req,h) => {
+            h.unstate("t")
+            const redirect = req.query.redirect
+            if(redirect) {
+                return h.redirect(redirect)
+            } else {
+                return h.redirect("/")
+            }
+            
+        }
+    },
+    {
+        method:'GET',
+        path:'/api/auth',
+        handler: authenticated((req, h) => h.response("").code(200)) 
+    },
+    {
         method:'GET',
         path:'/robots.txt',
         handler: (req,h) =>
@@ -213,6 +256,22 @@ const initHapi = async (isProd) => {
                 return h.response(JSON.stringify({error:"Form was not filled in correctly."})).code(500)
             }
         }
+    },{
+        method:'GET',
+        path:"/api/blog",
+        handler: retrieveBlogsHandler
+    },{
+        method:'POST',
+        path:"/api/blog",
+        handler: createBlogHandler
+    },{
+        method:'PATCH',
+        path:"/api/blog/{id}",
+        handler: updateBlogHandler
+    },{
+        method:'DELETE',
+        path:"/api/blog/{id}",
+        handler: deleteBlogHandler
     },{
         method:'GET',
         path:"/dist/{any*}",

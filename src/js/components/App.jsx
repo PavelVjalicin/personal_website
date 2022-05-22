@@ -15,6 +15,8 @@ const TopNav = loadable(() => import(/*webpackChunkName: "TopNav", webpackPrefet
 const Footer = loadable(() => import(/*webpackChunkName: "Footer", webpackPrefetch: true */ "./Footer"))
 const Blog = loadable(() => import(/*webpackChunkName: "Blog", webpackPrefetch: true */ "./pages/blog/Blog"))
 const BlogPost = loadable(() => import(/*webpackChunkName: "BlogPost", webpackPrefetch: true */ "./pages/blog/BlogPost"))
+const BlogEditor = loadable(() => import(/*webpackChunkName: "BlogEditor", webpackPrefetch: true */ "./pages/blog/BlogEditor"))
+const Login = loadable(() => import(/*webpackChunkName: "Login", webpackPrefetch: true */ "./pages/Login"))
 
 
 
@@ -57,8 +59,10 @@ class App extends Component {
                             <Route path={"contact"} element={<Contact />} />
                             <Route path={"blog"}>
                                 <Route index element={<Blog />} />
+                                <Route path="editor" element={<BlogEditor/>} />
                                 <Route path=":id" element={<BlogPost />}></Route>
                             </Route>
+                            <Route path={"login"} element={<Login/>}/>
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </div>

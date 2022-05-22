@@ -16,6 +16,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Typography from "@mui/material/Typography";
 import NoSsr from "@mui/material/NoSsr";
 import Container from "@mui/material/Container";
+import { getAdmin } from "../adminStore";
 
 class TopNav extends Component {
     constructor(props) {
@@ -29,7 +30,8 @@ class TopNav extends Component {
 
         this.state = {
             activeTab:this.setActiveTab(window.location.pathname),
-            small: window.innerWidth < 800
+            small: window.innerWidth < 800,
+            isAdmin: false
         }
     }
 
@@ -44,6 +46,7 @@ class TopNav extends Component {
 
     componentDidMount() {
         window.addEventListener("resize",this.manageSize)
+        getAdmin().then(isAdmin => this.setState({isAdmin:isAdmin}))
     }
 
     componentWillUnmount() {
@@ -98,6 +101,15 @@ class TopNav extends Component {
                                         <Divider/>
                                     </React.Fragment>
                                 )}
+                                {this.state.isAdmin && <>
+                                        <ListItem button
+                                                  component={'a'}
+                                                  href={"/logout?redirect="+location.pathname}
+                                                  >
+                                            <ListItemText primary={'logout'}/>
+                                        </ListItem>
+                                        <Divider/>
+                                    </>}
                             </List>
                         </Drawer>
                     </Grid>
@@ -121,6 +133,11 @@ class TopNav extends Component {
                              value={link[0]}
                              to={link[0]}/>
                     )}
+                    {this.state.isAdmin && <Tab
+                             label={"Logout"}
+                             component={"a"}
+                             href={"/logout?redirect="+location.pathname}/>}
+                    
                 </Tabs></Container>}
         </AppBar>
     }

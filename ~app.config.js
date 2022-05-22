@@ -11,5 +11,7 @@ exports.default = {
             }
         },
         to: "email@example.com"
-    }
+    },
+    secret: "SECRET_KEY",
+    admin_hash: "$2a$10$fm.6X0HiSlpaWgVq9LbLKOeJFhXXKVvZTwzhdPKWxpqSAy52RwM.a" //password
 }

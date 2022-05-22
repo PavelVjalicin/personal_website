@@ -8,7 +8,8 @@
     "prod": "node prod.js",
     "webpack-watch": "webpack --watch",
     "build-server": "babel src -d server-dist",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "gen-pass": "nodemon --exec babel-node ./src/hash_password.js"
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,10 @@
     "@loadable/server": "^5.15.2",
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.7.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "global": "^4.4.0",
+    "jsonwebtoken": "^8.5.1",
     "node-fetch": "^2.0.0",
     "nodemailer": "^6.6.1",
     "react": "^17.0.0",

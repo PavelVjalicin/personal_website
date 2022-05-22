@@ -1,20 +1,7 @@
 let blogs = null
-export const getBlogs = async () => { 
-     if(!blogs) {
-        blogs = {
-            order:["id"],
-            data: { id : {
-                id: "id",
-                title: "Title",
-                content: "Hello",
-                date: '2022-03-23',
-                tags: [1]
-            } }
-        }
-    }
+export const getBlogs = async () => {
+    if (!blogs) blogs = await fetch('/api/blog').then(resp => {
+        return resp.json()
+    })
     return blogs
-}
-
-const getTags = {
-    1: "Technology"
 }
