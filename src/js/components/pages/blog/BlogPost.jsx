@@ -15,7 +15,7 @@ export default function BlogPost() {
     return <> {blog ? <>
         <PageTitle>{blog.title}</PageTitle>
         <Markdown data={blog.content} />
-        <div>{new Date(blog.date).toLocaleDateString()}</div>
+        <Typography variant={'overline'}>{new Date(blog.date).toLocaleDateString()}</Typography>
     </> : <Typography>Loading...</Typography>}
     </>
 }

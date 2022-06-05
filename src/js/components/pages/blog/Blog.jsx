@@ -6,6 +6,7 @@ import { PageTitle } from "../../PageTitle";
 import { getBlogs } from "./BlogStore";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { getAdmin } from "../../../adminStore";
+import { Markdown } from "../../Markdown";
 
 const cardCharLimit = 200
 
@@ -48,7 +49,7 @@ const BlogCard = ({blog}) => {
             <Typography variant="h5">
                 {blog.title}
             </Typography>
-            <Typography>{blog.content.slice(0,cardCharLimit)}</Typography>
+            <Markdown data={blog.content.slice(0,cardCharLimit)} />
             <Typography variant={'overline'}>{new Date(blog.date).toLocaleDateString()}</Typography>
         </CardContent>
         <CardActions >
