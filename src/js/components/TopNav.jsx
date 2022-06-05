@@ -27,9 +27,9 @@ class TopNav extends Component {
         this.manageSize = this.manageSize.bind(this)
 
         this.hrefs = this.props.links.map(x => x[0])
-
+        const pathName = window.location?.pathname || ""
         this.state = {
-            activeTab:this.setActiveTab(window.location.pathname),
+            activeTab:this.setActiveTab(pathName),
             small: window.innerWidth < 800,
             isAdmin: false
         }

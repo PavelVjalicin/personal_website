@@ -10,11 +10,11 @@ import { getAdmin } from "../../../adminStore";
 const cardCharLimit = 200
 
 export default function Blog() {
-    const [blogs, setBlogs] = useState(null)
+    const [blogs, setBlogs] = useState(window.app?.data?.blogs || null)
 
     useEffect(async () => {
         getBlogs().then( setBlogs )
-    })
+    },[])
 
     return <>
         <Helmet>

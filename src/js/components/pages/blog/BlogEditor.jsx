@@ -24,11 +24,13 @@ export default function BlogEditor() {
                 setPublish(blog.publish)
                 setLoading(false)
             })
-        } 
+        } else {
+            setLoading(false)
+        }
     }, [])
 
     const handleSaveBlog = () => {
-        
+
         const url = id ? '/api/blog/' + id : '/api/blog'
         const method = id ? 'PATCH' : 'POST'
         

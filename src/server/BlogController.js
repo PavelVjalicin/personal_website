@@ -5,7 +5,7 @@ import fs from 'fs'
 let blogStore = null
 const blogsFile = "./data/blogs.json"
 
-const getBlogs = () => {
+export const getBlogs = () => {
     if(!blogStore) {
         if(fs.existsSync(blogsFile)) {
             const blogs = JSON.parse(fs.readFileSync(blogsFile))
