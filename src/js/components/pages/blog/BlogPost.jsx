@@ -6,9 +6,8 @@ import { useParams } from "react-router-dom";
 import { getBlogs } from "./BlogStore";
 
 export default function BlogPost() {
-
-    const [blog, setBlog] = useState(null)
     const { id } = useParams();
+    const [blog, setBlog] = useState(window.app?.data?.blogs.data[id] || null)
     useEffect(() => {
         getBlogs().then(blogs => setBlog(blogs.data[id]))
     })
