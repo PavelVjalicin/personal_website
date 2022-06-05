@@ -49,12 +49,12 @@ const BlogCard = ({blog}) => {
                 {blog.title}
             </Typography>
             <Typography>{blog.content.slice(0,cardCharLimit)}</Typography>
-            <Typography variant={'overline'}>{blog.date}</Typography>
+            <Typography variant={'overline'}>{new Date(blog.date).toLocaleDateString()}</Typography>
         </CardContent>
         <CardActions >
         <Button component={Link} to={blog.id}>Read More</Button>
         
-        {auth && <Button>Edit Blog</Button>}
+        {auth && <Button component={Link} to={"editor/" + blog.id}>Edit Blog</Button>}
         {auth && <IconButton onClick={ handleDeleteBlog }><DeleteIcon/></IconButton>}
         {auth && !blog.publish && <div>NOT PUBLISHED</div>}
         </CardActions>

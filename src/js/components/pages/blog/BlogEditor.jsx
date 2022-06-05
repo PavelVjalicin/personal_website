@@ -1,16 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { fetchAPI } from '../../../fetchApi';
 import { Button, Grid } from '@mui/material';
 import { Markdown } from '../../Markdown';
+import { getBlogs, refreshBlogs } from './BlogStore';
+import { useParams } from "react-router-dom";
 
 export default function BlogEditor() {
+    const { id } = useParams();
     const [value, setValue] = useState("");
     const [publish, setPublish] = useState(false)
     const [title, setTitle] = useState('')
     const [message, setMessage] = useState(null)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        if(id) {
+            refreshBlogs()
+            getBlogs().then( blogs => {
+                const blog = blogs.data[id]
+                console.log(blog)
+                setValue(blog.content)
+                setTitle(blog.title)
+                setPublish(blog.publish)
+                setLoading(false)
+            })
+        } 
+    }, [])
 
     const handleSaveBlog = () => {
-        fetchAPI('/api/blog', 'POST', {
+        
+        const url = id ? '/api/blog/' + id : '/api/blog'
+        const method = id ? 'PATCH' : 'POST'
+        
+        fetchAPI(url, method, {
             title: title,
             content: value,
             publish: publish
@@ -20,7 +42,7 @@ export default function BlogEditor() {
         })
     }
 
-    return <>
+    return loading ? <>Loading...</> : <>
         <div>
             Title
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -39,7 +61,7 @@ export default function BlogEditor() {
 
         <div>
             Publish:
-            <input type={'checkbox'} value={publish} onChange={(e) => setPublish(!publish)} />
+            <input type={'checkbox'} checked={publish} onChange={(e) => setPublish(!publish)} />
         </div>
 
         <Button onClick={handleSaveBlog}>Save Blog</Button>

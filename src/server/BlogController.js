@@ -75,16 +75,16 @@ export const updateBlogHandler = authenticated((req,h) => {
     const id = req.params.id
     const { title,content, publish } = req.payload
     const blogs = getBlogs()
-    const updatedBlog = blogs.data[id]
-    updatedBlog = {
+    const updatedBlog = {
+        ...blogs.data[id],
         title: title,
         content: content,
-        publish: publish,
-        ...updatedBlog
+        publish: publish
     }
+    console.log()
     blogs.data[id] = updatedBlog
     setBlogs(blogs)
-    h.response("").code(201)
+    return h.response("").code(201)
 })
 
 export const deleteBlogHandler = authenticated((req,h) => {

@@ -60,6 +60,7 @@ class App extends Component {
                             <Route path={"blog"}>
                                 <Route index element={<Blog />} />
                                 <Route path="editor" element={<BlogEditor/>} />
+                                <Route path="editor/:id" element={<BlogEditor/>} />
                                 <Route path=":id" element={<BlogPost />}></Route>
                             </Route>
                             <Route path={"login"} element={<Login/>}/>

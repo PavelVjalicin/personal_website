@@ -5,3 +5,5 @@ export const getBlogs = async () => {
     })
     return blogs
 }
+
+export const refreshBlogs = () => blogs = null
