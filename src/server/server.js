@@ -19,7 +19,7 @@ import conf from '../../app.config'
 import jwt from "jsonwebtoken";
 import { request } from "http";
 import { authenticated } from "./authentication";
-import { createBlogHandler, deleteBlogHandler, getBlogs, retrieveBlogsHandler, updateBlogHandler } from "./BlogController";
+import { createBlogHandler, deleteBlogHandler, getFilteredBlogs, retrieveBlogsHandler, updateBlogHandler } from "./BlogController";
 
 const config = conf.default
 
@@ -61,7 +61,7 @@ const offlineRender = (req, h) => {
                 const jsx = extractor.collectChunks(
                     <ThemeProvider theme={theme}>
                     <StaticRouter location={req.url.pathname}>
-                    <App data={{git:gitData, blogs: getBlogs()}}/>
+                    <App data={{git:gitData, blogs: getFilteredBlogs()}}/>
                     </StaticRouter>
                     </ThemeProvider>)
                     // Render your application

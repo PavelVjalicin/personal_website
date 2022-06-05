@@ -18,57 +18,60 @@ export const getBlogs = () => {
     return blogStore
 }
 
+export const getFilteredBlogs = () => {
+    const blogs = getBlogs()
+    const {filteredBlogs, filteredOutBlogIds} = Object.values(blogs.data).reduce( (acc, blog) => {
+        if(!blog.publish) {
+            acc.filteredOutBlogIds.push(blog.id)
+            return acc
+        } else {
+            acc.filteredBlogs[blog.id] = blog
+            return acc
+        }
+    }, {
+        filteredBlogs: {},
+        filteredOutBlogIds: []
+    })
+    return {
+        data: filteredBlogs,
+        meta: {
+            blogsOrdered: blogs.meta.blogsOrdered.filter(x => !filteredOutBlogIds.includes(x) )
+        }
+    }
+}
+
 const setBlogs = (blogs) => {
     fs.writeFileSync(blogsFile, JSON.stringify(blogs))
     blogStore = blogs 
 }
 
 export const retrieveBlogsHandler = (req,h) => {
-    const blogs = getBlogs()
     if(isAdmin(req)) {
-        return h.response(blogs)
-    } else {
-        const {filteredBlogs, filteredOutBlogIds} = Object.values(blogs.data).reduce( (acc, blog) => {
-            if(!blog.publish) {
-                acc.filteredOutBlogIds.push(blog.id)
-                return acc
-            } else {
-                acc.filteredBlogs[blog.id] = blog
-                return acc
-            }
-        }, {
-            filteredBlogs: {},
-            filteredOutBlogIds: []
-        })
-        
-        return h.response({
-            data: filteredBlogs,
-            meta: {
-                blogsOrdered: blogs.meta.blogsOrdered.filter(x => !filteredOutBlogIds.includes(x) )
-            }
-        })
+        return h.response(getBlogs())
+    } else {    
+        return h.response(getFilteredBlogs())
     }
 }
 
 export const createBlogHandler = authenticated((req,h) => {
     try {
-    const { title,content,publish } = req.payload
-    const id = title.replace(" ", "_").toLowerCase()
-    const blogs = getBlogs()
-    if(blogs.meta.blogsOrdered.includes(id)) return h.response("Blog id already exists").code(400)
-    const curDate = new Date();
-    const newBlog = {
-        id: id,
-        title: title,
-        content:content,
-        date: curDate,
-        publish: publish
-    }
-    blogs.data[id] = newBlog
-    blogs.meta.blogsOrdered.unshift(id)
-    setBlogs(blogs)
-    return h.response("").code(201)
-} catch (e) {console.log(e)}
+        const { title,content,publish } = req.payload
+        const id = title.replace(" ", "_").toLowerCase()
+        const blogs = getBlogs()
+        if(blogs.meta.blogsOrdered.includes(id)) return h.response("Blog id already exists").code(400)
+        const curDate = new Date();
+        const newBlog = {
+            id: id,
+            title: title,
+            content:content,
+            date: curDate,
+            publish: publish
+        }
+        blogs.data[id] = newBlog
+        blogs.meta.blogsOrdered.unshift(id)
+        setBlogs(blogs)
+        return h.response("").code(201)
+    } catch (e) {console.log(e)}
 })
 
 export const updateBlogHandler = authenticated((req,h) => {
