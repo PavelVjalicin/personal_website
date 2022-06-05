@@ -7,7 +7,7 @@ async function sendEmail(from,name,msg) {
     const fullMsg = msg + " Email: " + from+ " Name: " + name
 
     return await transporter.sendMail({
-        from: '"Info" <info@vjalicin.com>',
+        from: '"Pavel Vjalicin" <pavel@vjalicin.com>',
         to: config.to,
         subject: "vjalicin.com Contact",
         text: fullMsg
