@@ -40,6 +40,8 @@ class Repository extends Component {
 
         const lastUpdated = !this.state.small ? <S>{lastUpdatedComp}</S> : <div style={{paddingTop:5}}>{lastUpdatedComp}</div>
 
+        console.log(repo.license)
+
         return <>
             <Box style={{
                 marginTop:20,
@@ -58,7 +60,7 @@ class Repository extends Component {
                         <span style={{color:"#8f9ce6"}} >{repo.language}</span>
                     </S>
                     <S>
-                        <span>{repo.license.name === "Other" ? "Other License" :repo.license.name}</span>
+                        <span>{ (repo.license === null || repo.license.name === "Other") ? "Other License" :repo.license.name}</span>
                     </S>
                     {lastUpdated}
                 </div>
