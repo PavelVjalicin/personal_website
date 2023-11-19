@@ -12,7 +12,7 @@ export default function EscapeProgram() {
     
     const fetchS3 = (url, erText, f) => {
         fetch(url).then(resp => {
-            resp.text().then(f)
+            resp.text().then(text => text.includes("AccessDenied") ? f(erText) : f(text)).catch(f(erText))
         }).catch(f(erText))
     }
 
@@ -23,10 +23,14 @@ export default function EscapeProgram() {
     }}>{props.children}</pre>
 
     useEffect(() => {
+        window.scrollTo(0, 0)
+        setStatement("Loading statement")
+        setCode("Loading code")
+        setOutput("Loading output")
         fetchS3("https://escape-gpt.s3.eu-west-2.amazonaws.com/output/"+id+"/statement.txt", "Could not retrieve statement", setStatement)
         fetchS3("https://escape-gpt.s3.eu-west-2.amazonaws.com/output/"+id+"/code.scala", "Could not retrieve code", setCode)
-        fetchS3("https://escape-gpt.s3.eu-west-2.amazonaws.com/output/"+id+"/output.txt", "Could not retrieve output. Chat-GPT might have generated a code that cannot be compiles.", setOutput)
-    }, [])
+        fetchS3("https://escape-gpt.s3.eu-west-2.amazonaws.com/output/"+id+"/output.txt", "Could not retrieve output. Chat-GPT might have generated a code that does not compile.", setOutput)
+    }, [id])
     return <>
         <PageTitle>escapeGPT - Program #{id}</PageTitle>
         <br/>
@@ -59,12 +63,12 @@ export default function EscapeProgram() {
 }
 
 const Control = ({programId}) => {
-    const btns = [ ...Array(5).keys() ].map(i => programId - i + 2).map(id => id > 0 && id < 301 ? <Button variant={"outlined"} component={Link} to={"../" + id} disabled={id==programId}>{id}</Button> : null).reverse()
+    const btns = [ ...Array(5).keys() ].map(i => programId - i + 2).map(id => id > 0 && id < 301 ? <Button variant={"outlined"} key={id} component={Link} to={"../" + id} disabled={id==programId}>{id}</Button> : null).reverse()
     
     return <div style={{marginTop: 20, marginBottom: 20}}>
         <Button variant={"outlined"} component={Link} to={"../"+Math.round(Math.random()*299 + 1)}>Random Program</Button>
-        {programId > 1 ? <Button variant={"outlined"}>Previous</Button> : null }
+        {programId > 1 ? <Button variant={"outlined"} component={Link} to={"../" + (programId * 1 - 1)}>Previous</Button> : null }
         {btns}
-        { programId < 300 ? <Button variant={"outlined"}>Next</Button> : null }
+        { programId < 300 ? <Button variant={"outlined"} component={Link} to={"../" + (programId * 1 + 1)}>Next</Button> : null }
     </div>
 }
