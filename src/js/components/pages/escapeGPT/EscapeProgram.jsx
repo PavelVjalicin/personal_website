@@ -42,7 +42,7 @@ export default function EscapeProgram() {
         updateSong("https://escape-gpt.s3.eu-west-2.amazonaws.com/output/"+id+"/audio.mp3")
         fetchS3("https://escape-gpt.s3.eu-west-2.amazonaws.com/output/"+id+"/statement.txt", "Could not retrieve statement", setStatement)
         fetchS3("https://escape-gpt.s3.eu-west-2.amazonaws.com/output/"+id+"/code.scala", "Could not retrieve code", setCode)
-        fetchS3("https://escape-gpt.s3.eu-west-2.amazonaws.com/output/"+id+"/output.txt", "Could not retrieve output. Chat-GPT might have generated a code that does not compile.", setOutput)
+        fetchS3("https://escape-gpt.s3.eu-west-2.amazonaws.com/output/"+id+"/output.txt", "Could not retrieve output. Chat-GPT might have generated code that does not compile.", setOutput)
     }, [id])
     return <>
         <PageTitle>escapeGPT - Program #{id}</PageTitle>
