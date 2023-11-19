@@ -27,7 +27,7 @@ export default function EscapeGPT () {
         <p>
             Here is what <b>escapeGPT</b> is: I've asked chat-GPT to generate an interesting piece of Scala code and create a philosophical statement
             that describes the meaning of the generated program. I then extract the code and run it on my personal computer as an administrator with no supervision and 
-            record all of the outputs of the program. I ended up generating 300 programs and all of the data associated with those programs is available by pressing a number 
+            recorded all of the outputs of the program. I ended up generating 300 programs and all of the data associated with those programs is available by pressing a number 
             button below.
         </p>
         <h3>
