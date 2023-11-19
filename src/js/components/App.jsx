@@ -5,6 +5,8 @@ import Container from "@mui/material/Container";
 import loadable from '@loadable/component'
 import ScrollToTop from "./ScrollToTop";
 import CssBaseline from "@mui/material/CssBaseline";
+import EscapeGPT from "./pages/escapeGPT/EscapeGPT";
+import EscapeProgram from "./pages/escapeGPT/EscapeProgram";
 
 const Experience = loadable(() => import(/* webpackChunkName: "Experience", webpackPrefetch: true */ './pages/experience/Experience'))
 const Skills = loadable(() => import(/*webpackChunkName: "Skills", webpackPrefetch: true */ "./pages/skills/Skills"))
@@ -62,6 +64,10 @@ class App extends Component {
                                 <Route path="editor" element={<BlogEditor/>} />
                                 <Route path="editor/:id" element={<BlogEditor/>} />
                                 <Route path=":id" element={<BlogPost />}></Route>
+                            </Route>
+                            <Route path={"escapeGPT"}>
+                                <Route index element={<EscapeGPT/>} />
+                                <Route path=":id" element={<EscapeProgram />}></Route>
                             </Route>
                             <Route path={"login"} element={<Login/>}/>
                             <Route path="*" element={<NotFound />} />
