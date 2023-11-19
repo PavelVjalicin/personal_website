@@ -1,19 +1,31 @@
 import { Link, useParams } from "react-router-dom";
 import { PageTitle } from "../../PageTitle";
-import React, {useState} from "react"
+import React, {useState, useRef} from "react"
 import { useEffect } from "react";
 import { Button, Grid } from "@mui/material";
+
 
 export default function EscapeProgram() {
     const { id } = useParams();
     const [statement, setStatement] = useState("Loading statement")
     const [code, setCode] = useState("Loading code")
     const [output, setOutput] = useState("Loading output")
+    const [source, setSource] = useState("https://escape-gpt.s3.eu-west-2.amazonaws.com/output/"+id+"/audio.mp3")
     
+    const audioRef = useRef()
+
     const fetchS3 = (url, erText, f) => {
         fetch(url).then(resp => {
             resp.text().then(text => text.includes("AccessDenied") ? f(erText) : f(text)).catch(f(erText))
         }).catch(f(erText))
+    }
+
+    const updateSong = (source) => {
+        setSource(source);
+        if(audioRef.current){
+            audioRef.current.pause();
+            audioRef.current.load();
+        }
     }
 
     const Pre = (props) => <pre style={{
@@ -27,6 +39,7 @@ export default function EscapeProgram() {
         setStatement("Loading statement")
         setCode("Loading code")
         setOutput("Loading output")
+        updateSong("https://escape-gpt.s3.eu-west-2.amazonaws.com/output/"+id+"/audio.mp3")
         fetchS3("https://escape-gpt.s3.eu-west-2.amazonaws.com/output/"+id+"/statement.txt", "Could not retrieve statement", setStatement)
         fetchS3("https://escape-gpt.s3.eu-west-2.amazonaws.com/output/"+id+"/code.scala", "Could not retrieve code", setCode)
         fetchS3("https://escape-gpt.s3.eu-west-2.amazonaws.com/output/"+id+"/output.txt", "Could not retrieve output. Chat-GPT might have generated a code that does not compile.", setOutput)
@@ -35,9 +48,8 @@ export default function EscapeProgram() {
         <PageTitle>escapeGPT - Program #{id}</PageTitle>
         <br/>
         <Control programId={id}/>
-        <audio controls>
-            <source src={"https://escape-gpt.s3.eu-west-2.amazonaws.com/output/"+id+"/audio.mp3"} type="audio/mpeg"/>
-            Your browser does not support the audio element.
+        <audio controls ref={audioRef}>
+            <source src={source} type='audio/mpeg' />
         </audio>
         <h3>Code:</h3>
         <Grid container>
