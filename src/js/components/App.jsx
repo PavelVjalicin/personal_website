@@ -42,7 +42,7 @@ class App extends Component {
                     ["/github", "GitHub"],
                     ["/blog", "Blog"],
                     ["/contact", "Contact Me"],
-
+                    ["/escapegpt", "escapeGPT"],
                 ]} />
                 <Container style={{
                     borderLeft: 5,

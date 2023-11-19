@@ -24,8 +24,13 @@ export default class Experience extends Component {
                 <LineAnimation />
             </NoSsr>
             <PageTitle>Experience</PageTitle>
-            <ExperienceSection from={"August 2020"}
+            <ExperienceSection from={"July 2022"}
                 to={"Present"}
+                company={"Mercator Digital"}
+                position={"Scala Developer"}>
+            </ExperienceSection>
+            <ExperienceSection from={"August 2020"}
+                to={"July 2022"}
                 company={"White Bullet Solutions Limited"}
                 position={"Full-Stack Software Engineer (Contract)"}>
                 <Typography>
